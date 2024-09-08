@@ -4,7 +4,7 @@ linkTitle: About
 menu: {main: {weight: 10}}
 ---
 
-{{% blocks/cover title="About Goldydocs" image_anchor="bottom" height="auto" %}}
+{{% blocks/cover title="About Maveniverse" image_anchor="bottom" height="auto" %}}
 
 A sample site using the Docsy Hugo theme.
 {.mt-5}
@@ -31,5 +31,7 @@ different sections of the documentation and site for more ideas.
 
 # This is another section
 {.text-center}
+
+No way this is it
 
 {{% /blocks/section %}}
