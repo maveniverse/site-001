@@ -6,32 +6,31 @@ menu: {main: {weight: 10}}
 
 {{% blocks/cover title="About Maveniverse" image_anchor="bottom" height="auto" %}}
 
-A sample site using the Docsy Hugo theme.
+We are expanding the Maven Universe!
 {.mt-5}
 
 {{% /blocks/cover %}}
 
 {{% blocks/lead %}}
 
-Goldydocs is a sample site using the [Docsy](https://github.com/google/docsy)
-Hugo theme that shows what it can do and provides you with a template site
-structure. It’s designed for you to clone and edit as much as you like. See the
-different sections of the documentation and site for more ideas.
+Maveniverse is a team providing awesome extensions, plugins, documentation and advices around Apache Maven.
 
 {{% /blocks/lead %}}
 
 {{% blocks/section %}}
 
-# This is another section
+# Get the best Maven stuff directly from Maven developers
 {.text-center}
+
+People building Maven are here to help you...
 
 {{% /blocks/section %}}
 
 {{% blocks/section %}}
 
-# This is another section
+# Support Maven developers for better Maven
 {.text-center}
 
-No way this is it
+The game goes both ways...
 
 {{% /blocks/section %}}

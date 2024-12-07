@@ -22,6 +22,7 @@ enableGitInfo: true
 taxonomies:
   tag: tags
   category: categories
+  project: projects
 
 # Highlighting config
 pygmentsCodeFences: true
@@ -72,13 +73,13 @@ outputs:
 params:
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
-    taxonomyCloud: [tags, categories]
+    taxonomyCloud: [tags, categories, projects]
 
     # If used, must have same length as taxonomyCloud
-    taxonomyCloudTitle: [Tag Cloud, Categories]
+    taxonomyCloudTitle: [Tag Cloud, Categories, Projects]
 
     # set taxonomyPageHeader = [] to hide taxonomies on the page headers
-    taxonomyPageHeader: [tags, categories]
+    taxonomyPageHeader: [tags, categories, projects]
 
   privacy_policy: https://policies.google.com/privacy
 
@@ -126,7 +127,7 @@ params:
   prism_syntax_highlighting: false
 
   copyright:
-    authors: Maveniverse Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+    authors: Maveniverse Team | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [Apache Maven](https://maven.apache.org/) is a trademark of Apache Software Foundation |
     from_year: 2024
 
   # User interface configuration
@@ -150,9 +151,9 @@ params:
       enable: true
       # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
       'yes': >-
-        Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+        Glad to hear it! Please <a href="https://github.com/maveniverse/site-001/issues/new">tell us how we can improve</a>.
       'no': >-
-        Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+        Sorry to hear that. Please <a href="https://github.com/maveniverse/site-001/issues/new">tell us how we can improve</a>.
 
     # Adds a reading time to the top of each doc.
     # If you want this feature, but occasionally need to remove the Reading time from a single page,
@@ -172,11 +173,11 @@ params:
         icon: fab fa-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: Mastodon
-        url: https://twitter.com/cstamas
+        url: https://mastodon.online/@cstamas
         icon: fab fa-mastodon
         desc: Follow us on Mastodon to get the latest news!
       - name: Bluesky
-        url: https://twitter.com/cstamas
+        url: https://bsky.app/profile/cstamas.bsky.social
         icon: fab fa-bluesky
         desc: Follow us on Mastodon to get the latest news!
 

@@ -1,6 +1,10 @@
 ---
-title: Second blog post
+title: Tamas Second blog post
+author: cstamas ([@cstamas](https://twitter.com/cstamas))
 date: 2018-10-06
+projects: [Examples, Placeholders]
+tags: [test, docs]
+
 description: >
   A short lead description about this content page. Text here can also be
   **bold** or _italic_ and can even be split over multiple paragraphs.
