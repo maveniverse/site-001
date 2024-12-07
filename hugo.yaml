@@ -23,6 +23,7 @@ taxonomies:
   tag: tags
   category: categories
   project: projects
+  author: authors
 
 # Highlighting config
 pygmentsCodeFences: true
@@ -73,13 +74,13 @@ outputs:
 params:
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
-    taxonomyCloud: [tags, categories, projects]
+    taxonomyCloud: [tags, categories, projects, authors]
 
     # If used, must have same length as taxonomyCloud
-    taxonomyCloudTitle: [Tag Cloud, Categories, Projects]
+    taxonomyCloudTitle: [Tag Cloud, Categories, Projects, Authors]
 
     # set taxonomyPageHeader = [] to hide taxonomies on the page headers
-    taxonomyPageHeader: [tags, categories, projects]
+    taxonomyPageHeader: [tags, categories, projects, authors]
 
   privacy_policy: https://policies.google.com/privacy
 
