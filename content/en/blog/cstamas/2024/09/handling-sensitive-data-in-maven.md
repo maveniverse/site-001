@@ -74,12 +74,12 @@ from stale and/or broken encrypted passwords. Maven4 "security boundary" is JVM 
 if you think about it, same thing happened in Maven3, as explained above. The difference is
 that Maven3 forced on every plugin the burden of decryption, that plus had its own issues
 (remember the [MNG-4384](https://issues.apache.org/jira/browse/MNG-4384) and how all the 
-bloody plugin was forced to carry "own" PlexusSecDispatcher component?). You have to be
-aware, that encryption applies to settings only. So in POM you should not put any sensitive
+plugins were forced to carry their "own" PlexusSecDispatcher component?). Also, you have to be
+aware, that encryption **applies to settings only**. So in POM you should not have any sensitive
 data, no matter is it encrypted or plaintext.
 
 Second, the Cipher used for encryption is completely reworked and improved. Also,
-passwords are now "future-proof" in a way one can upgrade them safely to a new
+passwords are now "future-proof" encoded in a way one can upgrade them safely to a new
 Cipher.
 
 Finally, turtles are gone. Just like it happened in GPG plugin, Maven4 does not store any
