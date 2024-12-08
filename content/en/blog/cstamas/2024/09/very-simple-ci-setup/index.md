@@ -3,7 +3,7 @@ title: "Very simple CI setup"
 date: 2024-09-07T15:55:22+01:00
 draft: false
 authors: cstamas
-author: cstamas ([@cstamas](https://twitter.com/cstamas))
+author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:
@@ -11,6 +11,11 @@ tags:
   - github
 projects:
   - Maven
+resources:
+  - src: "very-simple-ci-setup-*.png"
+    title: "Image #:counter"
+    params:
+      byline: "Screenshot: Tamas Cservenak / CC-BY-CA"
 ---
 
 I'd just like to throw in a short explanation how (IMHO) should organize CI jobs for simple Maven projects for 
@@ -28,7 +33,9 @@ First example is [Maveniverse/MIMA](https://github.com/maveniverse/mima): It is 
 compatibility of Java `[8,)` and Maven `[3.6.3,)`, hence it does have a 
 [huge matrix](https://github.com/maveniverse/mima/actions/runs/10701424692).
 
-![33 jobs Matrix](/very-simple-ci-setup-1.png)
+{{< imgproc very-simple-ci-setup-1 Fit "800x300" >}}
+33 jobs Matrix.
+{{< /imgproc >}}
 
 But the build is organized in "two phases", like build once, and test built thing multiple times (instead to 
 "rebuild it over and over again and run tests on rebuilt thing"). The first job builds and installs the library into local repository,
@@ -38,7 +45,9 @@ resolvable for subsequent jobs, where the tests runs only.
 Second example: [Maveniverse/Toolbox](https://github.com/maveniverse/toolbox): It is a Java 21 Maven 3 Plugin, 
 covers compatibility of Java `[21,)` and Maven `[3.6.3,)`, a bit [smaller matrix](https://github.com/maveniverse/toolbox/actions/runs/10702513051).
 
-![12 jobs Matrix](/very-simple-ci-setup-2.png)
+{{< imgproc very-simple-ci-setup-2 Fit "800x300" >}}
+12 jobs Matrix.
+{{< /imgproc >}}
 
 Again, same story: first job builds and installs using Maven 3.9.9 + Java 21 LTS, then matrix comes to play to 
 ensure Maven 3.6.3 - Maven 4.0.0 all works with it (and only one dimension for Java, the 21 LTS). For this to work, 

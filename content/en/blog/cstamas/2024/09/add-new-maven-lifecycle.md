@@ -3,7 +3,7 @@ title: "How to add new Maven lifecycle mapping"
 date: 2024-09-07T14:55:22+01:00
 draft: false
 authors: cstamas
-author: cstamas ([@cstamas](https://twitter.com/cstamas))
+author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:

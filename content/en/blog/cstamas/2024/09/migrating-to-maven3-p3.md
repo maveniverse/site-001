@@ -3,7 +3,7 @@ title: "Migrating to Maven 3, part 3"
 date: 2024-09-09T19:16:22+02:00
 draft: false
 authors: cstamas
-author: cstamas ([@cstamas](https://twitter.com/cstamas))
+author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:

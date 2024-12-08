@@ -3,7 +3,7 @@ title: "Maven4 ante portas! (Part 1)"
 date: 2024-12-07T13:00:00+01:00
 draft: false
 authors: cstamas
-author: cstamas ([@cstamas](https://twitter.com/cstamas))
+author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:

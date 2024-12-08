@@ -3,7 +3,7 @@ title: "Handling sensitive data in Maven"
 date: 2024-12-07T12:56:00+01:00
 draft: false
 authors: cstamas
-author: cstamas ([@cstamas](https://twitter.com/cstamas))
+author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:

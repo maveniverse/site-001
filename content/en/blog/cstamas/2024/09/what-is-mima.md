@@ -3,7 +3,7 @@ title: "What is MIMA (and what is not)?"
 date: 2024-09-07T21:55:22+01:00
 draft: false
 authors: cstamas
-author: cstamas ([@cstamas](https://twitter.com/cstamas))
+author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:
