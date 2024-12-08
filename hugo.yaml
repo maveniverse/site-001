@@ -109,7 +109,7 @@ params:
   github_repo: https://github.com/maveniverse/site-001
 
   # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-  github_project_repo: https://github.com/maveniverse
+  #github_project_repo: https://github.com/maveniverse
 
   # Specify a value here if your content directory is not in your repo's root directory
   # github_subdir: ""
@@ -169,10 +169,6 @@ params:
         url: https://github.com/orgs/maveniverse/discussions
         icon: fa fa-comments
         desc: Discussion and help from your fellow users
-      - name: Twitter
-        url: https://twitter.com/cstamas
-        icon: fab fa-twitter
-        desc: Follow us on Twitter to get the latest news!
       - name: Mastodon
         url: https://mastodon.online/@cstamas
         icon: fab fa-mastodon
