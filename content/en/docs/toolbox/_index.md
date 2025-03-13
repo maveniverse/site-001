@@ -7,7 +7,7 @@ weight: 20
 ---
 
 {{% pageinfo %}}
-Toolbox was started as a "showcase" project of Maveniver MIMA combined into Mojos and CLI commands, that never stopped growing.
+Toolbox was started as a "showcase" project of Maveniverse MIMA combined into Mojos and CLI commands, that never stopped growing.
 {{% /pageinfo %}}
 
 A tool that gives you Swiss Knife for every situation.

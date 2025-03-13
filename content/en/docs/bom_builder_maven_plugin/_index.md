@@ -7,7 +7,7 @@ weight: 40
 ---
 
 {{% pageinfo %}}
-A forked and vastly improved Maven Plugin for BOMs.
+A Maven Plugin for BOMs to build according to your own taste.
 {{% /pageinfo %}}
 
 A plugin that helps you building BOM by your own taste.

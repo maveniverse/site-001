@@ -7,7 +7,7 @@ weight: 30
 ---
 
 {{% pageinfo %}}
-Nisse was a response to "finish" CI Friendly implementation in Maven 3 in proper way, and more.
+Nisse was a response to "finish" CI Friendly implementation in Maven 3, but turned out to be more.
 {{% /pageinfo %}}
 
 An extension that makes things right.
