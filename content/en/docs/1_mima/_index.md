@@ -3,7 +3,7 @@ title: Maveniverse MIMA
 description: Where it all started
 categories: [MIMA, Documentation]
 tags: [mima, docs]
-weight: 2
+weight: 10
 ---
 
 {{% pageinfo %}}

@@ -3,7 +3,7 @@ title: Maveniverse Nisse
 description: A small helper for big tasks
 categories: [Nisse, Documentation]
 tags: [nisse, docs]
-weight: 2
+weight: 30
 ---
 
 {{% pageinfo %}}
