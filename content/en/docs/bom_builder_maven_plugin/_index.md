@@ -1,5 +1,5 @@
 ---
-title: Maveniverse BOM Builder Maven Plugin
+title: BOM Builder Maven Plugin
 description: A tool for building BOMs
 categories: [BomBuilder, Documentation]
 tags: [bom-builder, docs]

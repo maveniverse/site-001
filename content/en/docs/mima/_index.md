@@ -1,5 +1,5 @@
 ---
-title: Maveniverse MIMA
+title: MIMA
 description: Where it all started
 categories: [MIMA, Documentation]
 tags: [mima, docs]

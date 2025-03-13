@@ -1,5 +1,5 @@
 ---
-title: Maveniverse Mason
+title: Mason
 description: If you dislike XML
 categories: [Mason, Documentation]
 tags: [mason, docs]

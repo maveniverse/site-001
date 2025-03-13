@@ -1,5 +1,5 @@
 ---
-title: Maveniverse Nisse
+title: Nisse
 description: A small helper for big tasks
 categories: [Nisse, Documentation]
 tags: [nisse, docs]
