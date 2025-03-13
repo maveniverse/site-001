@@ -1,5 +1,5 @@
 ---
-title: Toolbox
+title: Maveniverse Toolbox
 description: A showcase of MIMA + Mojo + Picocli that grew
 categories: [Toolbox, Documentation]
 tags: [toolbox, docs]
