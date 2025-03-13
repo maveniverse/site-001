@@ -6,7 +6,7 @@ menu: {main: {weight: 10}}
 
 {{% blocks/cover title="About Maveniverse" image_anchor="bottom" height="auto" %}}
 
-We are expanding the Maven Universe!
+We are expanding the Maveniverse!
 {.mt-5}
 
 {{% /blocks/cover %}}
