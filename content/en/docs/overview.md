@@ -6,7 +6,7 @@ weight: 1
 
 {{% pageinfo %}}
 
-All the Mamiverse project was built with well defined purpose and goal: to help and guide Maven users.
+All the Maveniverse project was built with well defined purpose and goal: to help and guide Maven users.
 
 {{% /pageinfo %}}
 
