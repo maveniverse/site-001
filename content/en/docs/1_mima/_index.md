@@ -1,8 +1,8 @@
 ---
-title: Getting Started
-description: What does your user need to know to try your project?
-categories: [Examples, Placeholders]
-tags: [test, docs]
+title: Maveniverse MIMA
+description: Where it all started
+categories: [MIMA, Documentation]
+tags: [mima, docs]
 weight: 2
 ---
 
