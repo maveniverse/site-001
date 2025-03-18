@@ -201,7 +201,9 @@ Of course, this is not critique of a new, and a really handy feature, am just ex
 
 {{% /alert %}}
 
-Moral of the story: you don't want to keep your local repository "pristine". And Maven 4 installs even if you don't tell 
+Moral of the story: you don't want to keep your local repository "pristine". "Polluting" (for me is funny even to think
+of this word, is like projects I work on are toxic) your Local Repository with 
+artifacts from Project(s) you work on is part of normal workflow and process. And Maven 4 installs even if you don't tell 
 it do so. Hence, you can calmly do the same thing while using Maven 3 and just following the "best practices" explained
 here and elsewhere. Again, flushing caches is part of planned maintenance.
 
