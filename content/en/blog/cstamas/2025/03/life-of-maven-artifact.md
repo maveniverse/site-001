@@ -102,6 +102,7 @@ a (bad) habit to "stick to your local repository" as it was really just a "bunch
 But, since Maven 3.0 doing this is wrong: the "origin tracking", while is done with good intents (compare to
 "road to hell"), is not flawless and has issues. Also, many things, like renaming a subproject or alike can cause
 headache, that can be easily solved (and spotted!) just by nuking your local repository.
+Unless, **you can use "split local repository"**... read more on that below.
 
 {{% /alert %}}
 
