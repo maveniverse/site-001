@@ -89,7 +89,7 @@ local repository in its classic sense: HEAD receives newly cached and installed 
 (list second and remaining directories) are used only for lookups, are read-only. This comes handy in some more 
 advanced CI or testing setups.
 
-{{% alert title="Important" color="info" %}}
+{{% alert title="Important" color="warning" %}}
 
 You are not married to your local repository! In other words, it is "best practice" if not downright
 real lifesaver to completely delete your local repository from time to time (ie. weekly). In Maven 2 times, it became
