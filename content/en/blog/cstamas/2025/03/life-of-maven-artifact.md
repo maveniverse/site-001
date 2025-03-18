@@ -116,7 +116,7 @@ Unless, **you can use "split local repository"**... read more on that below.
 {{% /alert %}}
 
 Since Maven 3.9 users may opt to use "split local repository" that solves most of the above-mentioned issues, and allows one to
-selectively delete accumulated artifacts: yes, you do want to delete installed and remote snapshots from time to time.
+selectively delete accumulated artifacts: yes, you do want to delete installed and remotely cached snapshots from time to time.
 Luckily, "split local repository" keeps things in separated directories, and one can easily choose what to delete. 
 But all this comes at a price: "split local repository" is not quite compatible with all the stuff present in
 (mostly legacy) bits of Maven 3 universe. Using "split local repository" is **warmly recommended, if possible**.
@@ -163,28 +163,73 @@ sequenceDiagram
 ```
 
 In short, when Maven is looking up some artifact, it will start in session, then in local repositories, and finally
-will try to get it from remote repositories. Each "actor" except for Session may (and usually is) deals with multiple 
-actual repositories. As mentioned above, Local Repositories may be a list (lookup with iterate thru all of them in
-list order), and Remote Repositories also may contain several repository definitions as well. In "basic" case, user
+will try to get it from remote repositories. Each "actor" except for Session may deal (and usually is) with multiple 
+actual repositories. As mentioned above, Local Repositories may be a list of directories (lookup with iterate thru all of them in
+list order), and Remote Repositories also may contain several remote repository definitions as well. In "most basic" case, user
 have one local repository and Maven Central as remote repository. Also, one can see, that "fastest" lookup is the one 
-from Session, then Local Repositories and finally the slowest is to get an artifact from remote.
+from Session, then Local Repositories and finally the slowest is to get an artifact from Remote Repositories that involves
+some sort of transport (HTTPS usually).
 
 When we say **artifact is resolvable**, we mean that required artifact can be retrieved by one of the `lookup` calls.
-If a required artifact is not resolvable, build failure is the expected outcome.
+If a required artifact is non-resolvable, build failure is the expected outcome.
 
-Also, as can be seen, "limited Maven sessions" (when you narrow subprojects being built by any means), will still must
-have inter-subproject dependencies resolvable. Given you are narrowing the session, you must make sure this is fulfilled
-as well. Easiest way to do it is by `install`ing, as then locally built artifacts becomes available "across sessions"
-by being present in Local Repositories. This does not pose any problem when rebuilding, as you can see in call diagram,
-that if artifact present in both places, Session and local repositories, Session is preferred.
+Also, as can be seen, "limited Maven sessions" (when you narrow subprojects being built by any means) still must
+have existing inter-subproject dependencies resolvable. Given you are narrowing the session, you must make sure this is fulfilled
+as well. Easiest way to do it is by `install`ing, as then locally built artifacts becomes available across multiple sessions
+(Maven CLI invocations) by being present in Local Repositories. This does not pose any problem when rebuilding, as you 
+can see in call diagram, artifact if present in both places, in this example in Session and Local Repositories, 
+Session is asked first ("wins" over right hand ones).
 
-## When to clean?
+### When to install?
 
-## When not to clean?
+Usually you want to install to keep things simple. People advising "do not install!" usually justify their decision by
+some colloquial "facts" like "I don't want to pollute my local repository". That justification is a red herring as can be seen
+above: this implies that these people **are married to their local repository**. They insist on keeping "pristine" something
+that is part of "planned maintenance". This justification is just wrong, or, it may reflect those users confusion what
+Local Repositories are about. Local repositories are just almost the same the part of project(s) you are working on, like 
+checkouts.
+
+{{% alert title="Story time" color="info" %}}
+
+One of the praised new Maven 4 feature is `-r` resumption option, that makes you able that in case of, for example, Unit
+Test failure, "fix the UT and continue from where you failed", and it works without invoking `install`. Well, the truth
+is that this is achieved by adding a new Maven 4 feature: project wide local repository (as opposed to user wide
+local repository, as known in Maven 3). The praised feature works, in a way that Maven do installs after all, even if 
+you did not tell it to do so. So what gives?
+
+Of course, this is not critique of a new, and a really handy feature, am just explaining what happens "behind the curtains".
+
+{{% /alert %}}
+
+Moral of the story: you don't want to keep your local repository "pristine". And Maven 4 installs even if you don't tell 
+it do so. Hence, you can calmly do the same thing while using Maven 3 and just following the "best practices" explained
+here and elsewhere. Again, flushing caches is part of planned maintenance.
+
+Installing is also needed, in case you work on a chain of projects, that depend on each other. And example can be Maven
+and Resolver: if there is a bug, that needs Resolver code changes, there is no other ways than installing one and 
+building another, that picks up fixed and installed artifacts from Local Repositories (to be honest, there are, but you 
+don't want to do what my fencing teacher told: "reach your left hand pocket with your right hand"... well, you can, but 
+why would you?).
+
+Ultimately, it is up to developer (the Maven user, but same stands for CI script as well) that needs to be "aware", and 
+just make sure "clean slate" build works and produces what it needs to produce, of course by proper uses of caches and proxies to
+not bash publicly available Remote Repositories. If "by chance" a year-old SNAPSHOT ends up in your build, you have other
+problems as well.
+
+### When to clean?
+
+
+
+### When not to clean?
 
 ## Practical examples
 
 
-## mvn clean install vs mvn verify
+### mvn clean install vs mvn verify
 
-## Changing branches
+### Changing branches
+
+### A morning routine
+
+## Conclusion
+
