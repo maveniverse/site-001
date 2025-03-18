@@ -69,7 +69,8 @@ POM specified repositories are accessible repositories), while in latter case, b
 no custom `settings.xml` and no MRM present. Ideally, a Maven build **is portable**, and if one uses group/virtual
 repositories, you not only lose Maven origin awareness, but also portability. Hence, in case of using "super groups",
 **MRM becomes Single Point of Failure**, as if you loose MRM due any reason, all your builds are doomed to be halted/fail, 
-for as long MRM is not recovered and not set up in very same way as it was before.
+for as long MRM is not recovered and not set up in very same way as it was before. You are always in better situation, 
+if you have a "B plan" that works, especially if having one is really "cheap" (technically).
 
 Remote repositories are by nature "global", but the meaning of "global" may mean different thing in open source and
 "corporate" environments.
@@ -78,19 +79,20 @@ Remote repositories contains **deployed** artifacts meant to be shared with othe
 
 ## Local repositories
 
-Maven always had "local repository": a directory where Maven caches remotely fetched artifacts, and installs locally
-built artifacts. It is obvious, that local repository is "mixed bag", and this must be considered when setting up
-caching on CI. Many times you want only cached artifacts, but not installed ones.
+Maven always had "local repository": a local directory where Maven caches remotely fetched artifacts and installs locally
+built artifacts. It is obvious, that local repository is a "mixed bag", and this must be considered when setting up
+caching on CI. Most of the time you want cached artifacts only, not the installed ones.
 
 Since Maven 3.0, local repository caching was enhanced by "origin tracking", to help you keep your sanity with 
 "works for me" like issues. Cached artifacts are tracked by "origin" (remote repository ID), and unlike in Maven 2, 
-where artifact (file) presence automatically meant "is available", in Maven 3.0+ it is "available" ONLY if artifact
-(file) is present, AND origin is contained in caller context provided remote repositories.
+where artifact (file) presence automatically meant "is available", in Maven 3.0+ it is "available" **only** if artifact
+(file) is present, **and** origin remote repository (from where it was cached) is contained in caller context provided 
+remote repositories.
 
-Since Maven 3.9 users may specify multiple local repositories as a list of directories, where HEAD of list is the 
+Since Maven 3.9 users may specify multiple local repositories as a list of directories, where HEAD of the list is the 
 local repository in its classic sense: HEAD receives newly cached and installed artifacts, while TAIL 
-(list second and remaining directories) are used only for lookups, are read-only. This comes handy in some more 
-advanced CI or testing setups.
+(list second and remaining directories) are used only for lookups, are used in read-only manner. This comes handy in 
+some more complex CI or testing setups.
 
 {{% alert title="Important" color="warning" %}}
 
@@ -103,35 +105,36 @@ headache, that can be easily solved (and spotted!) just by nuking your local rep
 
 {{% /alert %}}
 
-Since Maven 3.9 users may opt to use "split local repository" that solves most of the issues, and one is able to
-selectively delete accumulated artifacts: yes, you do want to delete installed ones from time to time,
-and probably remote snapshots as well. Luckily, "split local repository" keeps things in separated directories, and
-once can easily choose what to delete. OTOH, "split local repository" is not quite compatible with all the stuff present in
+Since Maven 3.9 users may opt to use "split local repository" that solves most of the above-mentioned issues, and allows one to
+selectively delete accumulated artifacts: yes, you do want to delete installed and remote snapshots from time to time.
+Luckily, "split local repository" keeps things in separated directories, and one can easily choose what to delete. 
+But all this comes at a price: "split local repository" is not quite compatible with all the stuff present in
 (mostly legacy) bits of Maven 3 universe. Using "split local repository" is **warmly recommended, if possible**.
-If you cannot use "split local repository", you should follow advice from previous paragraph, and nuke your local
-repository regularly, unless you want to face "works for me" (or the opposite) conflicts with CI.
+If you cannot use it, you should follow advice from previous paragraphs, and nuke your local
+repository regularly, unless you want to face "works for me" (or the opposite) conflicts with CI or colleagues.
 
 Local repositories are, as name suggests "local" to host (workstation or CI) that runs Maven, and is usually on 
-OS local (or maybe some mounted) filesystem.
+OS local filesystem.
 
 Local repositories contains **cached** artifacts pulled from remote repositories, and **installed** artifacts
-that were built locally (on host the local repository belong to). Split local repositories keeps these physically
-separated, but non-split ones keeps them mixed.
+that were built locally (on the host). You can also `install-file` if you need an artifact present in local repository.
+Split local repositories keeps artifacts physically separated, while the default one keeps them mixed, all together.
 
 ## Project
 
-Project usually contains one or more subprojects, that contains **sources** that when built, will end up as 
-**artifacts**. So, unlike above in remote and local repositories, here, we as starting point have no artifacts.
-Artifacts are materialized during build.
+Projects are usually versioned in some SCM and usually contain one or more subprojects, that again contain **sources** 
+that when built, will end up as **artifacts**. So, unlike above, in remote and local repositories, here, we as starting 
+point have no artifacts. Artifacts are materialized during build.
 
 Still, inter-project dependencies are expressed in very same manner as dependencies coming from remote repositories.
+And given they are "materialized during build", this has severe implications that sometimes offers surprises as well.
 
 ## Session
 
-The session contains projects that Maven effectively builds: usually or most commonly is same as "project" above, 
+The session contains projects that Maven effectively builds: usually or most commonly is same as "Project" above, 
 unless some "limiting" options are used like `-r`, `-rf` or `-N` and alike. It is important to keep this (not obvious)
 distinction, as even if checkout of the project contains certain module, if that module is not part of the Session,
-Maven treats it as "external" (to session).
+Maven treats it as "external" (to the session).
 
 ## Finding things
 
