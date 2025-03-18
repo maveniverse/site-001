@@ -56,17 +56,19 @@ checkout, with empty local repositories. This usually immediately shows issues a
 
 Also, from this above follows why **Maven Repository Manager (MRM) group/virtual repositories are inherently bad thing**:
 By using them, Maven suddenly completely loses concept of "artifact origin", and origin knowledge is shifted to MRM.
-This may be not a problem for project being built in and only in controlled environments (where MRM is always available),
-but in general is very bad practice: Maven users in such environment and MRM admins may become disconnected, or just
-a simple mishap may happen (adding some new repository to a group) and suddenly, much more artifacts become available
-to Maven thru these "super repositories". And worst, Maven build is not portable, and has a split-brain situation:
-to be able to build such a project, Maven alone is not enough, one need to provide very same "super repository" as 
-well. It is much better to declare remote repositories in POM, and have them "mirrored" (one by one) in for example
-company-wide `settings.xml`, instead to opposite example: where there is "Maven Central" set as `mirrorOf` and points
+This may be not a problem for project being built exclusively in controlled environments (where MRM is always available),
+but in general is very bad practice: In such environment Maven users and MRM admins may become disconnected, or just
+a simple mishap may happen (by adding some new repository to a group) and suddenly, much more artifacts become available
+to Maven through these "super repositories". And worse, Maven builds like these are not portable, as they have a split-brain situation:
+to be able to build such a project, Maven alone is not enough! One need to provide very same "super repository" as 
+well. It is much better to declare remote repositories in POM, and have them "mirrored" (one by one) in
+company-wide `settings.xml`, instead to do it opposite: where one have "Maven Central" set as `mirrorOf *` and points
 to a "super repository". If former Maven **still can build** project if taken out of MRM environment (assuming all
 POM specified repositories are accessible public repositories), while in latter build is doomed to simply fail when
 no custom `settings.xml` and MRM present. Ideally, a Maven build **is portable**, and if one uses group/virtual
-repositories, you not only lose Maven origin awareness, but also portability.
+repositories, you not only lose Maven origin awareness, but also portability. In case of using "super groups" due this,
+MRM becomes Single Point of Failure as well, as if you loose MRM due any reason, all your builds are halted and will
+not work, for as long MRM is not recovered and not set up in very same way as it was before.
 
 Remote repositories are by nature "global", but the meaning of "global" may mean different thing in open source and
 "corporate" environments.
