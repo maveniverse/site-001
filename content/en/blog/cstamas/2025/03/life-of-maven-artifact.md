@@ -32,7 +32,7 @@ available) and "corporate" (could not come up with better name) scenarios, where
 ## Remote repositories
 
 This one is I think simplest, and also the oldest concept in Maven: Maven will get you all dependencies you need to 
-build the project, like the ones you specified in POM. And to do so, Maven needs to know all required remote repositories 
+build the project, like the ones you specified in POM. And to do so, Maven needs to know all remote repositories 
 where required artifacts reside. In "ideal" situation, you don't need to do anything: all your dependencies will be 
 found on Maven Central.
 
@@ -40,35 +40,36 @@ found on Maven Central.
 
 Have to note that "dependencies you need" are **not only dependencies you specified in POM**! Maven itself
 performs builds using **plugins**, and you guessed, those are also JAR artifacts, fetched from remote repositories.
-So remote repositories should be declared for all artifacts your build needs.
+Hence, remote repositories should be declared for all artifacts your build needs.
 
 {{% /alert %}}
 
 By default, Maven will go over remote repositories "in defined order" (see effective POM what that order is) in a 
-"round-robin" (from first to last) fashion to get an artifact. This has several consequences: you usually want most
+"ordered" (from first to last) fashion to get an artifact. This has several consequences: you usually want most often
 used repository as first, and to get artifacts from last repository, you will need to wait for "not found" from all
 repositories before it. The solution for first problem is most probably solved by Maven itself, having Maven Central
-defined as first repository (but you can redefine this). The solution to last problem is offered as 
+defined as first repository (but you can redefine this order). The solution to last problem is offered as 
 [Remote Repository Filtering](https://maven.apache.org/resolver/remote-repository-filtering.html).
 
 From time to time, it is warmly recommended (or to do this on a CI) to have a build "from the scratch", like a fresh
-checkout, with empty local repositories. This usually immediately shows issues about artifact availability.
+checkout in a new environment, with empty local repositories. This usually immediately shows issues about artifact availability.
+Nothing special needed here, usually is enough just to use `-Dmaven.repo.local=some/alt/loca/repo` to achieve this.
 
 Also, from this above follows why **Maven Repository Manager (MRM) group/virtual repositories are inherently bad thing**:
-By using them, Maven suddenly completely loses concept of "artifact origin", and origin knowledge is shifted to MRM.
+By using them, Maven completely loses concept of "artifact origin", and origin knowledge is shifted to MRM.
 This may be not a problem for project being built exclusively in controlled environments (where MRM is always available),
-but in general is very bad practice: In such environment Maven users and MRM admins may become disconnected, or just
-a simple mishap may happen (by adding some new repository to a group) and suddenly, much more artifacts become available
-to Maven through these "super repositories". And worse, Maven builds like these are not portable, as they have a split-brain situation:
+but in general is very bad practice: In such environment if Maven users and MRM admins become disconnected, or just
+a simple configuration mishap happens (by adding some new repository to a group) problems can arise: from suddenly much more artifacts becoming available
+to Maven through these "super repositories" to complete build halt. And worse, Maven builds like these are not portable, as they have a split-brain situation:
 to be able to build such a project, Maven alone is not enough! One need to provide very same "super repository" as 
 well. It is much better to declare remote repositories in POM, and have them "mirrored" (one by one) in
-company-wide `settings.xml`, instead to do it opposite: where one have "Maven Central" set as `mirrorOf *` and points
-to a "super repository". If former Maven **still can build** project if taken out of MRM environment (assuming all
-POM specified repositories are accessible public repositories), while in latter build is doomed to simply fail when
-no custom `settings.xml` and MRM present. Ideally, a Maven build **is portable**, and if one uses group/virtual
-repositories, you not only lose Maven origin awareness, but also portability. In case of using "super groups" due this,
-MRM becomes Single Point of Failure as well, as if you loose MRM due any reason, all your builds are halted and will
-not work, for as long MRM is not recovered and not set up in very same way as it was before.
+company-wide `settings.xml`, instead to do it opposite: where one have "Uber Repository" set as `mirrorOf *` and points
+it to a "super repository". In former case Maven **still can build** project if taken out of MRM environment (assuming all
+POM specified repositories are accessible repositories), while in latter case, build is doomed to simply fail when
+no custom `settings.xml` and no MRM present. Ideally, a Maven build **is portable**, and if one uses group/virtual
+repositories, you not only lose Maven origin awareness, but also portability. Hence, in case of using "super groups",
+**MRM becomes Single Point of Failure**, as if you loose MRM due any reason, all your builds are doomed to be halted/fail, 
+for as long MRM is not recovered and not set up in very same way as it was before.
 
 Remote repositories are by nature "global", but the meaning of "global" may mean different thing in open source and
 "corporate" environments.
