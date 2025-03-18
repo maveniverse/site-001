@@ -14,9 +14,9 @@ projects:
 
 In Maven you will read about following very important things:
 * **session** (historically called "reactor" by a Maven 2 plugin) - the set of subprojects Maven is working on
-* **project** (sometimes called "checkout", referring that project is checked into some SCM) - the set of subprojects that makes the "project" you are working on
-* **local repositories** (since Maven 3.9 you can have multiple of these; in a limited way) - the mish-mash directory, where Maven caches (remote) and installs (locally build) artifacts
-* **remote repositories** - most notable one being Maven Central provided "out of the box".
+* **project** (sometimes called "checkout", referring that project is checked out from some SCM) - the set of subprojects that makes the "project" you are working on
+* **local repositories** (since Maven 3.9 you can have multiple of these; in a limited way) - the mish-mash directory, where Maven caches (remote) and installs (locally built) artifacts
+* **remote repositories** - remote repositories that contains deployed artifact meant to be shared. Most notable one being Maven Central provided "out of the box". Most often they are reached via HTTPS.
 
 Let's start from end.
 
