@@ -12,6 +12,14 @@ projects:
   - Maven
 ---
 
+{{% pageinfo color="info" %}}
+
+This article assumes reader has basic knowledge about Maven, POM and related things. The main point is to offer high
+level conceptualization and explain things "why's" and "why not", and finally explain why you don't want to listen to
+folks that tells you "never do..." (unless they are your parents).
+
+{{% /pageinfo %}}
+
 In Maven you will read about following very important things:
 * **session** (historically called "reactor" by a Maven 2 plugin) - the set of subprojects Maven is working on
 * **project** (sometimes called "checkout", referring that project is checked out from some SCM) - the set of subprojects that makes the "project" you are working on
