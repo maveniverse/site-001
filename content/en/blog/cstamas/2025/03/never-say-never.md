@@ -1,5 +1,5 @@
 ---
-title: "The life of Maven Artifact"
+title: "Never Say Never"
 date: 2025-03-17T21:55:22+01:00
 draft: false
 authors: cstamas
@@ -20,14 +20,6 @@ folks that tells you "never do..." (unless they are your parents).
 
 {{% /pageinfo %}}
 
-{{% alert title="Disclaimer" color="info" %}}
-
-While the concepts are similar, if not same, there may me slight deviations between open source (globally
-available) and "corporate" (could not come up with better name) scenarios, where some company provides infrastructure
-(like remote repositories, caches, but also some sort of "confined" network as well).
-
-{{% /alert %}}
-
 ## The pieces
 
 In Maven you will read about following very important things:
@@ -35,6 +27,14 @@ In Maven you will read about following very important things:
 * **project** (sometimes called "checkout", referring that project is checked out from some SCM) - the set of subprojects that makes the "project" you are working on
 * **local repositories** (since Maven 3.9 you can have multiple of these; in a limited way) - the mish-mash directory, where Maven caches (remote) and installs (locally built) artifacts
 * **remote repositories** - remote repositories that contains deployed artifact meant to be shared. Most notable one being Maven Central provided "out of the box". Most often they are reached via HTTPS.
+
+{{% alert title="Disclaimer" color="info" %}}
+
+While the concepts are similar, if not same, there may me slight deviations between open source (globally
+available) and "corporate" (could not come up with better name) scenarios, where some company provides infrastructure
+(like remote repositories, caches, but also some sort of "confined" network as well).
+
+{{% /alert %}}
 
 Let's start from end.
 
@@ -57,7 +57,7 @@ By default, Maven will go over remote repositories "in defined order" (see effec
 "ordered" (from first to last) fashion to get an artifact. This has several consequences: you usually want most often
 used repository as first, and to get artifacts from last repository, you will need to wait for "not found" from all
 repositories before it. The solution for first problem is most probably solved by Maven itself, having Maven Central
-defined as first repository (but you can redefine this order). The solution to last problem is offered as 
+defined as first repository (but you can redefine this order). The solution to last problem (and many more!) is offered as 
 [Remote Repository Filtering](https://maven.apache.org/resolver/remote-repository-filtering.html).
 
 From time to time, it is warmly recommended (or to do this on a CI) to have a build "from the scratch", like a fresh
@@ -147,11 +147,11 @@ distinction, as even if checkout of the project contains certain module, if that
 Maven treats it as "external" (to the session). Or in other words, even if "thing is on my disk" (checked out), Maven
 if told so, will treat it as external artifact (not part of Session).
 
-## How Maven finds things?
+## The pieces together
 
-Maven building may be envisioned as "onion" like structure, where search is performed from "inside to out" direction.
-Each [artifact coordinate](https://maven.apache.org/repositories/artifacts.html) (GAV, that is "artifact coordinates" and 
-has more elements than 3, but for brevity we consistently use
+How does Maven finds artifacts? Maven building may be envisioned as "onion" like structure, where search is performed 
+from "inside to out" direction. Each [artifact coordinate](https://maven.apache.org/repositories/artifacts.html) (GAV, 
+that is "artifact coordinates" and has more elements than 3, but for brevity we consistently use
 "GAV" to denote artifact coordinates) is looked up in this order:
 
 ```mermaid
@@ -162,13 +162,11 @@ sequenceDiagram
   Session->>Remote Repositories: lookup
 ```
 
-In short, when Maven is looking up some artifact, it will start in session, then in local repositories, and finally
-will try to get it from remote repositories. Each "actor" except for Session may deal (and usually is) with multiple 
+In short, when Maven is looking up some artifact, it will start in session, if not found then in local repositories, and finally
+if still not found it will try to get it from remote repositories. Each "actor" except for Session may deal (and usually is) with multiple 
 actual repositories. As mentioned above, Local Repositories may be a list of directories (lookup with iterate thru all of them in
-list order), and Remote Repositories also may contain several remote repository definitions as well. In "most basic" case, user
-have one local repository and Maven Central as remote repository. Also, one can see, that "fastest" lookup is the one 
-from Session, then Local Repositories and finally the slowest is to get an artifact from Remote Repositories that involves
-some sort of transport (HTTPS usually).
+list order), and Remote Repositories also may contain several remote repository definitions as well. But in "most basic" case, user
+have one local repository and Maven Central as remote repository.
 
 When we say **artifact is resolvable**, we mean that required artifact can be retrieved by one of the `lookup` calls.
 If a required artifact is non-resolvable, build failure is the expected outcome.
@@ -183,11 +181,11 @@ Session is asked first ("wins" over right hand ones).
 ### When to install?
 
 You do want to install, to keep things simple. People advising "do not install!" usually justify their decision by
-some colloquial "facts" like "I don't want to pollute my local repository". That justification is a red herring as can be seen
-above: this implies that these people **are married to their local repository**. They insist on keeping "pristine" something
+some colloquial "beliefs" like "I don't want to pollute my local repository". That justification is a red herring as can be seen
+above: this implies that these people **are married to their local repositories**. They insist on keeping "pristine" something
 that is part of "planned maintenance". This justification is just wrong, or, it may reflect those users confusion what
-Local Repositories are about. Local repositories are just almost the same the part of project(s) you are working on, like 
-checkouts.
+Local Repositories are about. Local repositories are almost the same the part of project(s) you are working on, like 
+checkouts. They are "within your work context", not outside.
 
 {{% alert title="Story time" color="info" %}}
 
@@ -201,7 +199,8 @@ Of course, this is not critique of a new, and a really handy feature, am just ex
 
 {{% /alert %}}
 
-Moral of the story: you don't want to keep your local repository "pristine". "Polluting" (for me is funny even to think
+Moral of the story: you don't want to keep your local repository pristine, you do want to make it "dirty" instead. 
+"Polluting" (for me is funny even to think
 of this word, is like projects I work on are toxic) your Local Repository with 
 artifacts from Project(s) you work on is part of normal workflow and process. And Maven 4 installs (true, not into 
 local repository, but does it matter?) even if you don't tell it to do so. Hence, you can calmly do the same thing 
@@ -219,6 +218,32 @@ just make sure that build works and produces what it needs to produce, of course
 not bash publicly available Remote Repositories. If "by chance" a year-old installed SNAPSHOT ends up in your build, you have more
 problems as well; it just means you lack some healthy maintenance routine. No magic nor any kind of "silver bullet" 
 will do this for you.
+
+But as can be seen, depending on what you do, the "resolvable artifacts" should be resolvable. Hence, the simplest
+thing to do is always to "level up" them: from Session to Local Repositories by installing them (making them resolvable 
+workstation-wide) or, deploying them to Remote Repositories (making them resolvable globally, if needed). Again, it all
+depends on what you do.
+
+### Snapshots
+
+Snapshot Artifacts are yet another not well understood kind of artifacts, but now will mention them only in context
+of this blog. Best practice with them is to not let them "cross organizational boundaries". Or in other words, within 
+a company, one team is okay to consume snapshots of other team (boundary is "within a company") assuming regular snapshot deployment
+is solved. Same stands for example for Apache Maven project: Maven depending on snapshot Resolver is okay (and even happens from
+time to time), given both are authored by us. In short, consumer should be able to influence the publishing of snapshots. You should never depend on
+snapshot that is outside your "circle of boundary", which is hard to precisely define, but the smaller the circle is,
+the better.
+
+On the other hand, when Maven does depend on snapshot Resolver, anyone building it will pull a snapshot artifacts and cache
+them to their local repository. And here is the thing: once, in the future, that codebase will get released and deployed
+to some remote repository (Resolver to Maven Central).
+
+So what happens to that snapshot in your local repository? By default, nothing, but if you consider "server side" of
+things, MRM used by Apache foundation will clean it up, once released. This even more increases your "disconnect" from
+the reality: you have something cached that does not exist anymore.
+
+Hence, snapshots are yet another reason why you want to nuke your local repository. They are not inherently bad either,
+but they do need some extra caution.
 
 ## Practical examples
 
@@ -291,7 +316,7 @@ has this configured by default on Surefire plugin, so just `-Dtest=void` (or any
 This way I know my local repository is "primed" (or populated on Mondays).
 
 From this moment, one can open IDE or whatever and begin working on project. From here, if you work on single project,
-you can continue issuing `mvn verify` or whatever you want. 
+you can continue issuing `mvn verify` or whatever you want.
 
 ### Changing branches
 
@@ -299,9 +324,9 @@ Again, this depends on what you do: if you change to some feature branch that is
 but "quick build" is advised. In "big change" cases (compare Maven [maven-3.9.x](https://github.com/apache/maven/tree/maven-3.9.x) and 
 [master](https://github.com/apache/maven/tree/master) branches!), a full `git` cleanup and "quick build" is advised.
 
-If you are lucky and you are able to use split local repository, you can find more tips under ["Use Cases"](https://maven.apache.org/resolver/local-repository.html#Use_Cases).
+If you are lucky, and you are able to use split local repository, you can find more tips under ["Use Cases"](https://maven.apache.org/resolver/local-repository.html#Use_Cases).
 
----
+### Warm up with your project
 
 Doing these "routines" should not take longer than having your first cup of coffee, while just like coffee does for you,
 it "warms up" Maven environment for real work. Of course, nothing is black or white: the mentioned projects like Camel
@@ -310,7 +335,7 @@ like [Maven Build Cache](https://maven.apache.org/extensions/maven-build-cache-e
  
 I am lucky to spend my time on "small scale" projects like Maven and Resolver are.
 
-## Conclusion (TL;DR)
+## Conclusion
 
 No, `mvn clean install` is not "pure evil", it has its own merit. And no, installing built artifacts is not "polluting",
 that is really silly thing to say. And finally, if your build picks up a year ago installed SNAPSHOT from your local
