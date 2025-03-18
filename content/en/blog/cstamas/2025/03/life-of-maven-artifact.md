@@ -310,10 +310,12 @@ like [Maven Build Cache](https://maven.apache.org/extensions/maven-build-cache-e
  
 I am lucky to spend my time on "small scale" projects like Maven and Resolver are.
 
-## Conclusion
+## Conclusion (TL;DR)
 
-Just do whatever suits you, and don't feel pressured to submit yourself to "facts" that are more like "beliefs",
-and as such, are usually wrong. That said, it is much better to get accustomed and learn what and how your tools do, 
-instead to become a blind "cult follower".
+No, `mvn clean install` is not "pure evil", it has its own merit. And no, installing built artifacts is not "polluting",
+that is really silly thing to say. And finally, if your build picks up a year ago installed SNAPSHOT from your local
+repository, you are simply lacking proper and planned maintenance. Don't feel pressured to submit yourself to "facts" 
+that are more like "beliefs", and as such, are usually wrong. That said, it is much better to get accustomed and learn 
+what and how your tools do, instead to become a blind "cult follower".
 
 Join to [Maven Users](https://maven.apache.org/mailing-lists.html) list and feel free to ask!
