@@ -149,18 +149,34 @@ if told so, will treat it as external artifact (not part of Session).
 
 ## How Maven finds things?
 
-Maven building may be envisioned as "onion" like structure, where search is performed from "inside to out" direction:
+Maven building may be envisioned as "onion" like structure, where search is performed from "inside to out" direction.
+Each [artifact coordinate](https://maven.apache.org/repositories/artifacts.html) (GAV, that is "artifact coordinates" and 
+has more elements than 3, but for brevity we consistently use
+"GAV" to denote artifact coordinates) is looked up in this order:
 
-```
-remoteRepositories(
-  localRepositories(
-    session()
-  )
-)
+```mermaid
+sequenceDiagram
+  autoNumber
+  Session->>Session: lookup
+  Session->>Local Repositories: lookup
+  Session->>Remote Repositories: lookup
 ```
 
 In short, when Maven is looking up some artifact, it will start in session, then in local repositories, and finally
-will try to get it from remote repositories.
+will try to get it from remote repositories. Each "actor" except for Session may (and usually is) deals with multiple 
+actual repositories. As mentioned above, Local Repositories may be a list (lookup with iterate thru all of them in
+list order), and Remote Repositories also may contain several repository definitions as well. In "basic" case, user
+have one local repository and Maven Central as remote repository. Also, one can see, that "fastest" lookup is the one 
+from Session, then Local Repositories and finally the slowest is to get an artifact from remote.
+
+When we say **artifact is resolvable**, we mean that required artifact can be retrieved by one of the `lookup` calls.
+If a required artifact is not resolvable, build failure is the expected outcome.
+
+Also, as can be seen, "limited Maven sessions" (when you narrow subprojects being built by any means), will still must
+have inter-subproject dependencies resolvable. Given you are narrowing the session, you must make sure this is fulfilled
+as well. Easiest way to do it is by `install`ing, as then locally built artifacts becomes available "across sessions"
+by being present in Local Repositories. This does not pose any problem when rebuilding, as you can see in call diagram,
+that if artifact present in both places, Session and local repositories, Session is preferred.
 
 ## When to clean?
 
