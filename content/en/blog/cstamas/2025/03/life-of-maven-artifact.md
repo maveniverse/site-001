@@ -20,9 +20,14 @@ In Maven you will read about following very important things:
 
 Let's start from end.
 
-**Remarks**: While the concepts are similar, if not same, there may me slight deviations between open source (globally
-available) and "corporate" (could not come up with better name) scenarios, where some company provides infrastructure 
+{{% alert title="Disclaimer" color="info" %}}
+
+While the concepts are similar, if not same, there may me slight deviations between open source (globally
+available) and "corporate" (could not come up with better name) scenarios, where some company provides infrastructure
 (like remote repositories, caches, but also some sort of "confined" network as well).
+
+{{% /alert %}}
+
 
 ## Remote repositories
 
@@ -31,9 +36,13 @@ build the project, like the ones you specified in POM. And to do so, Maven needs
 where required artifacts reside. In "ideal" situation, you don't need to do anything: all your dependencies will be 
 found on Maven Central.
 
-**Note:** Have to note that "dependencies you need" are **not only dependencies you specified in POM**! Maven itself
+{{% alert title="Important" color="info" %}}
+
+Have to note that "dependencies you need" are **not only dependencies you specified in POM**! Maven itself
 performs builds using **plugins**, and you guessed, those are also JAR artifacts, fetched from remote repositories.
 So remote repositories should be declared for all artifacts your build needs.
+
+{{% /alert %}}
 
 By default, Maven will go over remote repositories "in defined order" (see effective POM what that order is) in a 
 "round-robin" (from first to last) fashion to get an artifact. This has several consequences: you usually want most
@@ -80,12 +89,16 @@ local repository in its classic sense: HEAD receives newly cached and installed 
 (list second and remaining directories) are used only for lookups, are read-only. This comes handy in some more 
 advanced CI or testing setups.
 
-**Important**: You are not married to your local repository! In other words, it is "best practice" if not downright
+{{% alert title="Important" color="info" %}}
+
+You are not married to your local repository! In other words, it is "best practice" if not downright
 real lifesaver to completely delete your local repository from time to time (ie. weekly). In Maven 2 times, it became
 a (bad) habit to "stick to your local repository" as it was really just a "bunch of files" laid out in some way.
 But, since Maven 3.0 doing this is wrong: the "origin tracking", while is done with good intents (compare to
-"road to hell"), is not flawless and has issues. Also, many things, like renaming a subproject or alike can cause 
-headache, that can be easily solved (and spotted!) just by nuking your local repository. 
+"road to hell"), is not flawless and has issues. Also, many things, like renaming a subproject or alike can cause
+headache, that can be easily solved (and spotted!) just by nuking your local repository.
+
+{{% /alert %}}
 
 Since Maven 3.9 users may opt to use "split local repository" that solves most of the issues, and one is able to
 selectively delete accumulated artifacts: yes, you do want to delete installed ones from time to time,
