@@ -149,6 +149,19 @@ if told so, will treat it as external artifact (not part of Session).
 
 ## How Maven finds things?
 
+Maven building may be envisioned as "onion" like structure, where search is performed from "inside to out" direction:
+
+```
+remoteRepositories(
+  localRepositories(
+    session()
+  )
+)
+```
+
+In short, when Maven is looking up some artifact, it will start in session, then in local repositories, and finally
+will try to get it from remote repositories.
+
 ## When to clean?
 
 ## When not to clean?
