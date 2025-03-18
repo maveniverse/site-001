@@ -36,7 +36,7 @@ build the project, like the ones you specified in POM. And to do so, Maven needs
 where required artifacts reside. In "ideal" situation, you don't need to do anything: all your dependencies will be 
 found on Maven Central.
 
-{{% alert title="Important" color="info" %}}
+{{% alert title="Important" color="warning" %}}
 
 Have to note that "dependencies you need" are **not only dependencies you specified in POM**! Maven itself
 performs builds using **plugins**, and you guessed, those are also JAR artifacts, fetched from remote repositories.
@@ -121,11 +121,14 @@ Project usually contains one or more subprojects, that contains **sources** that
 **artifacts**. So, unlike above in remote and local repositories, here, we as starting point have no artifacts.
 Artifacts are materialized during build.
 
+Still, inter-project dependencies are expressed in very same manner as dependencies coming from remote repositories.
+
 ## Session
 
-The session is what Maven builds: usually or most commonly is same as "project" above, unless some "limiting" options 
-are used like `-r`, `-rf` or `-N` and alike. 
-
+The session contains projects that Maven effectively builds: usually or most commonly is same as "project" above, 
+unless some "limiting" options are used like `-r`, `-rf` or `-N` and alike. It is important to keep this (not obvious)
+distinction, as even if checkout of the project contains certain module, if that module is not part of the Session,
+Maven treats it as "external" (to session).
 
 ## Finding things
 
