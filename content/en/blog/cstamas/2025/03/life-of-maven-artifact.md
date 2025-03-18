@@ -28,7 +28,7 @@ available) and "corporate" (could not come up with better name) scenarios, where
 
 {{% /alert %}}
 
-# The pieces
+## The pieces
 
 In Maven you will read about following very important things:
 * **session** (historically called "reactor" by a Maven 2 plugin) - the set of subprojects Maven is working on
@@ -38,7 +38,7 @@ In Maven you will read about following very important things:
 
 Let's start from end.
 
-## Remote repositories
+### Remote repositories
 
 This one is I think simplest, and also the oldest concept in Maven: Maven will get you all dependencies you need to 
 build the project, like the ones you specified in POM. And to do so, Maven needs to know all remote repositories 
@@ -86,7 +86,7 @@ Remote repositories are by nature "global", but the meaning of "global" may mean
 
 Remote repositories contains **deployed** artifacts meant to be shared with other projects.
 
-## Local repositories
+### Local repositories
 
 Maven always had "local repository": a local directory where Maven caches remotely fetched artifacts and installs locally
 built artifacts. It is obvious, that local repository is a "mixed bag", and this must be considered when setting up
@@ -130,7 +130,7 @@ Local repositories contains **cached** artifacts pulled from remote repositories
 that were built locally (on the host). You can also `install-file` if you need an artifact present in local repository.
 Split local repositories keeps artifacts physically separated, while the default one keeps them mixed, all together.
 
-## Project
+### Project
 
 Projects are usually versioned in some SCM and usually contain one or more subprojects, that again contain **sources** 
 that when built, will end up as **artifacts**. So, unlike above, in remote and local repositories, here, we as starting 
@@ -139,18 +139,22 @@ point have no artifacts. Artifacts are materialized during build.
 Still, inter-project dependencies are expressed in very same manner as dependencies coming from remote repositories.
 And given they are "materialized during build", this has severe implications that sometimes offers surprises as well.
 
-## Session
+### Session
 
 The session contains projects that Maven effectively builds: usually or most commonly is same as "Project" above, 
 unless some "limiting" options are used like `-r`, `-rf` or `-N` and alike. It is important to keep this (not obvious)
 distinction, as even if checkout of the project contains certain module, if that module is not part of the Session,
-Maven treats it as "external" (to the session).
+Maven treats it as "external" (to the session). Or in other words, even if "thing is on my disk" (checked out), Maven
+if told so, will treat it as external artifact (not part of Session).
 
-# Finding things
+## How Maven finds things?
 
-It is important to note here, that if session is
-"limited", the subprojects loaded by Maven are not the same/equal present in project (checkout), the excluded
-subprojects are "invisible" to Maven. They can 
+## When to clean?
+
+## When not to clean?
+
+## Practical examples
+
 
 ## mvn clean install vs mvn verify
 
