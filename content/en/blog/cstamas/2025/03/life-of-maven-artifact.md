@@ -20,14 +20,6 @@ folks that tells you "never do..." (unless they are your parents).
 
 {{% /pageinfo %}}
 
-In Maven you will read about following very important things:
-* **session** (historically called "reactor" by a Maven 2 plugin) - the set of subprojects Maven is working on
-* **project** (sometimes called "checkout", referring that project is checked out from some SCM) - the set of subprojects that makes the "project" you are working on
-* **local repositories** (since Maven 3.9 you can have multiple of these; in a limited way) - the mish-mash directory, where Maven caches (remote) and installs (locally built) artifacts
-* **remote repositories** - remote repositories that contains deployed artifact meant to be shared. Most notable one being Maven Central provided "out of the box". Most often they are reached via HTTPS.
-
-Let's start from end.
-
 {{% alert title="Disclaimer" color="info" %}}
 
 While the concepts are similar, if not same, there may me slight deviations between open source (globally
@@ -36,6 +28,15 @@ available) and "corporate" (could not come up with better name) scenarios, where
 
 {{% /alert %}}
 
+# The pieces
+
+In Maven you will read about following very important things:
+* **session** (historically called "reactor" by a Maven 2 plugin) - the set of subprojects Maven is working on
+* **project** (sometimes called "checkout", referring that project is checked out from some SCM) - the set of subprojects that makes the "project" you are working on
+* **local repositories** (since Maven 3.9 you can have multiple of these; in a limited way) - the mish-mash directory, where Maven caches (remote) and installs (locally built) artifacts
+* **remote repositories** - remote repositories that contains deployed artifact meant to be shared. Most notable one being Maven Central provided "out of the box". Most often they are reached via HTTPS.
+
+Let's start from end.
 
 ## Remote repositories
 
@@ -145,7 +146,7 @@ unless some "limiting" options are used like `-r`, `-rf` or `-N` and alike. It i
 distinction, as even if checkout of the project contains certain module, if that module is not part of the Session,
 Maven treats it as "external" (to the session).
 
-## Finding things
+# Finding things
 
 It is important to note here, that if session is
 "limited", the subprojects loaded by Maven are not the same/equal present in project (checkout), the excluded
