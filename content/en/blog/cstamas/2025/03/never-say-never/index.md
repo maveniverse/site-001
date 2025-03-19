@@ -18,6 +18,8 @@ This article assumes reader has basic knowledge about Maven, POM and related thi
 level conceptualization and explain things "why's" and "why not", and finally explain why you don't want to listen to
 folks that tells you "never do..." (unless they are your parents).
 
+This article is mostly about Maven 3, but mentions Maven 4 as well.
+
 {{% /pageinfo %}}
 
 ## The pieces
