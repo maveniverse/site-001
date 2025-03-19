@@ -13,3 +13,5 @@ Toolbox was started as a "showcase" project of Maveniverse MIMA combined into Mo
 A tool that gives you Swiss Knife for every situation.
 
 https://github.com/maveniverse/toolbox
+
+[Maven generated plugin documentation](plugin-documentation/plugin-info.html)
