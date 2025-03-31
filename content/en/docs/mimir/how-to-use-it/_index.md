@@ -33,4 +33,4 @@ mimir.jgroups.interface=match-address\:192.168.1.*
 
 This will help JGroups to properly bind to interface that is used on your LAN.
 
-Nothing more is needed.
+With these, you are fully set up. Now just go and fire up a Maven or Maven Daemon build.
