@@ -11,6 +11,6 @@ Maveniverse Mímir started as solution of my own problem: workstation hopping, a
 up where I left on.
 {{% /pageinfo %}}
 
-A Maven 3/4 extension that offers "global cache" on workstaion, and shares cache via LAN to other Mimir running nodes.
+A Maven 3/4 extension that offers "global cache" on workstation, and shares cache via LAN to other Mimir running nodes.
 
-https://github.com/maveniverse/mimir
+Mímir is on Github: https://github.com/maveniverse/mimir
