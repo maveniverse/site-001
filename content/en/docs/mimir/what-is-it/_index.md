@@ -7,14 +7,14 @@ weight: 10
 ---
 
 Mímir is a Maven 3 and Maven 4 extension that offers global caching on workstations. More precisely, Mímir is a
-Resolver 1/2 extension (is a [`RepositoryConnector`](https://github.com/apache/maven-resolver/blob/fb6e59027cfce9c9fce6f4e4f6d310c1a7ee906c/maven-resolver-spi/src/main/java/org/eclipse/aether/spi/connector/RepositoryConnector.java)) 
+Resolver 1.x and 2.x extension (is a [`RepositoryConnector`](https://github.com/apache/maven-resolver/blob/fb6e59027cfce9c9fce6f4e4f6d310c1a7ee906c/maven-resolver-spi/src/main/java/org/eclipse/aether/spi/connector/RepositoryConnector.java)) 
 that is loaded via Maven extensions mechanism and extends Resolver.
 
 As you may know, Maven historically uses "local repository" as mixed bag, to store cached artifacts fetched
 from remote along with locally build and installed artifacts. Hence, your local repository usually contains
 both kind of artifacts.
 
-Mímir alleviates this, by introducing a **new workstation wide cache** (by default in `~/.mimir/local`) and placing
+Mímir alleviates this, by introducing a **new workstation wide read-through cache** (by default in `~/.mimir/local`) and placing
 hardlinks in Maven local repository pointing to Mímir cache entries.  This implies several important things:
 
 * you have separated **pure cache**, unlike existing local repository, that is a mixed bag on your disk.
