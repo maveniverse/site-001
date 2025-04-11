@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>njord:drop-all – eu.maveniverse.maven.plugins:njord</title>
+    <title>njord:export-bundle – eu.maveniverse.maven.plugins:njord</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,12 +54,12 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="njord.3Adrop-all"></a>
-<h1>njord:drop-all</h1>
+<section><a id="njord.3Aexport-bundle"></a>
+<h1>njord:export-bundle</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:njord:0.1.1-SNAPSHOT:drop-all</p>
+<p>eu.maveniverse.maven.plugins:njord:0.1.1-SNAPSHOT:export-bundle</p>
 <p><strong>Description</strong>:</p>
-<p>Tabula rasa: drops all stores. For safety reasons, you need extra <code>-Dyes</code>.</p>
+<p>Exports a store as "bundle" ZIP to given path. The ZIP file has remote repository layout and contains all the artifacts and metadata.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
@@ -71,17 +71,28 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#yes"><code>&lt;yes&gt;</code></a></td>
-<td><code>boolean</code></td>
+<td><a href="#directory"><code>&lt;directory&gt;</code></a></td>
+<td><code>String</code></td>
 <td><code>-</code></td>
-<td>No description.<br /><strong>User Property</strong>: <code>yes</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="yes"></a><section><a id="a.3Cyes.3E"></a>
-<h3>&lt;yes&gt;</h3>
+<td>No description.<br /><strong>User Property</strong>: <code>directory</code></td></tr>
+<tr class="a">
+<td><a href="#store"><code>&lt;store&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>No description.<br /><strong>User Property</strong>: <code>store</code></td></tr></table></section><section><a id="Parameter_Details"></a>
+<h2>Parameter Details</h2><a id="directory"></a><section><a id="a.3Cdirectory.3E"></a>
+<h3>&lt;directory&gt;</h3>
 <div>No description.</div>
 <ul>
-<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>yes</code></li></ul></section></section></section>
+<li><strong>User Property</strong>: <code>directory</code></li></ul><hr /></section><a id="store"></a><section><a id="a.3Cstore.3E"></a>
+<h3>&lt;store&gt;</h3>
+<div>No description.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>store</code></li></ul></section></section></section>
         </main>
       </div>
     </div>

@@ -71,25 +71,28 @@
 <td>Drops given store.</td></tr>
 <tr class="a">
 <td><a href="./drop-all-mojo.html">njord:drop-all</a></td>
-<td>Tabula rasa: removes all stores. To make it work you need extra <code>-Dyes</code>.</td></tr>
+<td>Tabula rasa: drops all stores. For safety reasons, you need extra <code>-Dyes</code>.</td></tr>
 <tr class="b">
 <td><a href="./export-mojo.html">njord:export</a></td>
-<td>Exports a store to given path (ie for archival purposes or processing or whatever).</td></tr>
+<td>Exports a store as "remote Maven repository" directory structure to given directory.</td></tr>
 <tr class="a">
+<td><a href="./export-bundle-mojo.html">njord:export-bundle</a></td>
+<td>Exports a store as "bundle" ZIP to given path. The ZIP file has remote repository layout and contains all the artifacts and metadata.</td></tr>
+<tr class="b">
 <td><a href="./help-mojo.html">njord:help</a></td>
 <td>Display help information on njord.
 <br />
  Call <code>mvn njord:help -Ddetail=true -Dgoal=&lt;goal-name&gt;</code> to display parameter details.</td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="./list-mojo.html">njord:list</a></td>
 <td>List all existing stores.</td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="./list-content-mojo.html">njord:list-content</a></td>
 <td>Lists content of given store.</td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="./merge-mojo.html">njord:merge</a></td>
 <td>Merges <code>from</code> store onto <code>to</code> store, eventually dropping <code>from</code> store.</td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="./publish-mojo.html">njord:publish</a></td>
 <td>Publishes given store to given target.</td></tr></table></section><section><a id="System_Requirements"></a>
 <h2>System Requirements</h2>
