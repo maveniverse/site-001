@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>njord:list-content – eu.maveniverse.maven.plugins:njord</title>
+    <title>njord:redeploy – eu.maveniverse.maven.plugins:njord</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,12 +54,12 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="njord.3Alist-content"></a>
-<h1>njord:list-content</h1>
+<section><a id="njord.3Aredeploy"></a>
+<h1>njord:redeploy</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:njord:0.1.2-SNAPSHOT:list-content</p>
+<p>eu.maveniverse.maven.plugins:njord:0.1.2-SNAPSHOT:redeploy</p>
 <p><strong>Description</strong>:</p>
-<p>Lists content of given store.</p>
+<p>Redeploys <code>from</code> store onto <code>to</code> store, eventually dropping <code>from</code> store.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
@@ -71,17 +71,40 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#store"><code>&lt;store&gt;</code></a></td>
+<td><a href="#drop"><code>&lt;drop&gt;</code></a></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>No description.<br /><strong>Default</strong>: <code>true</code><br /><strong>User Property</strong>: <code>drop</code></td></tr>
+<tr class="a">
+<td><a href="#from"><code>&lt;from&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>No description.<br /><strong>User Property</strong>: <code>store</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="store"></a><section><a id="a.3Cstore.3E"></a>
-<h3>&lt;store&gt;</h3>
+<td>No description.<br /><strong>User Property</strong>: <code>from</code></td></tr>
+<tr class="b">
+<td><a href="#to"><code>&lt;to&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>No description.<br /><strong>User Property</strong>: <code>to</code></td></tr></table></section><section><a id="Parameter_Details"></a>
+<h2>Parameter Details</h2><a id="drop"></a><section><a id="a.3Cdrop.3E"></a>
+<h3>&lt;drop&gt;</h3>
+<div>No description.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>drop</code></li>
+<li><strong>Default</strong>: <code>true</code></li></ul><hr /></section><a id="from"></a><section><a id="a.3Cfrom.3E"></a>
+<h3>&lt;from&gt;</h3>
 <div>No description.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>store</code></li></ul></section></section></section>
+<li><strong>User Property</strong>: <code>from</code></li></ul><hr /></section><a id="to"></a><section><a id="a.3Cto.3E"></a>
+<h3>&lt;to&gt;</h3>
+<div>No description.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>to</code></li></ul></section></section></section>
         </main>
       </div>
     </div>
