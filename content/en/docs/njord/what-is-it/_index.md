@@ -36,4 +36,5 @@ Example URIs:
 * `njord:store:release-00001` - means "select existing store release-00001 and use that", in this case store `release-00001`.
 
 Basically by setting up your POM with distribution release repository using URL `njord:` and snapshot repository 
-using URL `njord:snapshot` you are ready to use Njord.
+using URL `njord:snapshot` you are ready to use Njord. But, Njord is not intrusive, you can still use it by
+**doing nothing** in your project and just deploying with `-DaltDeploymentRepository=id::njord:` as well.
