@@ -20,7 +20,7 @@ For now, templates supported out of the box are:
 |------------------------|------------|--------------------------------------|-----------------------------|-------------------|
 | `release`              | `RELEASE`  | `SHA-1`, `MD5`                       | `GPG` (`Sigstore` optional) | no                |
 | `release-sca`          | `RELEASE`  | `SHA-512`, `SHA-256`, `SHA-1`, `MD5` | `GPG` (`Sigstore` optional) | no                |
-| `release-redeploy`     | `RELEASE`  | `SHA-1`, `MD5`                       | `GPG` (`Sigstore optional`) | yes               |
+| `release-redeploy`     | `RELEASE`  | `SHA-1`, `MD5`                       | `GPG` (`Sigstore` optional) | yes               |
 | `release-redeploy-sca` | `RELEASE`  | `SHA-512`, `SHA-256`, `SHA-1`, `MD5` | `GPG` (`Sigstore` optional) | yes               |
 | `snapshot`             | `SNAPSHOT` | `SHA-1`, `MD5`                       | `GPG` (`Sigstore` optional) | no                |
 | `snapshot-sca`         | `SNAPSHOT` | `SHA-512`, `SHA-256`, `SHA-1`, `MD5` | `GPG` (`Sigstore` optional) | no                |
