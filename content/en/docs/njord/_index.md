@@ -11,7 +11,8 @@ Njord is an attempt to bring simple "publishing" (new term, is **not** "deployin
 with some extras like "local staging".
 {{% /pageinfo %}}
 
-A tool that handles repository operations for you.
+Maveniverse Njörðr is a tool that makes possible "local staging" (as you may know from MRM), repository operations and
+publishing repositories.
 
 https://github.com/maveniverse/njord
 
