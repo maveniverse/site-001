@@ -1,5 +1,5 @@
 ---
-title: Goldydocs
+title: Maveniverse
 ---
 
 {{< blocks/cover title="Welcome to Maveniverse!" image_anchor="top" height="full" >}}

@@ -1,6 +1,6 @@
 ---
 title: Nisse
-description: A small helper for big tasks
+description: Inject properties to your build
 categories: [Nisse, Documentation]
 tags: [nisse, docs]
 weight: 30

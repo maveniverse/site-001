@@ -1,6 +1,6 @@
 ---
 title: Toolbox
-description: A showcase of MIMA + Mojo + Picocli that grew
+description: Swiss knife in your pocket
 categories: [Toolbox, Documentation]
 tags: [toolbox, docs]
 weight: 20

@@ -1,6 +1,6 @@
 ---
 title: MIMA
-description: Where it all started
+description: Use Resolver everywhere!
 categories: [MIMA, Documentation]
 tags: [mima, docs]
 weight: 10
