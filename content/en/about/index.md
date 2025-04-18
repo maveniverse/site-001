@@ -1,5 +1,5 @@
 ---
-title: About Maveniverse
+title: About
 linkTitle: About
 menu: {main: {weight: 10}}
 ---
