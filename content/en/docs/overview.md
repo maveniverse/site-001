@@ -10,4 +10,5 @@ All the Maveniverse projects were built with well-defined purpose and goal: to h
 
 {{% /pageinfo %}}
 
-TBD
+Maveniverse umbrella started as a "laboratory" for fast-paced prototyping and experimenting, but also to host
+projects that Apache Maven project felt as inadequate to host at project itself.
