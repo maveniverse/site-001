@@ -12,7 +12,14 @@ that is loaded via Maven extensions mechanism and extends Resolver. Njord does n
 
 Njord supports "templates", that define repository properties. Based on template a repository ("artifact store" in
 Njord lingo) is created. And those repositories can be merged, redeployed, dropped, validated or published (and 
-more coming).
+more coming). Also, based on chosen template, Resolver is configured to deploy mandatory checksums for you. On the
+other hand, mandatory signatures are NOT generated, it is you who must provide them as part of your build.
+
+In short, Njord keeps things "as before" (as without it): user never had to worry about checksums (Resolver did generate 
+them always), while the signatures are usually provided by a plugin enabled in "release profile". Njord goes step 
+forward, and IF user selects any "SCA" template  
+("SCA" stands for "Stronger Checksum Algorithms", see [Resolver Checksums](https://maven.apache.org/resolver/about-checksums.html))
+it will configure Resolver, and it will implicitly generate required stronger checksums without any user intervention required.
 
 For now, templates supported out of the box are:
 
