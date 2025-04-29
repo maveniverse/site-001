@@ -67,3 +67,5 @@ Next, let's see an example of Apache Maven project (I used `maven-gpg-plugin`):
 6. Publish it to ASF: `mvn njord:publish -Dstore=release-xxx -Dtarget=apache-rao` (use store name from above)
 7. From now on, the repository is staged on RAO, so you can close it, vote, and on vote pass, release it. All the usual fluff as before.
 8. Drop locally staged store: `mvn njord:drop -Dstor=release-xxx` (use store name from above)
+
+Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more mojos.
