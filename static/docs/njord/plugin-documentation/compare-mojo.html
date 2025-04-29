@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>njord:write-bundle – eu.maveniverse.maven.plugins:njord</title>
+    <title>njord:compare – eu.maveniverse.maven.plugins:njord</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,12 +54,12 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="njord.3Awrite-bundle"></a>
-<h1>njord:write-bundle</h1>
+<section><a id="njord.3Acompare"></a>
+<h1>njord:compare</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:njord:0.3.3:write-bundle</p>
+<p>eu.maveniverse.maven.plugins:njord:0.3.3:compare</p>
 <p><strong>Description</strong>:</p>
-<p>Write out a store as "bundle" ZIP to given path. The ZIP file has remote repository layout and contains all the artifacts and metadata.</p>
+<p>Compares two given stores against each other.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
@@ -71,28 +71,52 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#directory"><code>&lt;directory&gt;</code></a></td>
+<td><a href="#comparator"><code>&lt;comparator&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The directory to write out the bundle file.<br /><strong>User Property</strong>: <code>directory</code></td></tr>
+<td>The name of the comparator to use to compare.<br /><strong>Default</strong>: <code>bitwise</code><br /><strong>User Property</strong>: <code>comparator</code></td></tr>
 <tr class="a">
-<td><a href="#store"><code>&lt;store&gt;</code></a></td>
+<td><a href="#details"><code>&lt;details&gt;</code></a></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Show detailed validation report.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>details</code></td></tr>
+<tr class="b">
+<td><a href="#store1"><code>&lt;store1&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The name of the store to be written out.<br /><strong>User Property</strong>: <code>store</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="directory"></a><section><a id="a.3Cdirectory.3E"></a>
-<h3>&lt;directory&gt;</h3>
-<div>The directory to write out the bundle file.</div>
+<td>The name of the first store to compare.<br /><strong>User Property</strong>: <code>store1</code></td></tr>
+<tr class="a">
+<td><a href="#store2"><code>&lt;store2&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The name of the second store to compare.<br /><strong>User Property</strong>: <code>store2</code></td></tr></table></section><section><a id="Parameter_Details"></a>
+<h2>Parameter Details</h2><a id="comparator"></a><section><a id="a.3Ccomparator.3E"></a>
+<h3>&lt;comparator&gt;</h3>
+<div>The name of the comparator to use to compare.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>directory</code></li></ul><hr /></section><a id="store"></a><section><a id="a.3Cstore.3E"></a>
-<h3>&lt;store&gt;</h3>
-<div>The name of the store to be written out.</div>
+<li><strong>User Property</strong>: <code>comparator</code></li>
+<li><strong>Default</strong>: <code>bitwise</code></li></ul><hr /></section><a id="details"></a><section><a id="a.3Cdetails.3E"></a>
+<h3>&lt;details&gt;</h3>
+<div>Show detailed validation report.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>details</code></li>
+<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="store1"></a><section><a id="a.3Cstore1.3E"></a>
+<h3>&lt;store1&gt;</h3>
+<div>The name of the first store to compare.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>store</code></li></ul></section></section></section>
+<li><strong>User Property</strong>: <code>store1</code></li></ul><hr /></section><a id="store2"></a><section><a id="a.3Cstore2.3E"></a>
+<h3>&lt;store2&gt;</h3>
+<div>The name of the second store to compare.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>store2</code></li></ul></section></section></section>
         </main>
       </div>
     </div>
