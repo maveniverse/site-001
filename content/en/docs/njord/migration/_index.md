@@ -1,5 +1,5 @@
 ---
-title: Migrating project to Njord and Central Portal
+title: Migrating projects
 description: Using Njord!
 categories: [Njord, Documentation]
 tags: [njord, docs]
