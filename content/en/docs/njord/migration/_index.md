@@ -18,7 +18,7 @@ Not much to say here, [just follow the guide](https://central.sonatype.org/regis
 Edit your `settings.xml` and add your tokens to it. One of the main goals of Njord is **to prevent** copy-pasta
 happening in your Maven Settings. Users publishing one namespace may not experience this, but users publishing multiple
 namespaces are currently forced to copy-paste their auth tokens, as each project usually "invent" their own
-distribution management server IDs (exception is ASF, where ASF parent POM contains "well know" server ID).
+distribution management server IDs (exception is ASF, where ASF parent POM contains "well known" server ID).
 
 Hence, Njord recommend to name and store your tokens **only once** in your Maven Settings (this example is for
 Sonatype Central Portal):
@@ -31,11 +31,11 @@ Sonatype Central Portal):
     </server>
 ```
 
-And that's it! Your settings.xml now contains auth for Sonatype Central Portal.
+And that's it! Your `settings.xml` now contains auth for Sonatype Central Portal.
 
 ## Setup your project
 
-As your project was already published to Central, its POM may contain distribution management like this (Eclipse Sisu):
+As your project was already published to Central, the POM may contain distribution management like this:
 
 ```xml
   <distributionManagement>
@@ -71,7 +71,7 @@ and some tools like SBOM engines cannot use them as intended, as the URL is not 
 </distributionManagement>
 ```
 
-Yes, you see it right: POM now says "we publish to Central". Also, there is no need to distinguish server for "release" 
+Yes, you see it right: POM now says the truth: "we publish to Central". Also, there is no need to distinguish server for "release" 
 and "snapshot" anymore. Next, let's make same changes in Maven user settings: add following entry to your `settings.xml`:
 
 ```xml
