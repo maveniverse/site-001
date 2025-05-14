@@ -23,7 +23,7 @@ it will configure Resolver, and it will implicitly generate required stronger ch
 
 For now, templates supported out of the box are:
 
-| Name                   | Mode       | Mandatory Checksums                  | Mandatory Signatures        | Redeploy allowed? |
+| Name                   | Mode       | Mandatory Checksums                  | Mandatory                   | Redeploy allowed? |
 |------------------------|------------|--------------------------------------|-----------------------------|-------------------|
 | `release`              | `RELEASE`  | `SHA-1`, `MD5`                       | `GPG` (`Sigstore` optional) | no                |
 | `release-sca`          | `RELEASE`  | `SHA-512`, `SHA-256`, `SHA-1`, `MD5` | `GPG` (`Sigstore` optional) | no                |
@@ -32,16 +32,29 @@ For now, templates supported out of the box are:
 | `snapshot`             | `SNAPSHOT` | `SHA-1`, `MD5`                       | `GPG` (`Sigstore` optional) | no                |
 | `snapshot-sca`         | `SNAPSHOT` | `SHA-512`, `SHA-256`, `SHA-1`, `MD5` | `GPG` (`Sigstore` optional) | no                |
 
-To deploy to Njord repository, one can use the usual Resolve remote repository URL with protocol `njord:`.
-The examples below with the `id::` prefix (repository ID) can be used by `maven-deploy-plugin` for 
-`-DaltDeploymentReposiotory`, but in this case the `id` is really just a placeholder to fulfil the required
-syntax.
+## The `njord:` URI
+
+Njord can be considered also as new transport for Maven. It defines the `njord:` URI prefix and supports several
+forms:
+* `njord:` URI is a shorthand for `njord:release-sca` (default template), see below.
+* `njord:<TEMPLATE>` is equivalent to `njord:template:<TEMPLATE>`, see below.
+* `njord:template:<TEMPLATE>` URI when deployed to, will create new store using given template.
+* `njord:store:<STORE>` URI when deployed to, will try to deploy to given store that already must exist (will not be created).
+
+Similarly, to use Njord URIs in cases like `maven-deploy-plugin` parameter for alternate deployment repository, the format
+accepts `id::uri` formatted string, so Njord URIs looks like `id::njord:` or `id::njord:template:release-sca` with one 
+important detail: the `id` repository ID is there **only to fulfil syntactical requirements**, is unused otherwise. 
+Store name will be determined at the moment of creation.
 
 Example URIs:
 * `njord:` - means "use default template and create a new store" that is `release-sca`.
-* `njord:snapshot` - means "use template by that name and create a new store", in this case `snapshot`
-* `njord:store:release-00001` - means "select existing store release-00001 and use that", in this case store `release-00001`.
+* `njord:snapshot` - means "use template by name `snapshot` and create a new store".
+* `njord:store:release-00001` - means "select existing store `release-00001` and use that".
 
 Basically by setting up your POM with distribution release repository using URL `njord:` and snapshot repository 
 using URL `njord:snapshot` you are ready to use Njord. But, Njord is not intrusive, you can still use it by
 **doing nothing** in your project and just deploying with `-DaltDeploymentRepository=id::njord:` as well.
+
+Hints:
+* use `mvn njord:list` to list existing stores, see [list Mojo](../plugin-documentation/list-mojo.html)
+* use `mvn njord:list-templates` to list existing templates, see  [list-templates Mojo](../plugin-documentation/list-templates-mojo.html)
