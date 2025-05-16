@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:gav-list-repositories – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:add-core-extension – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,12 +54,12 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Agav-list-repositories"></a>
-<h1>toolbox:gav-list-repositories</h1>
+<section><a id="toolbox.3Aadd-core-extension"></a>
+<h1>toolbox:add-core-extension</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.8.1:gav-list-repositories</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.8.1:add-core-extension</p>
 <p><strong>Description</strong>:</p>
-<p>Lists repositories used to resolve given GAV.</p>
+<p>Adds core extension.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
@@ -74,12 +74,7 @@
 <td><a href="#gav"><code>&lt;gav&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The GAV to list repositories for.<br /><strong>User Property</strong>: <code>gav</code></td></tr>
-<tr class="a">
-<td><a href="#scope"><code>&lt;scope&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>Resolution scope to resolve (default 'runtime').<br /><strong>Default</strong>: <code>runtime</code><br /><strong>User Property</strong>: <code>scope</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<td>The extension GAV.<br /><strong>User Property</strong>: <code>gav</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -88,37 +83,46 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#boms"><code>&lt;boms&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>Comma separated list of BOMs to apply.<br /><strong>User Property</strong>: <code>boms</code></td></tr>
-<tr class="a">
 <td><a href="#dryRun"><code>&lt;dryRun&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Option to run potentially destructive commands without performing any IO.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>dryRun</code></td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="#failOnLogicalFailure"><code>&lt;failOnLogicalFailure&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>true</code><br /><strong>User Property</strong>: <code>failOnLogicalFailure</code></td></tr>
+<tr class="b">
+<td><a href="#force"><code>&lt;force&gt;</code></a></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Force overwrite of existing POM file.<br /><strong>User Property</strong>: <code>force</code></td></tr>
 <tr class="a">
 <td><a href="#forceStdout"><code>&lt;forceStdout&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
 <tr class="b">
+<td><a href="#parentVersionMatcherSpec"><code>&lt;parentVersionMatcherSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Artifact version matcher spec string to filter version candidates for parent, default is 'noSnapshotsAndPreviews()'.<br /><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code><br /><strong>User Property</strong>: <code>parentVersionMatcherSpec</code></td></tr>
+<tr class="a">
+<td><a href="#parentVersionSelectorSpec"><code>&lt;parentVersionSelectorSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Artifact version selector spec string to select the version from candidates for parent, default is 'last()'.<br /><strong>Default</strong>: <code>last()</code><br /><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></td></tr>
+<tr class="b">
+<td><a href="#scope"><code>&lt;scope&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The scope where to look.<br /><strong>Default</strong>: <code>project</code><br /><strong>User Property</strong>: <code>scope</code></td></tr>
+<tr class="a">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="boms"></a><section><a id="a.3Cboms.3E"></a>
-<h3>&lt;boms&gt;</h3>
-<div>Comma separated list of BOMs to apply.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>boms</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
+<h2>Parameter Details</h2><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
 <ul>
@@ -132,7 +136,13 @@
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>failOnLogicalFailure</code></li>
-<li><strong>Default</strong>: <code>true</code></li></ul><hr /></section><a id="forceStdout"></a><section><a id="a.3CforceStdout.3E"></a>
+<li><strong>Default</strong>: <code>true</code></li></ul><hr /></section><a id="force"></a><section><a id="a.3Cforce.3E"></a>
+<h3>&lt;force&gt;</h3>
+<div>Force overwrite of existing POM file.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>force</code></li></ul><hr /></section><a id="forceStdout"></a><section><a id="a.3CforceStdout.3E"></a>
 <h3>&lt;forceStdout&gt;</h3>
 <div>No description.</div>
 <ul>
@@ -140,18 +150,32 @@
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="gav"></a><section><a id="a.3Cgav.3E"></a>
 <h3>&lt;gav&gt;</h3>
-<div>The GAV to list repositories for.</div>
+<div>The extension GAV.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>gav</code></li></ul><hr /></section><a id="scope"></a><section><a id="a.3Cscope.3E"></a>
+<li><strong>User Property</strong>: <code>gav</code></li></ul><hr /></section><a id="parentVersionMatcherSpec"></a><section><a id="a.3CparentVersionMatcherSpec.3E"></a>
+<h3>&lt;parentVersionMatcherSpec&gt;</h3>
+<div>Artifact version matcher spec string to filter version candidates for parent, default is 'noSnapshotsAndPreviews()'.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>parentVersionMatcherSpec</code></li>
+<li><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code></li></ul><hr /></section><a id="parentVersionSelectorSpec"></a><section><a id="a.3CparentVersionSelectorSpec.3E"></a>
+<h3>&lt;parentVersionSelectorSpec&gt;</h3>
+<div>Artifact version selector spec string to select the version from candidates for parent, default is 'last()'.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></li>
+<li><strong>Default</strong>: <code>last()</code></li></ul><hr /></section><a id="scope"></a><section><a id="a.3Cscope.3E"></a>
 <h3>&lt;scope&gt;</h3>
-<div>Resolution scope to resolve (default 'runtime').</div>
+<div>The scope where to look.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>scope</code></li>
-<li><strong>Default</strong>: <code>runtime</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>Default</strong>: <code>project</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>
