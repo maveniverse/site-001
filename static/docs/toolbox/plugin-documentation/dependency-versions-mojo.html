@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:gav-list – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:dependency-versions – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,27 +54,16 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Agav-list"></a>
-<h1>toolbox:gav-list</h1>
+<section><a id="toolbox.3Adependency-versions"></a>
+<h1>toolbox:dependency-versions</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.9.0:gav-list</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.9.0:dependency-versions</p>
 <p><strong>Description</strong>:</p>
-<p>Lists remote repository by given "gavoid" (G or G:A or G:A:V where V may be a version constraint).</p>
+<p>Lists available versions of Maven Project dependencies.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
-<li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
-<h2>Required Parameters</h2>
-<table class="table table-striped">
-<tr class="a">
-<th>Name</th>
-<th>Type</th>
-<th>Since</th>
-<th>Description</th></tr>
-<tr class="b">
-<td><a href="#gavoid"><code>&lt;gavoid&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The GAV-oid to list (G or G:A or G:A:V), where V may be a version constraint.<br /><strong>User Property</strong>: <code>gavoid</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<li>Requires a Maven project to be executed.</li>
+<li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -82,6 +71,26 @@
 <th>Type</th>
 <th>Since</th>
 <th>Description</th></tr>
+<tr class="b">
+<td><a href="#apply"><code>&lt;apply&gt;</code></a></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Apply results to POM.<br /><strong>User Property</strong>: <code>apply</code></td></tr>
+<tr class="a">
+<td><a href="#artifactVersionMatcherSpec"><code>&lt;artifactVersionMatcherSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Artifact version matcher spec string, default is 'noSnapshotsAndPreviews()'.<br /><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code><br /><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></td></tr>
+<tr class="b">
+<td><a href="#artifactVersionSelectorSpec"><code>&lt;artifactVersionSelectorSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Artifact version selector spec string to select the version from candidates, default is 'last()'.<br /><strong>Default</strong>: <code>last()</code><br /><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></td></tr>
+<tr class="a">
+<td><a href="#depSpec"><code>&lt;depSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The dependency matcher spec.<br /><strong>Default</strong>: <code>any()</code><br /><strong>User Property</strong>: <code>depSpec</code></td></tr>
 <tr class="b">
 <td><a href="#dryRun"><code>&lt;dryRun&gt;</code></a></td>
 <td><code>boolean</code></td>
@@ -98,26 +107,43 @@
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
 <tr class="a">
-<td><a href="#repositoryBaseUri"><code>&lt;repositoryBaseUri&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The base URI of the remote repository.<br /><strong>User Property</strong>: <code>repositoryBaseUri</code></td></tr>
-<tr class="b">
-<td><a href="#repositoryId"><code>&lt;repositoryId&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>A repository ID. Maybe a "well known" one, or if all repository data given, a new one.<br /><strong>Default</strong>: <code>central</code><br /><strong>User Property</strong>: <code>repositoryId</code></td></tr>
-<tr class="a">
 <td><a href="#repositoryVendor"><code>&lt;repositoryVendor&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The vendor of the remote repository.<br /><strong>User Property</strong>: <code>repositoryVendor</code><br /><strong>Alias</strong>: <code>toolbox.search.backend.type</code></td></tr>
+<td>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.<br /><strong>User Property</strong>: <code>toolbox.search.backend.type</code></td></tr>
 <tr class="b">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
+<h2>Parameter Details</h2><a id="apply"></a><section><a id="a.3Capply.3E"></a>
+<h3>&lt;apply&gt;</h3>
+<div>Apply results to POM.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>apply</code></li></ul><hr /></section><a id="artifactVersionMatcherSpec"></a><section><a id="a.3CartifactVersionMatcherSpec.3E"></a>
+<h3>&lt;artifactVersionMatcherSpec&gt;</h3>
+<div>Artifact version matcher spec string, default is 'noSnapshotsAndPreviews()'.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></li>
+<li><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code></li></ul><hr /></section><a id="artifactVersionSelectorSpec"></a><section><a id="a.3CartifactVersionSelectorSpec.3E"></a>
+<h3>&lt;artifactVersionSelectorSpec&gt;</h3>
+<div>Artifact version selector spec string to select the version from candidates, default is 'last()'.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></li>
+<li><strong>Default</strong>: <code>last()</code></li></ul><hr /></section><a id="depSpec"></a><section><a id="a.3CdepSpec.3E"></a>
+<h3>&lt;depSpec&gt;</h3>
+<div>The dependency matcher spec.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>depSpec</code></li>
+<li><strong>Default</strong>: <code>any()</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
 <ul>
@@ -137,33 +163,13 @@
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="gavoid"></a><section><a id="a.3Cgavoid.3E"></a>
-<h3>&lt;gavoid&gt;</h3>
-<div>The GAV-oid to list (G or G:A or G:A:V), where V may be a version constraint.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>gavoid</code></li></ul><hr /></section><a id="repositoryBaseUri"></a><section><a id="a.3CrepositoryBaseUri.3E"></a>
-<h3>&lt;repositoryBaseUri&gt;</h3>
-<div>The base URI of the remote repository.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>repositoryBaseUri</code></li></ul><hr /></section><a id="repositoryId"></a><section><a id="a.3CrepositoryId.3E"></a>
-<h3>&lt;repositoryId&gt;</h3>
-<div>A repository ID. Maybe a "well known" one, or if all repository data given, a new one.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>repositoryId</code></li>
-<li><strong>Default</strong>: <code>central</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
+<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
 <h3>&lt;repositoryVendor&gt;</h3>
-<div>The vendor of the remote repository.</div>
+<div>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>repositoryVendor</code></li>
-<li><strong>Alias</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>

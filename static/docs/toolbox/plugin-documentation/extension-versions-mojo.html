@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:gav-libyear – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:extension-versions – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,32 +54,16 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Agav-libyear"></a>
-<h1>toolbox:gav-libyear</h1>
+<section><a id="toolbox.3Aextension-versions"></a>
+<h1>toolbox:extension-versions</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.9.0:gav-libyear</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.9.0:extension-versions</p>
 <p><strong>Description</strong>:</p>
-<p>Calculates "libyear" for Maven Artifacts (for direct dependencies or transitively).</p>
+<p>Lists available versions of Maven Project extensions.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
-<li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
-<h2>Required Parameters</h2>
-<table class="table table-striped">
-<tr class="a">
-<th>Name</th>
-<th>Type</th>
-<th>Since</th>
-<th>Description</th></tr>
-<tr class="b">
-<td><a href="#gav"><code>&lt;gav&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The GAV to calculate libyear for.<br /><strong>User Property</strong>: <code>gav</code></td></tr>
-<tr class="a">
-<td><a href="#scope"><code>&lt;scope&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>Resolution scope to resolve (default 'test').<br /><strong>Default</strong>: <code>test</code><br /><strong>User Property</strong>: <code>scope</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<li>Requires a Maven project to be executed.</li>
+<li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -88,86 +72,83 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
+<td><a href="#apply"><code>&lt;apply&gt;</code></a></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Apply results to POM.<br /><strong>User Property</strong>: <code>apply</code></td></tr>
+<tr class="a">
+<td><a href="#artifactMatcherSpec"><code>&lt;artifactMatcherSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The extension matcher spec.<br /><strong>Default</strong>: <code>any()</code><br /><strong>User Property</strong>: <code>artifactMatcherSpec</code></td></tr>
+<tr class="b">
 <td><a href="#artifactVersionMatcherSpec"><code>&lt;artifactVersionMatcherSpec&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>Artifact version matcher spec string to filter version candidates, default is 'noSnapshotsAndPreviews()'.<br /><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code><br /><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></td></tr>
+<td>Artifact version matcher spec string, default is 'noSnapshotsAndPreviews()'.<br /><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code><br /><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></td></tr>
 <tr class="a">
 <td><a href="#artifactVersionSelectorSpec"><code>&lt;artifactVersionSelectorSpec&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>Artifact version selector spec string to select "latest", default is 'major()'.<br /><strong>Default</strong>: <code>major()</code><br /><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></td></tr>
+<td>Artifact version selector spec string to select the version from candidates, default is 'last()'.<br /><strong>Default</strong>: <code>last()</code><br /><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></td></tr>
 <tr class="b">
-<td><a href="#boms"><code>&lt;boms&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>Comma separated list of BOMs to apply.<br /><strong>User Property</strong>: <code>boms</code></td></tr>
-<tr class="a">
 <td><a href="#dryRun"><code>&lt;dryRun&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Option to run potentially destructive commands without performing any IO.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>dryRun</code></td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="#failOnLogicalFailure"><code>&lt;failOnLogicalFailure&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>true</code><br /><strong>User Property</strong>: <code>failOnLogicalFailure</code></td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="#forceStdout"><code>&lt;forceStdout&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
-<tr class="b">
-<td><a href="#repositoryBaseUri"><code>&lt;repositoryBaseUri&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The base URI of the remote repository.<br /><strong>User Property</strong>: <code>repositoryBaseUri</code></td></tr>
 <tr class="a">
-<td><a href="#repositoryId"><code>&lt;repositoryId&gt;</code></a></td>
+<td><a href="#pluginKey"><code>&lt;pluginKey&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>A repository ID. Maybe a "well known" one, or if all repository data given, a new one.<br /><strong>Default</strong>: <code>central</code><br /><strong>User Property</strong>: <code>repositoryId</code></td></tr>
+<td>The plugin key in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;</code> to display tree for. If plugin is from "known" groupId (as configured in settings.xml) it may be in format of <code>:&lt;artifactId&gt;</code> and this mojo will find it. Finally, if plugin key is plain string like <code>"clean"</code>, this mojo will apply some heuristics to find it.<br /><strong>User Property</strong>: <code>pluginKey</code></td></tr>
 <tr class="b">
 <td><a href="#repositoryVendor"><code>&lt;repositoryVendor&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The vendor of the remote repository.<br /><strong>User Property</strong>: <code>repositoryVendor</code><br /><strong>Alias</strong>: <code>toolbox.search.backend.type</code></td></tr>
-<tr class="a">
-<td><a href="#transitive"><code>&lt;transitive&gt;</code></a></td>
-<td><code>boolean</code></td>
-<td><code>-</code></td>
-<td>Make libyear transitive, in which case it will calculate for whole transitive hull.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>transitive</code></td></tr>
-<tr class="b">
-<td><a href="#upToDate"><code>&lt;upToDate&gt;</code></a></td>
-<td><code>boolean</code></td>
-<td><code>-</code></td>
-<td>Make libyear show up-to-date libraries with age as well.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>upToDate</code></td></tr>
+<td>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.<br /><strong>User Property</strong>: <code>toolbox.search.backend.type</code></td></tr>
 <tr class="a">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="artifactVersionMatcherSpec"></a><section><a id="a.3CartifactVersionMatcherSpec.3E"></a>
+<h2>Parameter Details</h2><a id="apply"></a><section><a id="a.3Capply.3E"></a>
+<h3>&lt;apply&gt;</h3>
+<div>Apply results to POM.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>apply</code></li></ul><hr /></section><a id="artifactMatcherSpec"></a><section><a id="a.3CartifactMatcherSpec.3E"></a>
+<h3>&lt;artifactMatcherSpec&gt;</h3>
+<div>The extension matcher spec.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>artifactMatcherSpec</code></li>
+<li><strong>Default</strong>: <code>any()</code></li></ul><hr /></section><a id="artifactVersionMatcherSpec"></a><section><a id="a.3CartifactVersionMatcherSpec.3E"></a>
 <h3>&lt;artifactVersionMatcherSpec&gt;</h3>
-<div>Artifact version matcher spec string to filter version candidates, default is 'noSnapshotsAndPreviews()'.</div>
+<div>Artifact version matcher spec string, default is 'noSnapshotsAndPreviews()'.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></li>
 <li><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code></li></ul><hr /></section><a id="artifactVersionSelectorSpec"></a><section><a id="a.3CartifactVersionSelectorSpec.3E"></a>
 <h3>&lt;artifactVersionSelectorSpec&gt;</h3>
-<div>Artifact version selector spec string to select "latest", default is 'major()'.</div>
+<div>Artifact version selector spec string to select the version from candidates, default is 'last()'.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></li>
-<li><strong>Default</strong>: <code>major()</code></li></ul><hr /></section><a id="boms"></a><section><a id="a.3Cboms.3E"></a>
-<h3>&lt;boms&gt;</h3>
-<div>Comma separated list of BOMs to apply.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>boms</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
+<li><strong>Default</strong>: <code>last()</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
 <ul>
@@ -187,54 +168,19 @@
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="gav"></a><section><a id="a.3Cgav.3E"></a>
-<h3>&lt;gav&gt;</h3>
-<div>The GAV to calculate libyear for.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>gav</code></li></ul><hr /></section><a id="repositoryBaseUri"></a><section><a id="a.3CrepositoryBaseUri.3E"></a>
-<h3>&lt;repositoryBaseUri&gt;</h3>
-<div>The base URI of the remote repository.</div>
+<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="pluginKey"></a><section><a id="a.3CpluginKey.3E"></a>
+<h3>&lt;pluginKey&gt;</h3>
+<div>The plugin key in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;</code> to display tree for. If plugin is from "known" groupId (as configured in settings.xml) it may be in format of <code>:&lt;artifactId&gt;</code> and this mojo will find it. Finally, if plugin key is plain string like <code>"clean"</code>, this mojo will apply some heuristics to find it.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>repositoryBaseUri</code></li></ul><hr /></section><a id="repositoryId"></a><section><a id="a.3CrepositoryId.3E"></a>
-<h3>&lt;repositoryId&gt;</h3>
-<div>A repository ID. Maybe a "well known" one, or if all repository data given, a new one.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>repositoryId</code></li>
-<li><strong>Default</strong>: <code>central</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
+<li><strong>User Property</strong>: <code>pluginKey</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
 <h3>&lt;repositoryVendor&gt;</h3>
-<div>The vendor of the remote repository.</div>
+<div>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>repositoryVendor</code></li>
-<li><strong>Alias</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="scope"></a><section><a id="a.3Cscope.3E"></a>
-<h3>&lt;scope&gt;</h3>
-<div>Resolution scope to resolve (default 'test').</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>scope</code></li>
-<li><strong>Default</strong>: <code>test</code></li></ul><hr /></section><a id="transitive"></a><section><a id="a.3Ctransitive.3E"></a>
-<h3>&lt;transitive&gt;</h3>
-<div>Make libyear transitive, in which case it will calculate for whole transitive hull.</div>
-<ul>
-<li><strong>Type</strong>: <code>boolean</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>transitive</code></li>
-<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="upToDate"></a><section><a id="a.3CupToDate.3E"></a>
-<h3>&lt;upToDate&gt;</h3>
-<div>Make libyear show up-to-date libraries with age as well.</div>
-<ul>
-<li><strong>Type</strong>: <code>boolean</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>upToDate</code></li>
-<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>
