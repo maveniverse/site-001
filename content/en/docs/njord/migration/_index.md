@@ -55,7 +55,9 @@ to use with this server (it is `sonatype-cp`), and which templates to use.
 
 Note: if you want to use Central Portal Snapshots feature, then don't forget to first enable these on Portal Web UI.
 Next, in that case you can remove the `njord.snapshotUrl` element, and enjoy "direct deploy" (so Njord does not 
-meddle, or stage snapshots). Maven will go directly for Central Portal Snapshot endpoint.
+meddle, or stage snapshots). Maven will go directly for Central Portal Snapshot endpoint. Any service that supports
+SNAPSHOT deploy and accepts `maven-deploy-plugin` deploy requests may be left without `njord.snapshotUrl` configuration
+as in that case that good old deploy plugin can do the job as well, no Njord needed.
 
 ## Setup your project
 
