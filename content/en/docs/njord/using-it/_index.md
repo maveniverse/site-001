@@ -14,7 +14,20 @@ remains fully dormant, does not interfere with your build at all, merely defines
 
 ## Setting it up
 
-With Maven 3 create project-wide, or with Maven 4+ create user-wide `~/.m2/extensions.xml` like this:
+Njord can be added as POM build extension:
+
+```xml
+    <extensions>
+      <extension>
+        <groupId>eu.maveniverse.maven.njord</groupId>
+        <artifactId>extension</artifactId>
+        <version>${maveniverse.release.njordVersion}</version>
+      </extension>
+    </extensions>
+```
+
+Alternatively, with Maven 3 create project-wide, or with Maven 4+ create user-wide `~/.m2/extensions.xml` like this:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <extensions>

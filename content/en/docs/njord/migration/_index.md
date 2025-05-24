@@ -94,7 +94,19 @@ And you are done!
 
 ## Extension
 
-Finally, you need to make sure that Njord extension is loaded:
+Finally, you need to make sure that Njord extension is loaded as extension. As POM/build/extensions:
+
+```xml
+    <extensions>
+      <extension>
+        <groupId>eu.maveniverse.maven.njord</groupId>
+        <artifactId>extension</artifactId>
+        <version>${maveniverse.release.njordVersion}</version>
+      </extension>
+    </extensions>
+```
+
+or as core extension:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -102,10 +114,22 @@ Finally, you need to make sure that Njord extension is loaded:
     <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
         <artifactId>extension</artifactId>
-        <version>${latestVersion}</version>
+        <version>${maveniverse.release.njordVersion}</version>
     </extension>
 </extensions>
 ```
+
+If you are putting Njord into POM, it is recommended to tie plugin version to extension version, by adding
+plugin management entry to POM/build/pluginManagement/plugins as:
+
+```xml
+        <plugin>
+          <groupId>eu.maveniverse.maven.plugins</groupId>
+          <artifactId>njord</artifactId>
+          <version>${maveniverse.release.njordVersion}</version>
+        </plugin>
+```
+
 
 ## Publish it!
 

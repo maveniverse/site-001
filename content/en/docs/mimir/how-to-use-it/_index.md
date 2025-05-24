@@ -15,9 +15,21 @@ with following content (adjust Mímir version as needed):
     <extension>
         <groupId>eu.maveniverse.maven.mimir</groupId>
         <artifactId>extension</artifactId>
-        <version>0.4.1</version>
+        <version>${mimirVersion}</version>
     </extension>
 </extensions>
+```
+
+You can add it to your (parent) POM as well, as build extension:
+
+```xml
+    <extensions>
+      <extension>
+        <groupId>eu.maveniverse.maven.mimir</groupId>
+        <artifactId>extension</artifactId>
+        <version>${mimirVersion}</version>
+      </extension>
+    </extensions>
 ```
 
 Using it with Maven 3 is also possible and completely fine and compatible, but there you will need to set up
