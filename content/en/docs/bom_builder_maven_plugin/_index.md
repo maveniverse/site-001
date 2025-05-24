@@ -13,3 +13,5 @@ A Maven Plugin for BOMs to build according to your own taste.
 A plugin that helps you building BOM by your own taste.
 
 https://github.com/maveniverse/bom-builder-maven-plugin
+
+[Maven generated plugin documentation](plugin-documentation/plugin-info.html)
