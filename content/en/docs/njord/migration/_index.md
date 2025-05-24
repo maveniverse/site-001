@@ -176,8 +176,8 @@ with added right hand "annotated explanations":
 [INFO]   Repository Id: sonatype-central-portal
 [INFO]   Repository Auth: Present  <------------------------------------------------- auth is present
 [INFO]   POM URL: https://repo.maven.apache.org/maven2/  <--------------------------- POM "truth", once published, artifacts are here
-[INFO]   Effective URL: njord:template:release-sca  <-------------------------------- The Njord publisher (service) we use to publish
-[INFO] - release-sca  <-------------------------------------------------------------- The template we use
+[INFO]   Effective URL: njord:template:release-sca  <-------------------------------- The Njord URL we use when deploy releases
+[INFO] - release-sca  <-------------------------------------------------------------- The template we set, detailed
 [INFO]     Default prefix: 'bom-builder'
 [INFO]     Allow redeploy: false
 [INFO]     Checksum Factories: [SHA-512, SHA-256, SHA-1, MD5]
@@ -185,12 +185,12 @@ with added right hand "annotated explanations":
 [INFO] * Snapshot
 [INFO]   Repository Id: sonatype-central-portal
 [INFO]   Repository Auth: Present
-[INFO]   POM URL: https://central.sonatype.com/repository/maven-snapshots/  <-------- Snapshots do not use Njord, mvn deploy pushes directory to Portal Snapshots
+[INFO]   POM URL: https://central.sonatype.com/repository/maven-snapshots/  <-------- Snapshots do not use Njord, mvn deploy deploys directly Portal
 [INFO] 
-[INFO] No candidate artifact stores found  <----------------------------------------- Nothing has been staged yet
+[INFO] No candidate artifact stores found  <----------------------------------------- Nothing has been locally staged yet
 [INFO] 
 [INFO] Project publishing:
-[INFO] - 'sonatype-cp' -> Publishes to Sonatype Central Portal  <-------------------- The publishing service description
+[INFO] - 'sonatype-cp' -> Publishes to Sonatype Central Portal  <-------------------- The publishing service we set, detailed
 [INFO]   Checksums:
 [INFO]     Mandatory: SHA-1, MD5
 [INFO]     Supported: SHA-512, SHA-256
