@@ -100,6 +100,9 @@ and some tools like SBOM engines cannot use them as intended, as the URL is not 
 Yes, you see it right: POM now says the truth: "we publish to Central" and "we use Sonatype Central Portal" service. 
 Also, there is no need to distinguish server for "release" and "snapshot".
 
+Finally, IF you have some existing plugin that did the job before, just remove, and undo all the hoops and loops that
+the plugin or tool required (like adding some properties, profiles, whatnot).
+
 And you are done!
 
 ## Extension
