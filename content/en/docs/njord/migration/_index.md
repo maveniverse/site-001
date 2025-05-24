@@ -25,13 +25,37 @@ Sonatype Central Portal):
 
 ```xml
     <server>
-      <id>sonatype-cp</id>
+      <id>sonatype-central-portal</id>
       <username>$TOKEN1</username>
       <password>$TOKEN2</password>
     </server>
 ```
 
-And that's it! Your `settings.xml` now contains auth for Sonatype Central Portal.
+Next, we will add a bit of Njord configuration: what publisher we want to use with this server, and what templates.
+Edit the server entry above to contain something like this:
+
+```xml
+    <server>
+      <id>sonatype-central-portal</id>
+      <username>$TOKEN1</username>
+      <password>$TOKEN2</password>
+      <configuration>
+        <!-- Sonatype Central Portal publisher -->
+        <njord.publisher>sonatype-cp</njord.publisher>
+        <!-- Releases are staged locally (if omitted, would go directly to URL as per POM) -->
+        <njord.releaseUrl>njord:template:release-sca</njord.releaseUrl>
+        <!-- Snapshots are staged locally (if omitted, would go directly to URL as per POM) -->
+        <njord.snapshotUrl>njord:template:snapshot-sca</njord.snapshotUrl>
+      </configuration>
+    </server>
+```
+
+And that's it! Your `settings.xml` now contains auth for Sonatype Central Portal, and also tells Njord which publisher
+to use with this server (it is `sonatype-cp`), and which templates to use.
+
+Note: if you want to use Central Portal Snapshots feature, then don't forget to first enable these on Portal Web UI.
+Next, in that case you can remove the `njord.snapshotUrl` element, and enjoy "direct deploy" (so Njord does not 
+meddle, or stage snapshots). Maven will go directly for Central Portal Snapshot endpoint.
 
 ## Setup your project
 
@@ -59,42 +83,26 @@ and some tools like SBOM engines cannot use them as intended, as the URL is not 
 ```xml
   <distributionManagement>
     <snapshotRepository>
-      <id>myproject-publish</id>
+      <id>sonatype-central-portal</id>
       <name>My Project Snapshots</name>
       <url>https://central.sonatype.com/repository/maven-snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>myproject-publish</id>
+      <id>sonatype-central-portal</id>
       <name>My Project Releases</name>
       <url>https://repo.maven.apache.org/maven2</url>
     </repository>
 </distributionManagement>
 ```
 
-Yes, you see it right: POM now says the truth: "we publish to Central". Also, there is no need to distinguish server for "release" 
-and "snapshot" anymore. Next, let's make same changes in Maven user settings: add following entry to your `settings.xml`:
-
-```xml
-   <server>
-     <id>myproject-publish</id>
-     <configuration>
-       <!-- Auth redirect -->
-       <njord.authRedirect>sonatype-cp</njord.authRedirect>
-       <!-- Sonatype Central Portal publisher -->
-       <njord.publisher>sonatype-cp</njord.publisher>
-       <!-- Releases are staged locally (if omitted, would go directly to URL as per POM) -->
-       <njord.releaseUrl>njord:template:release-sca</njord.releaseUrl>
-       <!-- Snapshots are staged locally (if omitted, would go directly to URL as per POM) -->
-       <njord.snapshotUrl>njord:template:snapshot-sca</njord.snapshotUrl>
-     </configuration>
-   </server>
-```
+Yes, you see it right: POM now says the truth: "we publish to Central" and "we use Sonatype Central Portal" service. 
+Also, there is no need to distinguish server for "release" and "snapshot".
 
 And you are done!
 
 ## Extension
 
-Finally, you need to make sure that Njord extension is loaded as extension. As POM/build/extensions:
+Finally, you need to make sure that Njord extension is loaded as extension. Ideally as POM project/build/extensions:
 
 ```xml
     <extensions>
@@ -106,7 +114,7 @@ Finally, you need to make sure that Njord extension is loaded as extension. As P
     </extensions>
 ```
 
-or as core extension:
+But you can do it as core extension, in `.mvn/extensions.xml` or Maven 4 user wide `~/.m2/extensions.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -130,10 +138,90 @@ plugin management entry to POM/build/pluginManagement/plugins as:
         </plugin>
 ```
 
+## Summary
+
+To get summary, invoke `mvn njord:status`.
+
+It will tell you all publishing related information about your project, even is the auth present or not (ie you may
+have a typo in server.id in POM or your `settings.xml`).
+
+With this setup as above, one should see output like this (example is from [BOM builder plugin](../../bom_builder_maven_plugin)),
+with added right hand "annotated explanations":
+
+```
+[cstamas@angeleyes bom-builder-maven-plugin (master)]$ mvn njord:status
+[INFO] Scanning for projects...
+[INFO] Njord 0.6.0 session created
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] eu.maveniverse.maven.bom-builder:bom-builder                       [pom]
+[INFO] eu.maveniverse.maven.plugins:bom-builder3                 [maven-plugin]
+[INFO] eu.maveniverse.maven.bom-builder:it3                               [pom]
+[INFO] 
+[INFO] ------------< eu.maveniverse.maven.bom-builder:bom-builder >------------
+[INFO] Building eu.maveniverse.maven.bom-builder:bom-builder 1.1.1-SNAPSHOT [1/3]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- njord:0.6.0:status (default-cli) @ bom-builder ---
+[INFO] Project deployment:
+[INFO]   Store prefix: bom-builder  <------------------------------------------------ store prefix, build-builder-00001, etc
+[INFO] * Release
+[INFO]   Repository Id: sonatype-central-portal
+[INFO]   Repository Auth: Present  <------------------------------------------------- auth is present
+[INFO]   POM URL: https://repo.maven.apache.org/maven2/  <--------------------------- POM "truth", once published, artifacts are here
+[INFO]   Effective URL: njord:template:release-sca  <-------------------------------- The Njord publisher (service) we use to publish
+[INFO] - release-sca  <-------------------------------------------------------------- The template we use
+[INFO]     Default prefix: 'bom-builder'
+[INFO]     Allow redeploy: false
+[INFO]     Checksum Factories: [SHA-512, SHA-256, SHA-1, MD5]
+[INFO]     Omit checksums for: [.asc, .sigstore, .sigstore.json]
+[INFO] * Snapshot
+[INFO]   Repository Id: sonatype-central-portal
+[INFO]   Repository Auth: Present
+[INFO]   POM URL: https://central.sonatype.com/repository/maven-snapshots/  <-------- Snapshots do not use Njord, mvn deploy pushes directory to Portal Snapshots
+[INFO] 
+[INFO] No candidate artifact stores found  <----------------------------------------- Nothing has been staged yet
+[INFO] 
+[INFO] Project publishing:
+[INFO] - 'sonatype-cp' -> Publishes to Sonatype Central Portal  <-------------------- The publishing service description
+[INFO]   Checksums:
+[INFO]     Mandatory: SHA-1, MD5
+[INFO]     Supported: SHA-512, SHA-256
+[INFO]   Signatures:
+[INFO]     Mandatory: GPG
+[INFO]     Supported: Sigstore
+[INFO]   Published artifacts will be available from:
+[INFO]     RELEASES:  central @ https://repo.maven.apache.org/maven2/
+[INFO]     SNAPSHOTS: sonatype-central-portal @ https://central.sonatype.com/repository/maven-snapshots
+[INFO]   Service endpoints:
+[INFO]     RELEASES:  sonatype-central-portal @ https://central.sonatype.com/api/v1/publisher/upload
+[INFO]     SNAPSHOTS: sonatype-central-portal @ https://central.sonatype.com/repository/maven-snapshots
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for eu.maveniverse.maven.bom-builder:bom-builder 1.1.1-SNAPSHOT:
+[INFO] 
+[INFO] eu.maveniverse.maven.bom-builder:bom-builder ....... SUCCESS [  0.037 s]
+[INFO] eu.maveniverse.maven.plugins:bom-builder3 .......... SKIPPED
+[INFO] eu.maveniverse.maven.bom-builder:it3 ............... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.329 s
+[INFO] Finished at: 2025-05-24T22:49:03+02:00
+[INFO] ------------------------------------------------------------------------
+[INFO] Njord session closed
+[cstamas@angeleyes bom-builder-maven-plugin (master)]$ 
+```
 
 ## Publish it!
 
-With this setup, you just perform `mvn deploy` as you did before. It will locally stage. To publish, just use
-`mvn njord:publish`. Or just do `mvn deploy -Dnjord.autoPublish`.
+With this setup, you just perform `mvn deploy` as you did before. If your checkout is snapshot, you will deploy to
+Central Portal Snapshots. If your checkout is a release, it will be locally staged once Maven finishes. 
+
+To publish, just use `mvn njord:publish`, or just do `mvn deploy -Dnjord.autoPublish`.
+
+Once Maven returns, your project is being validated at https://central.sonatype.com/publishing
 
 Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more mojos.
