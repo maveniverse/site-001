@@ -230,3 +230,29 @@ To publish, just use `mvn njord:publish`, or just do `mvn deploy -Dnjord.autoPub
 Once Maven returns, your project is being validated at https://central.sonatype.com/publishing
 
 Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more mojos.
+
+## What if don't want (or cannot) change the POM?
+
+In this case Njord can still be used, but the "inconvenience" is that you need to hand over all info to Njord.
+
+The maven user settings change is **mandatory**, you need to have tokens set in your `settings.xml`.
+
+The presence of Njord extension is **mandatory** as well, You can load it as user-wide extension (`~/m2/extensions.xml`)
+if you use Maven 4 or you can create (or edit if exists) project `.mvn/extensions.xml`.
+
+Below I assume you work with a release checkout (ie you checked out a tag, also the "release profile" in this example
+follow ASF convention):
+
+```
+$ mvn -P apache-release deploy \                                                     1)
+         -DaltDeploymentRepository=id::njord: \                                      2)
+         -Dnjord.autoPublish \                                                       3)
+         -Dnjord.publisher=sonatype-cp \                                             4)
+         -Dnjord.publisher.sonatype-cp.releaseRepositoryId=sonatype-central-portal   5)
+```
+
+So what happens here? We invoke "deploy for release" (1), but using "alternate deployment repository" (2),
+that will create an artifact store from default template. Note that `id::url` form is standard format accepted
+by `maven-deploy-plugin` but the `id` is in fact unused, as store ID will be known only after it is created.
+At session end (3) the created store with deployed artifacts will be published, using specified publisher service (4) 
+and auth material from specified server (5) in user `settings.xml`.
