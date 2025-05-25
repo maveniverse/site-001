@@ -1,0 +1,6 @@
+/* Fix dark mode code rendering */
+.highlight pre {
+  background-color: var(--td-pre-bg) !important;
+}
+
+
