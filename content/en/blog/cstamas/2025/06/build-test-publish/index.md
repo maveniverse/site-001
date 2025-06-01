@@ -34,7 +34,7 @@ This also may imply that "good old" way of doing things, like just stick somethi
 For me, typical set is like:
 * build with "latest LTS": that is as at the time this is written: Java 21 LTS and Maven 3.9 (latest patch release, 3.9.9)
 * test with "wide" matrix, if needed, and it may go from Java 8 all way up to Java 24, same with Maven, test may want to pull in old Maven as 3.6.3 is.
-* publish to some service that is but may not be controlled by you (typical example: publishing to Central)
+* publish to some service that is usually not controlled by you (typical example: publishing to Central)
 
 As one can see, "build", "test" and "publishing" poses wildly different requirements. Expecting that **whole your stack fits the widest (test) matrix is just unreal**.
 
