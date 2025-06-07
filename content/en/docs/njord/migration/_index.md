@@ -44,11 +44,21 @@ Edit the server entry above to contain something like this:
         <njord.publisher>sonatype-cp</njord.publisher>
         <!-- Releases are staged locally (if omitted, would go directly to URL as per POM) -->
         <njord.releaseUrl>njord:template:release-sca</njord.releaseUrl>
-        <!-- Snapshots are staged locally (if omitted, would go directly to URL as per POM) -->
+        <!-- Only if you want snapshots locally staged (if omitted, would go directly to URL as per POM) -->
         <njord.snapshotUrl>njord:template:snapshot-sca</njord.snapshotUrl>
       </configuration>
     </server>
 ```
+
+One more nit, for simplicity sake:
+
+```xml
+  <pluginGroups>
+    <pluginGroup>eu.maveniverse.maven.plugins</pluginGroup>
+  </pluginGroups>
+```
+
+To not have to type plugin G on each invocation (this is not mandatory, but makes life easier).
 
 And that's it! Your `settings.xml` now contains auth for Sonatype Central Portal, and also tells Njord which publisher
 to use with this server (it is `sonatype-cp`), and which templates to use.
@@ -110,13 +120,27 @@ And you are done!
 Finally, you need to make sure that Njord extension is loaded as extension. Ideally as POM project/build/extensions:
 
 ```xml
+    <properties>
+      <version.njord>VERSION</version.njord>
+    </properties>
+
+    <build>
     <extensions>
       <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
         <artifactId>extension</artifactId>
-        <version>${maveniverse.release.njordVersion}</version>
+        <version>${version.njord}</version>
       </extension>
     </extensions>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>eu.maveniverse.maven.plugins</groupId>
+          <artifactId>njord</artifactId>
+          <version>${version.njord}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
 ```
 
 But you can do it as core extension, in `.mvn/extensions.xml` or Maven 4 user wide `~/.m2/extensions.xml`:
@@ -127,25 +151,16 @@ But you can do it as core extension, in `.mvn/extensions.xml` or Maven 4 user wi
     <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
         <artifactId>extension</artifactId>
-        <version>${maveniverse.release.njordVersion}</version>
+        <version>VERSION</version>
     </extension>
 </extensions>
-```
-
-If you are putting Njord into POM, it is recommended to tie plugin version to extension version, by adding
-plugin management entry to POM/build/pluginManagement/plugins as:
-
-```xml
-        <plugin>
-          <groupId>eu.maveniverse.maven.plugins</groupId>
-          <artifactId>njord</artifactId>
-          <version>${maveniverse.release.njordVersion}</version>
-        </plugin>
 ```
 
 ## Summary
 
 To get summary, invoke `mvn njord:status`.
+
+Note: this line above will work for you as-is IF you added `pluginGroup` to your `settings.xml`.
 
 It will tell you all publishing related information about your project, even is the auth present or not (ie you may
 have a typo in server.id in POM or your `settings.xml`).
