@@ -30,9 +30,8 @@ sequenceDiagram
   autoNumber
   Session->>Session: lookup
   Session->>Local Repositories: lookup
-  Session->>Remote Repositories: lookup
-  Session->>Mimir (cache lookup)
-  Mimir->>Remote Repositories: lookup
+  Session->>Mimir Cache: lookup
+  Mimir Cache->>Remote Repositories: lookup and cache
 ```
 
 This means, that **nuking local repository** is not an impediment anymore, as you still have everything in your
