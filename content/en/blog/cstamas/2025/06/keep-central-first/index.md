@@ -1,6 +1,6 @@
 ---
 title: "Keep Central first!"
-date: 2025-06-12T14:20:23+01:00
+date: 2025-06-12T12:20:23+01:00
 draft: false
 authors: cstamas
 author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
@@ -54,6 +54,15 @@ Maven would "consult". Just add following snippet(s) to your user-wide `settings
 ```
 
 With this in your user with Maven settings, Maven will take care to keep Central first.
+
+By default, Maven kees Remote Repositories ordered (like in a POM, it obeys the order), but globally, they are assembled
+like this:
+* settings/env
+* project POM
+* Maven defaults
+
+This implies, that IF you are building a project whose POM contains even one repository stanza (and not having env like that
+above) that is not Central, the POM defined repository will take precedence over Central. And many times, this is NOT what you want.
 
 Things like [`itr` option](https://issues.apache.org/jira/browse/MNG-8030) or using [Maven RRF](https://maven.apache.org/resolver/remote-repository-filtering.html)
 would be next things to consider.
