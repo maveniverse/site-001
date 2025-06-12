@@ -12,7 +12,7 @@ projects:
   - Maven
 ---
 
-Just to remind people about Mimir, and why they want to use it: if you remember the "Never Say Never" blog entry
+Just to remind people about Mimir, and why they want to use it: if you remember the [Never Say Never](/blog/2025/03/17/never-say-never) blog entry
 diagram:
 
 ```mermaid
