@@ -1,14 +1,14 @@
 ---
 title: DOMTrip
-description: Round-tripping with XML!
+description: The lossless XML editing library for Java
 categories: [DOMTrip, Documentation]
 tags: [domtrip, docs]
 weight: 100
 ---
 
 {{% pageinfo %}}
-Round-trip editing is programmatic changing an XML document, like a POM is, while preserving all the formatting
-of the original XML document.
+Round-trip editing is a programmatic changing/editing an XML document, like for example a Maven POM is, while 
+preserving all the formatting of the original document.
 {{% /pageinfo %}}
 
 Maveniverse DOMTrip is in works.
