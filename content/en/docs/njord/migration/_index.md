@@ -128,7 +128,7 @@ Finally, you need to make sure that Njord extension is loaded as extension. Idea
     <extensions>
       <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
-        <artifactId>extension</artifactId>
+        <artifactId>extension3</artifactId>
         <version>${version.njord}</version>
       </extension>
     </extensions>
@@ -150,7 +150,7 @@ But you can do it as core extension, in `.mvn/extensions.xml` or Maven 4 user wi
 <extensions>
     <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
-        <artifactId>extension</artifactId>
+        <artifactId>extension3</artifactId>
         <version>VERSION</version>
     </extension>
 </extensions>

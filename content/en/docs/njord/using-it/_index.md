@@ -35,7 +35,7 @@ If you want to add Njord to your parent POM, the recommended way is this:
     <extensions>
       <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
-        <artifactId>extension</artifactId>
+        <artifactId>extension3</artifactId>
         <version>${version.njord}</version>
       </extension>
     </extensions>
@@ -57,7 +57,7 @@ Alternatively, with Maven 3 create project-wide, or with Maven 4+ create user-wi
 <extensions>
     <extension>
         <groupId>eu.maveniverse.maven.njord</groupId>
-        <artifactId>extension</artifactId>
+        <artifactId>extension3</artifactId>
         <version>${currentVersion}</version>
     </extension>
 </extensions>

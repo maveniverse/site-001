@@ -14,7 +14,7 @@ with following content (adjust Mímir version as needed):
 <extensions>
     <extension>
         <groupId>eu.maveniverse.maven.mimir</groupId>
-        <artifactId>extension</artifactId>
+        <artifactId>extension3</artifactId>
         <version>${mimirVersion}</version>
     </extension>
 </extensions>
@@ -26,7 +26,7 @@ You can add it to your (parent) POM as well, as build extension:
     <extensions>
       <extension>
         <groupId>eu.maveniverse.maven.mimir</groupId>
-        <artifactId>extension</artifactId>
+        <artifactId>extension3</artifactId>
         <version>${mimirVersion}</version>
       </extension>
     </extensions>
