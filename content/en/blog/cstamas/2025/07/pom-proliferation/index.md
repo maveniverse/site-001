@@ -95,4 +95,4 @@ Any help is warmly welcome and appreciated!
 
 ## So, what is the response to Pom-Pom-Pom?
 
-To find it out, wait for part 2. This above was only very brief history of POM file proliferation.
+To find it out, wait for part 2. This above was only very brief history of POM file "proliferation".
