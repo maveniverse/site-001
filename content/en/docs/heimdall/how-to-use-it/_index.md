@@ -27,7 +27,32 @@ When you added this extension, prefix filter will auto activate and pull/cache p
 them (functionality from this point on is equal to the Apache Maven RRF, with difference that you do not have to
 check in potentially huge prefixes file to your source).
 
-## Fine-tuning group filtering
+## Prefix filtering
+
+Prefix filtering does not require much user intervention: it makes use of remote repository published prefix files.
+
+Examples of those are:
+* Maven Central https://repo.maven.apache.org/maven2/.meta/prefixes.txt
+* ASF RAO Snapshots https://repository.apache.org/content/repositories/snapshots/.meta/prefixes.txt
+* Eclipse Tycho https://repo.eclipse.org/content/repositories/tycho/.meta/prefixes.txt
+
+When Heimdall discovers these files, it will pull them and cache (applying all the Maven caching policies) and use them
+for their origin repositories.
+
+In short, "prefix file" contains path prefix entries per one line. Those are NOT Maven coordinates! Prefix files can
+be 2, 3 or more path segments deep (usually are 2).
+
+Maven will never ask a remote repository with prefix file for an artifact **known to not be there**.  
+
+For example, take Eclipse Tycho repository above: its prefix file contains one notable entry: `org/eclipse`. This tells
+Maven that the repo has artifacts which path starts with `org/eclipse/...`. Having this information, Maven will never
+go and reach Tycho repository in relation of any `org.apache` artifact, for example.
+
+> Prefix file is not about "it is 100% here" type of information, in fact, it is the opposite: it is telling 
+> "it is 100% not here". By not having artifact layout path segments listed here, repository states 
+> "do not bother coming to me".
+
+## Maven groupId filtering
 
 > If you're using other remote repositories, not only Maven Central, this may come very handy!
 
