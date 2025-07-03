@@ -31,6 +31,8 @@ check in potentially huge prefixes file to your source).
 
 > If you're using other remote repositories, not only Maven Central, this may come very handy!
 
+While prefix filtering is about _paths_, group ID filtering is about Maven group IDs.
+
 You can "fine-tune" group filtering per project level, or globally (user wide). To tune group filtering on project
 level, few steps more is needed. First, tell Heimdall where the group filter file configurations are:
 
@@ -69,7 +71,7 @@ com.atlassian         (1)
 !=com.atlassian.foo   (4)
 ```
 Legend:
-* First line means: allow `com.atlassian` and all below (so, `com.atlassian.foo` as well etc).
-* Second line means: allow `com.atlassian` **exactly and only** and nothing below.
-* Third line means: disallow `com.atlassian.foo` and all below.
-* Fourth line means: disallow `com.atlassian.foo` **exactly and only**. 
+* First line means: allow groupId `com.atlassian` and all below (so, `com.atlassian.foo` as well etc).
+* Second line means: allow groupId`com.atlassian` **exactly and only** and nothing below.
+* Third line means: disallow groupId `com.atlassian.foo` and all below.
+* Fourth line means: disallow groupId `com.atlassian.foo` **exactly and only**. 
