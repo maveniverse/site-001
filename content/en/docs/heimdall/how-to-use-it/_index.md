@@ -53,7 +53,7 @@ This will list all the repositories considered to pull dependencies. Now that yo
 you can simply prepare filters as well: each file has path like this:
 
 ```
-`.mvn/rrf/groupId-${repositoryId}.txt
+.mvn/rrf/groupId-${repositoryId}.txt
 ```
 
 If the file is matched with remote repository ID, it is loaded up and used. For repositories not having matched file,
@@ -68,8 +68,8 @@ com.atlassian         (1)
 !com.atlassian.foo    (3)
 !=com.atlassian.foo   (4)
 ```
-
-First line means: allow `com.atlassian` and all below (so, `com.atlassian.foo` as well etc).
-Second line means: allow `com.atlassian` **exactly and only** and nothing below.
-Third line means: disallow `com.atlassian.foo` and all below.
-Fourth line means: disallow `com.atlassian.foo` **exactly and only**. 
+Legend:
+* First line means: allow `com.atlassian` and all below (so, `com.atlassian.foo` as well etc).
+* Second line means: allow `com.atlassian` **exactly and only** and nothing below.
+* Third line means: disallow `com.atlassian.foo` and all below.
+* Fourth line means: disallow `com.atlassian.foo` **exactly and only**. 
