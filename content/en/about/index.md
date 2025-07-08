@@ -19,14 +19,14 @@ Maveniverse is a team providing awesome extensions, plugins, documentation and a
 
 {{% blocks/section %}}
 
-# Get the best Maven stuff directly from Maven developers
+# Get the best Maven stuff directly from people who love Apache Maven
 {.text-center}
 
 {{% /blocks/section %}}
 
 {{% blocks/section %}}
 
-# Support Maven developers for better Maven
+# Support us for better Apache Maven experience
 {.text-center}
 
 {{% /blocks/section %}}
