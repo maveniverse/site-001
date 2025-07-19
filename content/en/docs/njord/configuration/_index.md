@@ -9,8 +9,8 @@ weight: 30
 Njord uses existing Maven infrastructure to get the configuration, still a bit more explanation is needed for some bits.
 
 For start, user interacts with Njord via `njord:` URI using vanilla Maven plugins like `maven-deploy-plugin` is, and
-also using `njord-maven-plugin` Mojos. All the mojos **does not require projects** to be run (and are also aggregator
-Mojos). Still, IF Mojos are invoked with Maven Project present (ie in a checkout where POM is present, and Maven loads
+also using `njord-maven-plugin` goals. All the mojos **does not require projects** to be run (and are also aggregator
+Mojos). Still, IF goals are invoked with Maven Project present (ie in a checkout where POM is present, and Maven loads
 it) the Project will be used as "extra contextual source" for some operations.
 
 ## Njord basedir
@@ -36,9 +36,9 @@ Of course, the recommended way to set this very property from example is Maven u
 
 ## Project
 
-Njord Mojos does **not require project**, and they can be invoked without any. But, in that case all the "heuristics" will be
-unavailable, and you will need to provide all the required input to Mojos explicitly. For example, assuming you have 
-locally staged `myproject-00001`, you can still publish it by explicitly configuring `publish` mojo from a directory
+Njord goals do **not require project**, and they can be invoked without any. But, in that case all the "heuristics" will be
+unavailable, and you will need to provide all the required input to goals explicitly. For example, assuming you have 
+locally staged `myproject-00001`, you can still publish it by explicitly configuring `publish` goal from a directory
 where no project exists:
 
 ```

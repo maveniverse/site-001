@@ -6,14 +6,14 @@ tags: [njord, docs]
 weight: 10
 ---
 
-Njord is a Maven 3 and Maven 4 extension that offers **local staging, repository operations and repository publishing**. 
+Njord is a Maven 3 and Maven 4 extension that offers **local staging, repository operations and repository publishing** and a `njord-maven-plugin` optional plugin. 
 More precisely, Njord is a Resolver 1.x and 2.x extension (is [`RepositoryConnector`](https://github.com/apache/maven-resolver/blob/fb6e59027cfce9c9fce6f4e4f6d310c1a7ee906c/maven-resolver-spi/src/main/java/org/eclipse/aether/spi/connector/RepositoryConnector.java)) 
 that is loaded via Maven extensions mechanism and extends Resolver. Njord does not mingle with your build at all.
 
-Njord supports "templates", that define repository properties. Based on template a repository ("artifact store" in
-Njord lingo) is created. And those repositories can be merged, redeployed, dropped, validated or published (and 
-more coming). Also, based on chosen template, Resolver is configured to deploy mandatory checksums for you. On the
-other hand, mandatory signatures are NOT generated, it is you who must provide them as part of your build.
+Njord supports "templates", that define repository properties. Based on template, a local staging repository ("artifact store" in
+Njord lingo) is created. And those local staging repositories can be merged, redeployed, dropped, validated or published (and 
+more coming) through a Maven plugin. Also, based on chosen template, Resolver is configured to create mandatory checksums for you. On the
+other hand, mandatory *signatures* are NOT generated, it is you who must provide them as part of your build.
 
 In short, Njord keeps things "as before" (as without it): user never had to worry about checksums (Resolver did generate 
 them always), while the signatures are usually provided by a plugin enabled in "release profile". Njord goes step 
@@ -23,7 +23,7 @@ it will configure Resolver, and it will implicitly generate required stronger ch
 
 For now, templates supported out of the box are:
 
-| Name                   | Mode       | Mandatory Checksums                  | Mandatory                   | Redeploy allowed? |
+| Name                   | Mode       | Checksums Created                    | Signature Checked           | Redeploy allowed? |
 |------------------------|------------|--------------------------------------|-----------------------------|-------------------|
 | `release`              | `RELEASE`  | `SHA-1`, `MD5`                       | `GPG` (`Sigstore` optional) | no                |
 | `release-sca`          | `RELEASE`  | `SHA-512`, `SHA-256`, `SHA-1`, `MD5` | `GPG` (`Sigstore` optional) | no                |
@@ -47,7 +47,7 @@ important detail: the `id` repository ID is there **only to fulfil syntactical r
 Store name will be determined at the moment of creation.
 
 Example URIs:
-* `njord:` - means "use default template and create a new store" that is `release-sca`.
+* `njord:` - means "use default template (that is `release-sca`) and create a new store".
 * `njord:snapshot` - means "use template by name `snapshot` and create a new store".
 * `njord:store:release-00001` - means "select existing store `release-00001` and use that".
 
