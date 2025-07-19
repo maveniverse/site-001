@@ -15,12 +15,12 @@ Also, assuming you do have a project already, set up and probably published used
 Not much to say here, [just follow the guide](https://central.sonatype.org/register/central-portal/).
 **Do not forget to enable SNAPSHOTS for namespace**, if you intend to use them.
 
-Edit your `settings.xml` and add your tokens to it. One of the main goals of Njord is **to prevent** copy-pasta
+Edit your `settings.xml` and add your tokens to it. One of the main goals of Njord is **to prevent** copy-paste
 happening in your Maven Settings. Users publishing one namespace may not experience this, but users publishing multiple
 namespaces are currently forced to copy-paste their auth tokens, as each project usually "invent" their own
 distribution management server IDs (exception is ASF, where ASF parent POM contains "well known" server ID).
 
-Hence, Njord recommend to name and store your tokens **only once** in your Maven Settings (this example is for
+Hence, Njord recommends to name and store your tokens **only once** in your Maven Settings (this example is for
 Sonatype Central Portal):
 
 ```xml
@@ -58,7 +58,7 @@ One more nit, for simplicity sake:
   </pluginGroups>
 ```
 
-To not have to type plugin G on each invocation (this is not mandatory, but makes life easier).
+To not have to type plugin groupId on each invocation (this is not mandatory, but makes life easier).
 
 And that's it! Your `settings.xml` now contains auth for Sonatype Central Portal, and also tells Njord which publisher
 to use with this server (it is `sonatype-cp`), and which templates to use.
@@ -66,7 +66,7 @@ to use with this server (it is `sonatype-cp`), and which templates to use.
 Note: if you want to use Central Portal Snapshots feature, then don't forget to first enable these on Portal Web UI.
 Next, in that case you can remove the `njord.snapshotUrl` element, and enjoy "direct deploy" (so Njord does not 
 meddle, or stage snapshots). Maven will go directly for Central Portal Snapshot endpoint. Any service that supports
-SNAPSHOT deploy and accepts `maven-deploy-plugin` deploy requests may be left without `njord.snapshotUrl` configuration
+SNAPSHOT deploy and accepts `maven-deploy-plugin` direct file deploy requests may be left without `njord.snapshotUrl` configuration
 as in that case that good old deploy plugin can do the job as well, no Njord needed.
 
 ## Setup your project
@@ -89,7 +89,7 @@ As your project was already published to Central, the POM may contain distributi
 ```
 
 **You do not have to change anything!**. But, it is worth to change it. For start, the URLs for releases here are "fake",
-and some tools like SBOM engines cannot use them as intended, as the URL is not "where artifacts are published", it is 
+and some tools like SBOM engines cannot use them as intended, as the URL is not "where artifacts are published" (where they'll be available for download), it is 
 "service used to publish" instead. It is recommended to change this POM section into something like this:
 
 ```xml
@@ -108,7 +108,7 @@ and some tools like SBOM engines cannot use them as intended, as the URL is not 
 ```
 
 Yes, you see it right: POM now says the truth: "we publish to Central" and "we use Sonatype Central Portal" service. 
-Also, there is no need to distinguish server for "release" and "snapshot".
+Also, there is no need to distinguish server id for "release" and "snapshot".
 
 Finally, IF you have some existing plugin that did the job before, just remove, and undo all the hoops and loops that
 the plugin or tool required (like adding some properties, profiles, whatnot).
@@ -117,7 +117,7 @@ And you are done!
 
 ## Extension
 
-Finally, you need to make sure that Njord extension is loaded as extension. Ideally as POM project/build/extensions:
+Finally, you need to make sure that Njord extension is loaded as extension. Ideally as POM `project/build/extensions`:
 
 ```xml
     <properties>
@@ -125,22 +125,23 @@ Finally, you need to make sure that Njord extension is loaded as extension. Idea
     </properties>
 
     <build>
-    <extensions>
-      <extension>
-        <groupId>eu.maveniverse.maven.njord</groupId>
-        <artifactId>extension3</artifactId>
-        <version>${version.njord}</version>
-      </extension>
-    </extensions>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>eu.maveniverse.maven.plugins</groupId>
-          <artifactId>njord</artifactId>
+      <extensions>
+        <extension>
+          <groupId>eu.maveniverse.maven.njord</groupId>
+          <artifactId>extension3</artifactId>
           <version>${version.njord}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+        </extension>
+      </extensions>
+      <pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>eu.maveniverse.maven.plugins</groupId>
+            <artifactId>njord</artifactId>
+            <version>${version.njord}</version>
+          </plugin>
+        </plugins>
+      </pluginManagement>
+    </build>
 ```
 
 But you can do it as core extension, in `.mvn/extensions.xml` or Maven 4 user wide `~/.m2/extensions.xml`:
@@ -158,7 +159,7 @@ But you can do it as core extension, in `.mvn/extensions.xml` or Maven 4 user wi
 
 ## Summary
 
-To get summary, invoke `mvn njord:status`.
+To get summary, invoke [`mvn njord:status`](../plugin-documentation/status-mojo.html).
 
 Note: this line above will work for you as-is IF you added `pluginGroup` to your `settings.xml`.
 
@@ -240,11 +241,11 @@ with added right hand "annotated explanations":
 With this setup, you just perform `mvn deploy` as you did before. If your checkout is snapshot, you will deploy to
 Central Portal Snapshots. If your checkout is a release, it will be locally staged once Maven finishes. 
 
-To publish, just use `mvn njord:publish`, or just do `mvn deploy -Dnjord.autoPublish`.
+To publish, just use [`mvn njord:publish`](../plugin-documentation/publish-mojo.html), or just do `mvn deploy -Dnjord.autoPublish`.
 
 Once Maven returns, your project is being validated at https://central.sonatype.com/publishing
 
-Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more mojos.
+Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more goals.
 
 ## What if don't want (or cannot) change the POM?
 

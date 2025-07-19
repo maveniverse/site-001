@@ -14,12 +14,12 @@ remains fully dormant, does not interfere with your build at all, merely defines
 
 ## Setting it up
 
-Maveniverse Njord is a suite of Maven (core or build; works both ways) extension and a Maven Plugin. You should keep 
+Maveniverse Njord is a suite of a Maven (core or build; works both ways) extension and a Maven Plugin. You should keep 
 the versions of extension and plugin aligned. Simplest way to achieve this is to:
 
-* create a property like version.njord in your parent POM carrying Njord version.
-* adding a build/pluginManagement section with Njord plugin and version property.
-* adding a build/extensions section wirh Njord extension and version property.
+* create a property like `version.njord` in your parent POM carrying Njord version.
+* adding a `build/pluginManagement` section with Njord plugin and previous version property.
+* adding a `build/extensions` section with Njord extension and previous version property.
 
 Depending on your needs, Njord can be defined in parent POMs but can also be "sideloaded" as user or project extension, 
 maybe even only when you are about to publish (so not all the time).
@@ -64,7 +64,7 @@ Alternatively, with Maven 3 create project-wide, or with Maven 4+ create user-wi
 ```
 
 It is recommended (but not mandatory) to add this stanza to your `settings.xml` as well if you don't have it already
-(to not type whole G of plugin):
+(to not type whole groupId of plugin):
 ```xml
   <pluginGroups>
     <pluginGroup>eu.maveniverse.maven.plugins</pluginGroup>
@@ -98,7 +98,7 @@ Supported publishers are:
 | Sonatype S01 on https://s01.oss.sonatype.org/ (`sonatype-s01`) | -                       | As above but using S01 instance.                                                                                                             |
 | Apache RAO on https://repository.apache.org/ (`apache-rao`)    | `apache.releases.https` | As above but using RAO instance.                                                                                                             |
 
-Make sure your `settings.xml` contains token associated with proper `server.id` corresponding to you publishing service you want to use.
+Make sure your `settings.xml` contains token associated with proper `server.id` corresponding to the publishing service you want to use.
 
 In case you are about to publish a project you cannot alter distribution management for some reason, and assuming 
 Central Portal publishing is enabled for it, just add this stanza in your `settings.xml`:
@@ -112,22 +112,22 @@ Central Portal publishing is enabled for it, just add this stanza in your `setti
      </server>
 ```
 
-This basically **redirects** the server "the-project-release" (in POM that you are unable to change) to your defined
+This basically **redirects** the server `the-project-release` (in POM that you are unable to change) to your defined
 `sonatype-central-portal` entry.
 
 That's all! No project change needed at all.
 
 ## Using it
 
-Next, let's see an example of Apache Maven project (I used `maven-gpg-plugin`):
+Next, let's see an example of Apache Maven project (I used `maven-shared-jar` https://github.com/apache/maven-shared-jar/):
 
-1. For example’s sake, I took last release of plugin (hence am simulating release deploy): `git checkout maven-gpg-plugin-3.2.7`
+1. For example’s sake, I took last release of the project (hence am simulating release deploy): `git checkout maven-shared-jar-3.2.0`
 2. Deploy it (locally stage): `mvn -P apache-release deploy -DaltDeploymentRepository=id::njord:` (The `id` is really unused, is there just to fulfil deploy plugin syntax requirement. The URL `njord:` will use "default" store template that is RELEASE. You can target other templates by using, and is equivalent of this `njord:release`. You can stage locally snapshots as well with URL `njord:snapshot`. Finally, you can target existing store with `njord:store:storename-xxx`).
-3. Check staged store names: `mvn njord:list`
-4. Optionally, check locally staged content: `mvn njord:list-content -Dstore=release-xxx` (use store name from above)
-5. Optionally, validate locally staged content: `mvn njord:validate -Ddetails -Dstore=release-xxx` (use store name from above)
-6. Publish it to ASF: `mvn njord:publish -Dstore=release-xxx -Dtarget=apache-rao` (use store name from above)
+3. Check staged store names: [`mvn njord:list`](../plugin-documentation/list-mojo.html)
+4. Optionally, check locally staged content: [`mvn njord:list-content -Dstore=release-xxx`](../plugin-documentation/list-content-mojo.html) (use store name from above)
+5. Optionally, validate locally staged content: [`mvn njord:validate -Ddetails -Dstore=release-xxx`](../plugin-documentation/validate-mojo.html) (use store name from above)
+6. Publish it to ASF: [`mvn njord:publish -Dstore=release-xxx -Dtarget=apache-rao`](../plugin-documentation/publish-mojo.html) (use store name from above)
 7. From now on, the repository is staged on RAO, so you can close it, vote, and on vote pass, release it. All the usual fluff as before.
-8. Drop locally staged store: `mvn njord:drop -Dstor=release-xxx` (use store name from above)
+8. Drop locally staged store: [`mvn njord:drop -Dstore=release-xxx`](../plugin-documentation/drop-mojo.html) (use store name from above)
 
-Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more mojos.
+Check out [Maven generated plugin documentation](../plugin-documentation/plugin-info.html) for more goals.
