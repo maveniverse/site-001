@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:classpath – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:project-dependency-graph – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,15 +54,16 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Aclasspath"></a>
-<h1>toolbox:classpath</h1>
+<section><a id="toolbox.3Aproject-dependency-graph"></a>
+<h1>toolbox:project-dependency-graph</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.12.1:classpath</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.12.1:project-dependency-graph</p>
 <p><strong>Description</strong>:</p>
-<p>Prints the classpath of current project.</p>
+<p>Displays project interdependencies of Maven Projects.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>Requires a Maven project to be executed.</li>
+<li>Executes as an aggregator goal.</li>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
 <h2>Required Parameters</h2>
 <table class="table table-striped">
@@ -72,10 +73,25 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#scope"><code>&lt;scope&gt;</code></a></td>
+<td><a href="#excludeDependencyMatcherSpec"><code>&lt;excludeDependencyMatcherSpec&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The resolution scope to display, accepted values are "runtime", "compile", "test", etc.<br /><strong>Default</strong>: <code>runtime</code><br /><strong>User Property</strong>: <code>scope</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<td>The exclusion dependency matcher (inverted!) to apply to graph. Default is <code>none()</code>.<br /><strong>Default</strong>: <code>none()</code><br /><strong>User Property</strong>: <code>excludeDependencyMatcherSpec</code></td></tr>
+<tr class="a">
+<td><a href="#excludeSubprojectsMatcherSpec"><code>&lt;excludeSubprojectsMatcherSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The exclusion artifact matcher (inverted!) to apply to reactor modules. Default is <code>none()</code>.<br /><strong>Default</strong>: <code>none()</code><br /><strong>User Property</strong>: <code>excludeSubprojectsMatcherSpec</code></td></tr>
+<tr class="b">
+<td><a href="#output"><code>&lt;output&gt;</code></a></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>The location to write resulting image to.<br /><strong>Default</strong>: <code>${project.build.directory}/project-dependency-graph.svg</code><br /><strong>User Property</strong>: <code>output</code></td></tr>
+<tr class="a">
+<td><a href="#showExternal"><code>&lt;showExternal&gt;</code></a></td>
+<td><code>boolean</code></td>
+<td><code>-</code></td>
+<td>Set it <code>true</code> to include external direct dependencies as well.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>showExternal</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -109,6 +125,11 @@
 <td><code>-</code></td>
 <td>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.<br /><strong>User Property</strong>: <code>toolbox.search.backend.type</code></td></tr>
 <tr class="a">
+<td><a href="#selector"><code>&lt;selector&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Set the project selector, like <code>-rf</code> Maven command uses it, can be <code>:A</code> or <code>G:A</code>. If the selector is set, it must match exactly one project within reactor, otherwise it will fail. By default, selector is <code>null</code>, and no selected project will be set.<br /><strong>User Property</strong>: <code>selector</code></td></tr>
+<tr class="b">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
@@ -120,7 +141,21 @@
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>dryRun</code></li>
-<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="extraRepositories"></a><section><a id="a.3CextraRepositories.3E"></a>
+<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="excludeDependencyMatcherSpec"></a><section><a id="a.3CexcludeDependencyMatcherSpec.3E"></a>
+<h3>&lt;excludeDependencyMatcherSpec&gt;</h3>
+<div>The exclusion dependency matcher (inverted!) to apply to graph. Default is <code>none()</code>.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>excludeDependencyMatcherSpec</code></li>
+<li><strong>Default</strong>: <code>none()</code></li></ul><hr /></section><a id="excludeSubprojectsMatcherSpec"></a><section><a id="a.3CexcludeSubprojectsMatcherSpec.3E"></a>
+<h3>&lt;excludeSubprojectsMatcherSpec&gt;</h3>
+<div>The exclusion artifact matcher (inverted!) to apply to reactor modules. Default is <code>none()</code>.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>excludeSubprojectsMatcherSpec</code></li>
+<li><strong>Default</strong>: <code>none()</code></li></ul><hr /></section><a id="extraRepositories"></a><section><a id="a.3CextraRepositories.3E"></a>
 <h3>&lt;extraRepositories&gt;</h3>
 <div>Appends extra repositories to context.</div>
 <ul>
@@ -139,20 +174,33 @@
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
+<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="output"></a><section><a id="a.3Coutput.3E"></a>
+<h3>&lt;output&gt;</h3>
+<div>The location to write resulting image to.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>output</code></li>
+<li><strong>Default</strong>: <code>${project.build.directory}/project-dependency-graph.svg</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
 <h3>&lt;repositoryVendor&gt;</h3>
 <div>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="scope"></a><section><a id="a.3Cscope.3E"></a>
-<h3>&lt;scope&gt;</h3>
-<div>The resolution scope to display, accepted values are "runtime", "compile", "test", etc.</div>
+<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="selector"></a><section><a id="a.3Cselector.3E"></a>
+<h3>&lt;selector&gt;</h3>
+<div>Set the project selector, like <code>-rf</code> Maven command uses it, can be <code>:A</code> or <code>G:A</code>. If the selector is set, it must match exactly one project within reactor, otherwise it will fail. By default, selector is <code>null</code>, and no selected project will be set.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>selector</code></li></ul><hr /></section><a id="showExternal"></a><section><a id="a.3CshowExternal.3E"></a>
+<h3>&lt;showExternal&gt;</h3>
+<div>Set it <code>true</code> to include external direct dependencies as well.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>scope</code></li>
-<li><strong>Default</strong>: <code>runtime</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>User Property</strong>: <code>showExternal</code></li>
+<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>
