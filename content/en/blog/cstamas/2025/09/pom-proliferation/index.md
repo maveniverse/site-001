@@ -95,8 +95,8 @@ we deal with something else.
 
 And this is how publisher sees it. But how does consumer see it? That's the point. Publishing and consuming are two
 distinct flows and (usually) may happen in very distant time as well. Usually
-* publisher tells what it builds (is past for consumer)
-* consumer tells how it consumes (is future for publisher)
+* publisher tells what it builds (in past relative to consuming)
+* consumer tells how it consumes (in future relative to publishing)
 
 So, the "causality" link between the two, while may exist, it is usually absent, or is "short term" (ie today I know about Java 25,
 but I have no idea what Java 35 will contain). It is usually best to avoid "predictions" like these (as user using my library on Java 35 will
