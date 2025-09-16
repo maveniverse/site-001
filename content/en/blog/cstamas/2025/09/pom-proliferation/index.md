@@ -93,14 +93,15 @@ classifier), that _same POM is used to get dependencies_. Hence, my question abo
 related exactly to this: if _same artifact_ in different contexts requires (wildly) different dependencies, then
 we deal with something else.
 
-Amd this is how publisher sees it. But how does consumer see it? That's the point. Publishing and consuming are two
-distinct flows and (usually) may happen in very distant time as well. In Maven:
+And this is how publisher sees it. But how does consumer see it? That's the point. Publishing and consuming are two
+distinct flows and (usually) may happen in very distant time as well. Usually
 * publisher tells what it builds (is past for consumer)
 * consumer tells how it consumes (is future for publisher)
 
 So, the "causality" link between the two, while may exist, it is usually absent, or is "short term" (ie today I know about Java 25,
 but I have no idea what Java 35 will contain). It is usually best to avoid "predictions" like these (as user using my library on Java 35 will
-know better anyway).
+know better anyway). So whatever extra info is needed, the "lifespan" (and maybe even meaning of it) can be questioned,
+as nobody can predict the future. And Maven Central stores artifacts forever.
 
 Related:
 * https://en.wikipedia.org/wiki/Law_of_the_instrument
