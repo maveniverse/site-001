@@ -103,5 +103,7 @@ but I have no idea what Java 35 will contain). It is usually best to avoid "pred
 know better anyway). So whatever extra info is needed, the "lifespan" (and maybe even meaning of it) can be questioned,
 as nobody can predict the future. And Maven Central stores artifacts forever.
 
+These "extra infos" (I require..., I work with...) **may work**, but IMHO only within boundaries of one forge.
+
 Related:
 * https://en.wikipedia.org/wiki/Law_of_the_instrument
