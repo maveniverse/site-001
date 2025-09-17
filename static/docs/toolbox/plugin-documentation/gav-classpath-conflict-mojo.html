@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:lock-plugin-versions – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:gav-classpath-conflict – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,17 +54,47 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Alock-plugin-versions"></a>
-<h1>toolbox:lock-plugin-versions</h1>
+<section><a id="toolbox.3Agav-classpath-conflict"></a>
+<h1>toolbox:gav-classpath-conflict</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.13.4:lock-plugin-versions</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.13.4:gav-classpath-conflict</p>
 <p><strong>Description</strong>:</p>
-<p>Locks available versions of Maven Project used plugins.</p>
+<p>Resolves two Maven Artifact and prints out the classpath conflicts.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
-<li>Requires a Maven project to be executed.</li>
-<li>Executes as an aggregator goal.</li>
-<li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Optional_Parameters"></a>
+<li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
+<h2>Required Parameters</h2>
+<table class="table table-striped">
+<tr class="a">
+<th>Name</th>
+<th>Type</th>
+<th>Since</th>
+<th>Description</th></tr>
+<tr class="b">
+<td><a href="#artifactDifferentiatorSpec"><code>&lt;artifactDifferentiatorSpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The artifact differentiators to apply to set of artifacts. If differentiator comes up with more than one partition, you have a conflict. Spec string may contain multiple differentiators split by comma.<br /><strong>Default</strong>: <code>majorVersion()</code><br /><strong>User Property</strong>: <code>artifactDifferentiatorSpec</code></td></tr>
+<tr class="a">
+<td><a href="#gav1"><code>&lt;gav1&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The first artifact coordinates in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;[:&lt;extension&gt;[:&lt;classifier&gt;]]:&lt;version&gt;</code> to display conflicts for.<br /><strong>User Property</strong>: <code>gav1</code></td></tr>
+<tr class="b">
+<td><a href="#gav2"><code>&lt;gav2&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The second artifact coordinates in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;[:&lt;extension&gt;[:&lt;classifier&gt;]]:&lt;version&gt;</code> to display conflicts for.<br /><strong>User Property</strong>: <code>gav2</code></td></tr>
+<tr class="a">
+<td><a href="#keyFactorySpec"><code>&lt;keyFactorySpec&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The artifact key factory to apply (defines sets of possibly conflicting artifacts).<br /><strong>Default</strong>: <code>versionlessId()</code><br /><strong>User Property</strong>: <code>keyFactorySpec</code></td></tr>
+<tr class="b">
+<td><a href="#scope"><code>&lt;scope&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The resolution scope to display, accepted values are "runtime", "compile", "test", etc.<br /><strong>Default</strong>: <code>runtime</code><br /><strong>User Property</strong>: <code>scope</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -73,88 +103,49 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#apply"><code>&lt;apply&gt;</code></a></td>
-<td><code>boolean</code></td>
+<td><a href="#boms"><code>&lt;boms&gt;</code></a></td>
+<td><code>String</code></td>
 <td><code>-</code></td>
-<td>Apply results to POM.<br /><strong>User Property</strong>: <code>apply</code></td></tr>
+<td>Apply BOMs, if needed. Comma separated GAVs.<br /><strong>User Property</strong>: <code>boms</code></td></tr>
 <tr class="a">
-<td><a href="#artifactMatcherSpec"><code>&lt;artifactMatcherSpec&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The plugin matcher spec.<br /><strong>Default</strong>: <code>any()</code><br /><strong>User Property</strong>: <code>artifactMatcherSpec</code></td></tr>
-<tr class="b">
-<td><a href="#artifactVersionMatcherSpec"><code>&lt;artifactVersionMatcherSpec&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>Artifact version matcher spec string, default is 'noSnapshotsAndPreviews()'.<br /><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code><br /><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></td></tr>
-<tr class="a">
-<td><a href="#artifactVersionSelectorSpec"><code>&lt;artifactVersionSelectorSpec&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>Artifact version selector spec string to select the version from candidates, default is 'last()'.<br /><strong>Default</strong>: <code>last()</code><br /><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></td></tr>
-<tr class="b">
 <td><a href="#dryRun"><code>&lt;dryRun&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Option to run potentially destructive commands without performing any IO.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>dryRun</code></td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="#extraRepositories"><code>&lt;extraRepositories&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>Appends extra repositories to context.<br /><strong>User Property</strong>: <code>extraRepositories</code></td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="#failOnLogicalFailure"><code>&lt;failOnLogicalFailure&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Makes command fail on "logical" failure.<br /><strong>Default</strong>: <code>true</code><br /><strong>User Property</strong>: <code>failOnLogicalFailure</code></td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="#forceStdout"><code>&lt;forceStdout&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
-<tr class="b">
-<td><a href="#pluginKey"><code>&lt;pluginKey&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The plugin key in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;</code> to display tree for. If plugin is from "known" groupId (as configured in settings.xml) it may be in format of <code>:&lt;artifactId&gt;</code> and this mojo will find it. Finally, if plugin key is plain string like <code>"clean"</code>, this mojo will apply some heuristics to find it.<br /><strong>User Property</strong>: <code>pluginKey</code></td></tr>
 <tr class="a">
-<td><a href="#repositoryVendor"><code>&lt;repositoryVendor&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.<br /><strong>User Property</strong>: <code>toolbox.search.backend.type</code></td></tr>
-<tr class="b">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="apply"></a><section><a id="a.3Capply.3E"></a>
-<h3>&lt;apply&gt;</h3>
-<div>Apply results to POM.</div>
+<h2>Parameter Details</h2><a id="artifactDifferentiatorSpec"></a><section><a id="a.3CartifactDifferentiatorSpec.3E"></a>
+<h3>&lt;artifactDifferentiatorSpec&gt;</h3>
+<div>The artifact differentiators to apply to set of artifacts. If differentiator comes up with more than one partition, you have a conflict. Spec string may contain multiple differentiators split by comma.</div>
 <ul>
-<li><strong>Type</strong>: <code>boolean</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>apply</code></li></ul><hr /></section><a id="artifactMatcherSpec"></a><section><a id="a.3CartifactMatcherSpec.3E"></a>
-<h3>&lt;artifactMatcherSpec&gt;</h3>
-<div>The plugin matcher spec.</div>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>artifactDifferentiatorSpec</code></li>
+<li><strong>Default</strong>: <code>majorVersion()</code></li></ul><hr /></section><a id="boms"></a><section><a id="a.3Cboms.3E"></a>
+<h3>&lt;boms&gt;</h3>
+<div>Apply BOMs, if needed. Comma separated GAVs.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>artifactMatcherSpec</code></li>
-<li><strong>Default</strong>: <code>any()</code></li></ul><hr /></section><a id="artifactVersionMatcherSpec"></a><section><a id="a.3CartifactVersionMatcherSpec.3E"></a>
-<h3>&lt;artifactVersionMatcherSpec&gt;</h3>
-<div>Artifact version matcher spec string, default is 'noSnapshotsAndPreviews()'.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>artifactVersionMatcherSpec</code></li>
-<li><strong>Default</strong>: <code>noSnapshotsAndPreviews()</code></li></ul><hr /></section><a id="artifactVersionSelectorSpec"></a><section><a id="a.3CartifactVersionSelectorSpec.3E"></a>
-<h3>&lt;artifactVersionSelectorSpec&gt;</h3>
-<div>Artifact version selector spec string to select the version from candidates, default is 'last()'.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>artifactVersionSelectorSpec</code></li>
-<li><strong>Default</strong>: <code>last()</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
+<li><strong>User Property</strong>: <code>boms</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
 <ul>
@@ -180,19 +171,33 @@
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="pluginKey"></a><section><a id="a.3CpluginKey.3E"></a>
-<h3>&lt;pluginKey&gt;</h3>
-<div>The plugin key in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;</code> to display tree for. If plugin is from "known" groupId (as configured in settings.xml) it may be in format of <code>:&lt;artifactId&gt;</code> and this mojo will find it. Finally, if plugin key is plain string like <code>"clean"</code>, this mojo will apply some heuristics to find it.</div>
+<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="gav1"></a><section><a id="a.3Cgav1.3E"></a>
+<h3>&lt;gav1&gt;</h3>
+<div>The first artifact coordinates in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;[:&lt;extension&gt;[:&lt;classifier&gt;]]:&lt;version&gt;</code> to display conflicts for.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>pluginKey</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
-<h3>&lt;repositoryVendor&gt;</h3>
-<div>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.</div>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>gav1</code></li></ul><hr /></section><a id="gav2"></a><section><a id="a.3Cgav2.3E"></a>
+<h3>&lt;gav2&gt;</h3>
+<div>The second artifact coordinates in the format <code>&lt;groupId&gt;:&lt;artifactId&gt;[:&lt;extension&gt;[:&lt;classifier&gt;]]:&lt;version&gt;</code> to display conflicts for.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>gav2</code></li></ul><hr /></section><a id="keyFactorySpec"></a><section><a id="a.3CkeyFactorySpec.3E"></a>
+<h3>&lt;keyFactorySpec&gt;</h3>
+<div>The artifact key factory to apply (defines sets of possibly conflicting artifacts).</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>keyFactorySpec</code></li>
+<li><strong>Default</strong>: <code>versionlessId()</code></li></ul><hr /></section><a id="scope"></a><section><a id="a.3Cscope.3E"></a>
+<h3>&lt;scope&gt;</h3>
+<div>The resolution scope to display, accepted values are "runtime", "compile", "test", etc.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>scope</code></li>
+<li><strong>Default</strong>: <code>runtime</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>
