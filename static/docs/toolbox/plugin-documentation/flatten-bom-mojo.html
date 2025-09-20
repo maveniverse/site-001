@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:gav-copy-gav – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:flatten-bom – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,14 +54,15 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Agav-copy-gav"></a>
-<h1>toolbox:gav-copy-gav</h1>
+<section><a id="toolbox.3Aflatten-bom"></a>
+<h1>toolbox:flatten-bom</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.13.5:gav-copy-gav</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.13.5:flatten-bom</p>
 <p><strong>Description</strong>:</p>
-<p>Resolves a given GAV and copies resulting artifact to target.</p>
+<p>Flattens a BOM and attaches it.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
+<li>Requires a Maven project to be executed.</li>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
 <h2>Required Parameters</h2>
 <table class="table table-striped">
@@ -71,15 +72,20 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#gav"><code>&lt;gav&gt;</code></a></td>
-<td><code>String</code></td>
+<td><a href="#attach"><code>&lt;attach&gt;</code></a></td>
+<td><code>boolean</code></td>
 <td><code>-</code></td>
-<td>The comma separated GAVs to resolve.<br /><strong>User Property</strong>: <code>gav</code></td></tr>
+<td>Whether to attach to project the flattened BOM or not.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>attach</code></td></tr>
 <tr class="a">
-<td><a href="#sinkSpec"><code>&lt;sinkSpec&gt;</code></a></td>
+<td><a href="#bom"><code>&lt;bom&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The sink spec.<br /><strong>User Property</strong>: <code>sinkSpec</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<td>The GAV of BOM to flatten.<br /><strong>User Property</strong>: <code>bom</code></td></tr>
+<tr class="b">
+<td><a href="#outputFile"><code>&lt;outputFile&gt;</code></a></td>
+<td><code>File</code></td>
+<td><code>-</code></td>
+<td>The output file.<br /><strong>Default</strong>: <code>${project.build.directory}/flatten-bom.xml</code><br /><strong>User Property</strong>: <code>outputFile</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -108,11 +114,34 @@
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
 <tr class="b">
+<td><a href="#gav"><code>&lt;gav&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The GAV to emit flattened BOM with.<br /><strong>Default</strong>: <code>${project.groupId}:${project.artifactId}:${project.version}</code><br /><strong>User Property</strong>: <code>gav</code></td></tr>
+<tr class="a">
+<td><a href="#repositoryVendor"><code>&lt;repositoryVendor&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.<br /><strong>User Property</strong>: <code>toolbox.search.backend.type</code></td></tr>
+<tr class="b">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
+<h2>Parameter Details</h2><a id="attach"></a><section><a id="a.3Cattach.3E"></a>
+<h3>&lt;attach&gt;</h3>
+<div>Whether to attach to project the flattened BOM or not.</div>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>attach</code></li>
+<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="bom"></a><section><a id="a.3Cbom.3E"></a>
+<h3>&lt;bom&gt;</h3>
+<div>The GAV of BOM to flatten.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>bom</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
 <ul>
@@ -140,17 +169,25 @@
 <li><strong>Required</strong>: <code>No</code></li>
 <li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="gav"></a><section><a id="a.3Cgav.3E"></a>
 <h3>&lt;gav&gt;</h3>
-<div>The comma separated GAVs to resolve.</div>
+<div>The GAV to emit flattened BOM with.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>gav</code></li>
+<li><strong>Default</strong>: <code>${project.groupId}:${project.artifactId}:${project.version}</code></li></ul><hr /></section><a id="outputFile"></a><section><a id="a.3CoutputFile.3E"></a>
+<h3>&lt;outputFile&gt;</h3>
+<div>The output file.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.io.File</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>gav</code></li></ul><hr /></section><a id="sinkSpec"></a><section><a id="a.3CsinkSpec.3E"></a>
-<h3>&lt;sinkSpec&gt;</h3>
-<div>The sink spec.</div>
+<li><strong>User Property</strong>: <code>outputFile</code></li>
+<li><strong>Default</strong>: <code>${project.build.directory}/flatten-bom.xml</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
+<h3>&lt;repositoryVendor&gt;</h3>
+<div>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>sinkSpec</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>
