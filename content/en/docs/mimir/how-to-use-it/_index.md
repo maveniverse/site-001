@@ -36,11 +36,11 @@ Using it with Maven 3 is also possible and completely fine and compatible, but t
 per-project extensions in `.mvn/extensions.xml` file instead of one user-wide one.
 
 One extra step is needed, in case you have non-trivial networking (like Docker, Tailscale or alike): you need 
-to "help" a bit to JGroups, to figure out which networking interface belongs to your LAN. To achieve that,
+to "help" a bit to JGroups and other components, to figure out which networking interface belongs to your LAN. To achieve that,
 you need to create `~/.mimir/daemon.properties` file with following content (use your LAN IP address):
 
 ```properties
-mimir.jgroups.interface=match-address\:192.168.1.*
+mimir.localHostHint=match-address\:192.168.1.*
 ```
 
 This will help JGroups to properly bind to interface that is used on your LAN.

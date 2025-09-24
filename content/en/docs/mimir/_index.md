@@ -7,7 +7,7 @@ weight: 60
 ---
 
 {{% pageinfo %}}
-Maveniverse Mímir started as solution of my own problem: workstation hopping, and a LOT of download when when picking
+Maveniverse Mímir started as solution of my own problem: workstation hopping, and a LOT of download when picking
 up where I left on.
 {{% /pageinfo %}}
 
