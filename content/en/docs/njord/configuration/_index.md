@@ -9,7 +9,7 @@ weight: 30
 Njord uses existing Maven infrastructure to get the configuration, still a bit more explanation is needed for some bits.
 
 For start, user interacts with Njord via `njord:` URI using vanilla Maven plugins like `maven-deploy-plugin` is, and
-also using `njord-maven-plugin` goals. All the mojos **does not require projects** to be run (and are also aggregator
+also using `njord-maven-plugin` goals. All the mojos **do not require projects** to be run (and are also aggregator
 Mojos). Still, IF goals are invoked with Maven Project present (ie in a checkout where POM is present, and Maven loads
 it) the Project will be used as "extra contextual source" for some operations.
 
@@ -33,6 +33,36 @@ property will be defined ONLY if you invoke Njord Mojos in this very same projec
 Basic Maven stuff.
 
 Of course, the recommended way to set this very property from example is Maven user property like `mvn -Dnjord.dryRun ...`.
+
+### Global properties
+
+The following properties are applicable irrespective of the actual publisher being used.
+
+Name | Description | Default Value | Mandatory
+--- | --- | --- | ---
+`njord.enabled` | Boolean flag determining whether Njord should be active at all. | `true` | `no`
+`njord.dryRun` | Boolean flag determining whether Njord should prevent actual publishing. | `false` | `no`
+`njord.autoPublish` | Boolean flag determining whether publication should happen automatically at the end of the session. | `false` | `no`
+`njord.autoDrop` | Boolean flag determining whether a local staging should be automatically dropped after publishing. | `true` | `no`
+`njord.prefix`| The prefix to use for local Njord stores/staging repositories. | determined from `top level project ->artifactId` | `no`
+`njord.publisher` | The publisher to use with this repository. Support publisher ids listed in [Using it](../using-it/). | not set | `yes`
+`njord.releaseUrl` | The url identifying the local Njord store/staging repository for release artifacts. Must always start with `njord:`. For details on the URI format refer to [What is it](../what-is-it/). | not set | `yes`
+`njord.snapshotUrl` | The url identifying the local Njord store/staging repository for SNAPSHOT artifacts. Must always start with `njord:`. For details on the URI format refer to [What is it](../what-is-it/). | not set | `yes` (only if Njord should be used with Snapshots, one can continue to use `maven-deploy-plugin` for SNAPSHOTs)
+`njord.authRedirect` | Id of the server from which to retrieve the authentication settings from [Maven's `settings.xml`](https://maven.apache.org/settings.html). | determined from `project->distributionManagement->repository->id` / `project->distributionManagement->snapshotRepository->id`) | `no`
+`njord.serviceRedirect` | Id of the server from which to retrieve Njord properties from [Maven's `settings.xml`](https://maven.apache.org/settings.html). | determined from `project->distributionManagement->repository->id` / `project->distributionManagement->snapshotRepository->id`) | `no`
+
+### Publisher specific properties
+
+There are some properties only evaluated with certain publishers.
+The most relevant ones are listed below. None of them are mandatory though.
+For the full list look at the source code.
+
+#### Sonatype Central Portal Publisher
+
+Name | Alias | Description | Default Value 
+--- | --- | --- | ---
+`njord.publisher.sonatype-cp.publishingType` | `njord.publishingType` | Either `automatic` or `user_managed`. See <https://central.sonatype.org/publish/publish-portal-api/#uploading-a-deployment-bundle> for details. | `user_managed`
+`njord.publisher.sonatype-cp.waitForStates` | `njord.publisher.sonatype-cp.waitForStates` | Boolean flag determining whether publishing should block until deployment reached the final state. Makes the publishing fail in case the final state is an error state. | `false` | `no`
 
 ## Project
 
