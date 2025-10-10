@@ -94,9 +94,7 @@ Supported publishers are:
 | Publisher (publisher ID)                                       | server.id               | What is needed                                                                                                                               |
 |----------------------------------------------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | Sonatype Central Portal (`sonatype-cp`)                        | -                       | Obtain tokens for publishing by following [this documentation](https://central.sonatype.org/publish/generate-portal-token/).                 |
-| Sonatype OSS on https://oss.sonatype.org/ (`sonatype-oss`)     | -                       | Obtain tokens for publishing by following [this documentation](https://central.sonatype.org/publish/generate-token/) and using OSS instance. |
-| Sonatype S01 on https://s01.oss.sonatype.org/ (`sonatype-s01`) | -                       | As above but using S01 instance.                                                                                                             |
-| Apache RAO on https://repository.apache.org/ (`apache-rao`)    | `apache.releases.https` | As above but using RAO instance.                                                                                                             |
+| Apache RAO on https://repository.apache.org/ (`apache-rao`)    | `apache.releases.https` | Obtain a token by logging in to <https://repository.apache.org/#profile;User%20Token>. See also the [Nexus 2 Documentation](https://support.sonatype.com/hc/en-us/articles/33379982205459-Nexus-Repository-2-Documentation).                                                                                                             |
 
 Make sure your `settings.xml` contains token associated with proper `server.id` corresponding to the publishing service you want to use.
 
