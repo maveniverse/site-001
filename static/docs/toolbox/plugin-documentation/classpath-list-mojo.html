@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:gav-dump – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:classpath-list – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,14 +54,15 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Agav-dump"></a>
-<h1>toolbox:gav-dump</h1>
+<section><a id="toolbox.3Aclasspath-list"></a>
+<h1>toolbox:classpath-list</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.14.0:gav-dump</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.14.0:classpath-list</p>
 <p><strong>Description</strong>:</p>
-<p>Dumps MIMA environment.</p>
+<p>Prints the classpath of current project as list of artifacts.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
+<li>Requires a Maven project to be executed.</li>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
 <h2>Required Parameters</h2>
 <table class="table table-striped">
@@ -71,10 +72,15 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#asProperties"><code>&lt;asProperties&gt;</code></a></td>
+<td><a href="#details"><code>&lt;details&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
-<td>Output it as Java Properties format.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>asProperties</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<td>Set it <code>true</code> for details listed.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>details</code></td></tr>
+<tr class="a">
+<td><a href="#scope"><code>&lt;scope&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The resolution scope to display, accepted values are "runtime", "compile", "test", etc.<br /><strong>Default</strong>: <code>runtime</code><br /><strong>User Property</strong>: <code>scope</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -103,22 +109,22 @@
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
 <tr class="b">
-<td><a href="#toFile"><code>&lt;toFile&gt;</code></a></td>
-<td><code>File</code></td>
+<td><a href="#repositoryVendor"><code>&lt;repositoryVendor&gt;</code></a></td>
+<td><code>String</code></td>
 <td><code>-</code></td>
-<td>Output it into given file (only if asProperties=true).<br /><strong>User Property</strong>: <code>toFile</code></td></tr>
+<td>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.<br /><strong>User Property</strong>: <code>toolbox.search.backend.type</code></td></tr>
 <tr class="a">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="asProperties"></a><section><a id="a.3CasProperties.3E"></a>
-<h3>&lt;asProperties&gt;</h3>
-<div>Output it as Java Properties format.</div>
+<h2>Parameter Details</h2><a id="details"></a><section><a id="a.3Cdetails.3E"></a>
+<h3>&lt;details&gt;</h3>
+<div>Set it <code>true</code> for details listed.</div>
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>asProperties</code></li>
+<li><strong>User Property</strong>: <code>details</code></li>
 <li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
@@ -145,13 +151,20 @@
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="toFile"></a><section><a id="a.3CtoFile.3E"></a>
-<h3>&lt;toFile&gt;</h3>
-<div>Output it into given file (only if asProperties=true).</div>
+<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="repositoryVendor"></a><section><a id="a.3CrepositoryVendor.3E"></a>
+<h3>&lt;repositoryVendor&gt;</h3>
+<div>The repository vendor to use for Search RR backend ("central", "nx2" or any other extractor). If empty, heuristics will be applied to figure out.</div>
 <ul>
-<li><strong>Type</strong>: <code>java.io.File</code></li>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>toFile</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
+<li><strong>User Property</strong>: <code>toolbox.search.backend.type</code></li></ul><hr /></section><a id="scope"></a><section><a id="a.3Cscope.3E"></a>
+<h3>&lt;scope&gt;</h3>
+<div>The resolution scope to display, accepted values are "runtime", "compile", "test", etc.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>scope</code></li>
+<li><strong>Default</strong>: <code>runtime</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
 <ul>
