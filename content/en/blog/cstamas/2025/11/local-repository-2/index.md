@@ -126,4 +126,13 @@ in `R`_, only to wait for results of accessing 10 various repositories. And ther
 
 ## Solution
 
-Simplest solution is: get rid of **global** and **mutable** aspects. More about it in next blog.
+Simplest solution is: get rid of **global** and **mutable** aspects. But, implementation is not so simple.
+
+Still, IMHO, Maven should:
+* get rid of **global** and **mutable** local repository
+
+And instead:
+* use **global cache** instead (shared globally on workstation)
+* use **per project (mutable) local repository**
+
+Later will try to detail these ideas, as partially (with Maven 4 even fully) can be implemented already.
