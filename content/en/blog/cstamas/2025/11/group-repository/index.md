@@ -58,7 +58,7 @@ closed source project there are many pitfalls.
 The consequence is that **project configuration** is maybe just blurred, but sometimes fully delegated from Maven to MRM: Maven is not anymore in control,
 but neither is MRM. Building becomes impossible at the moment Maven cannot reach MRM, or, and this is the more usual
 case, MRM **changes** intentionally or unintentionally. It may be migrated, upgraded or even just reconfigured. The sole
-group repository change may render builds inoperable. Also, it is very easy to create "overlap" (see [Local Repositories](../maven-local-repository)),
+group repository change may render builds inoperable. Also, it is very easy to create "overlap" (see [Local Repositories](/blog/2025/11/09/maven-local-repository/)),
 especially with "supergroups". In this very moment, with or without the awareness of this overlap (by MRM maintainers
 and MRM clients) your MRM, and thus, client builds became dependent on repository ordering of the group repository. Later,
 one build may fail and other may work if you make your `GR` as `(R1, R2, R3)` while the opposite happens only if you
@@ -86,6 +86,62 @@ distinguish what comes from where for real. This information is just taken away 
 This way all the possible helping hand of Maven is taken away as well, only to
 become "fully reliant" (and dependent) on MRM. Thus, creating things like SBOMs or some reporting may become a challenge. Usually people
 just give up, agree to lose all the Maven side (usually open source) solutions, and replace them with proprietary one.
+
+## How to MRM
+
+For start, for sure you use Central. You most probably [want to keep it first](/blog/2025/06/12/keep-central-first/) in your list (there are **rare** 
+circumstances where you may choose not to). Next, you should declare all your repository to represent "truth" (similar
+like is the case with Njord and regarding publishing repositories). Essentially, all your repositories aside of Central
+(is given) should be enlisted in your POM.
+
+Instead of this:
+
+```mermaid
+block-beta
+        columns 1
+          block:ID
+            A["supergroup"]
+          end
+          space
+          block:MRM
+            columns 1
+            MA["supergroup"]
+            block:MRMR
+              R1
+              R2
+              R3
+              R4
+            end
+          end
+          ID --> MRM
+```
+
+You want this:
+
+```mermaid
+block-beta
+        columns 1
+          block:ID
+            A["R1"]
+            B["R2"]
+            C["R3"]
+            D["R4"]
+          end
+          space
+          block:MRM
+              R1
+              R2
+              R3
+              R4
+          end
+          A --> R1
+          B --> R2
+          C --> R3
+          D --> R4
+```
+
+Next, you want environment specific settings, that will properly "redirect" the defined repositories telling "the truth",
+to those URLs your environment provide (ie. Central proxy).
 
 ## When to use groups?
 
