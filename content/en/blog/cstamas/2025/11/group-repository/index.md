@@ -100,20 +100,24 @@ Instead of this:
 block-beta
         columns 1
           block:ID
-            A["supergroup"]
+            A["POM supergroup"]
           end
           space
           block:MRM
             columns 1
-            MA["supergroup"]
+            MA["MRM supergroup"]
             block:MRMR
-              R1
-              R2
-              R3
-              R4
+              R1["MRM R1"]
+              R2["MRM R2"]
+              R3["MRM R3"]
+              R4["MRM R4"]
             end
           end
           ID --> MRM
+          MA --> R1
+          MA --> R2
+          MA --> R3
+          MA --> R4
 ```
 
 You want this:
@@ -122,17 +126,17 @@ You want this:
 block-beta
         columns 1
           block:ID
-            A["R1"]
-            B["R2"]
-            C["R3"]
-            D["R4"]
+            A["POM R1"]
+            B["POM R2"]
+            C["POM R3"]
+            D["POM R4"]
           end
           space
           block:MRM
-              R1
-              R2
-              R3
-              R4
+              R1["MRM R1"]
+              R2["MRM R2"]
+              R3["MRM R3"]
+              R4["MRM R4"]
           end
           A --> R1
           B --> R2
