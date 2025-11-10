@@ -129,6 +129,11 @@ split that happened after it): a `GAV` irrelevant of its `R` origin will land on
 build depends on `GAV` and use 10 remote repositories, Resolver has to lock `GAV` corresponding lock _without factoring
 in `R`_, only to wait for results of accessing 10 various repositories. And there will be some timeouts.
 
+The locking in fact targeted the second problem, as Resolver since 1.9.x uses atomic moves to "publish" artifacts, and
+in fact, if you skim over issues, that issues seems solved, while the _metadata_ (Maven and Resolver internal ones)
+were still prone to corruption, somewhat. But most of these were fixed around the end of Maven 3.9.x lane. Still, the
+multi-repository locking is there, and seems is biting people who uses locking.
+
 ## Solution
 
 Simplest solution is: get rid of **global** and **mutable** aspects.
