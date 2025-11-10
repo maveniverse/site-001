@@ -21,11 +21,12 @@ Njord configuration (usually not needed). The file full path is `~/.njord/njord.
 
 ## Njord properties
 
-Njord applies following "precedence" rule to calculate effective (configuration) properties:
-* Maven system properties
-* Njord system-wide properties (sourced from `~/.njord/njord.properties`)
-* Maven project properties (if present)
-* Maven user properties
+Njord merges properties from the following sources to calculate effective (configuration) properties:
+1. Maven system properties (from Java system properties and environment variables)
+2. Njord system-wide properties (from `~/.njord/njord.properties`)
+3. Server configuration, **only for some properties which are annotated below** (from effective server with the given server id in [`settings.xml`](https://maven.apache.org/settings.html)) 
+4. Maven project properties (if present)
+5. Maven user properties
 
 This implies, that if you want to define for example `njord.dryRun` property, you can achieve it in multiple ways: it is
 possible even to have it in (effective) Project properties set by some profile. But be warned: in this example case, the 
@@ -34,22 +35,45 @@ Basic Maven stuff.
 
 Of course, the recommended way to set this very property from example is Maven user property like `mvn -Dnjord.dryRun ...`.
 
+### Njord Server Configurations
+
+Some properties may be added to the Maven `[settings.xml]` like this
+
+```
+    <server>
+      <id>sonatype-central-portal</id>
+      <username>$TOKEN1</username>
+      <password>$TOKEN2</password>
+      <configuration>
+        <njord.publisher>sonatype-cp</njord.publisher>
+        <njord.releaseUrl>njord:template:release-sca</njord.releaseUrl>
+        <njord.snapshotUrl>njord:template:snapshot-sca</njord.snapshotUrl>
+      </configuration>
+    </server>
+```
+
+The server id used for the lookup is determined from `project.distributionManagement.repository.id` / `project.distributionManagement.snapshotRepository.id`. 
+
+In addition the used server can be redirected with
+`njord.serviceRedirect` (or if not set with `njord.authRedirect`, the latter only effective for credentials).
+The redirect properties (`njord.serviceRedirect` and `njord.authRedirect`) must be used exclusively inside the server configuration of `settings.xml` and lead to only leveraging the configuration/authentication from the server id contained in the redirect property.
+
 ### Global properties
 
 The following properties are applicable irrespective of the actual publisher being used.
 
-Name | Description | Default Value | Mandatory
---- | --- | --- | ---
-`njord.enabled` | Boolean flag determining whether Njord should be active at all. | `true` | `no`
-`njord.dryRun` | Boolean flag determining whether Njord should prevent actual publishing. | `false` | `no`
-`njord.autoPublish` | Boolean flag determining whether publication should happen automatically at the end of the session. | `false` | `no`
-`njord.autoDrop` | Boolean flag determining whether a local staging should be automatically dropped after publishing. | `true` | `no`
-`njord.prefix`| The prefix to use for local Njord stores/staging repositories. | Determined from `<top level project>.artifactId` | `no`
-`njord.publisher` | The publisher to use with this repository. Supported publisher ids listed in [Using it](../using-it/). | not set | `yes`
-`njord.releaseUrl` | The url identifying the local Njord store/staging repository for release artifacts. Must always start with `njord:`. For details on the URI format refer to [What is it](../what-is-it/). | not set | `yes`
-`njord.snapshotUrl` | The url identifying the local Njord store/staging repository for SNAPSHOT artifacts. Must always start with `njord:`. For details on the URI format refer to [What is it](../what-is-it/). | not set | `yes` (only if Njord should be used with Snapshots, one can continue to use `maven-deploy-plugin` for SNAPSHOTs)
-`njord.authRedirect` | Id of the server from which to retrieve the authentication settings from [Maven's `settings.xml`](https://maven.apache.org/settings.html). | determined from `project.distributionManagement.repository.id` / `project.distributionManagement.snapshotRepository.id`) | `no`
-`njord.serviceRedirect` | Id of the server from which to retrieve Njord properties from [Maven's `settings.xml`](https://maven.apache.org/settings.html). | determined from `project.distributionManagement.repository.id` / `project.distributionManagement.snapshotRepository.id`) | `no`
+Name | Description | Default Value | Mandatory | Optionally sourced from `settings.xml`
+--- | --- | --- | --- | ---
+`njord.enabled` | Boolean flag determining whether Njord should be active at all. | `true` | `no` | `no`
+`njord.dryRun` | Boolean flag determining whether Njord should prevent actual publishing. | `false` | `no` | `no`
+`njord.autoPublish` | Boolean flag determining whether publication should happen automatically at the end of the session. | `false` | `no` | `no`
+`njord.autoDrop` | Boolean flag determining whether a local staging should be automatically dropped after publishing. | `true` | `no` | `no`
+`njord.prefix`| The prefix to use for local Njord stores/staging repositories. | Determined from `<top level project>.artifactId` | `no` | `no`
+`njord.publisher` | The publisher to use with this repository. Supported publisher ids listed in [Using it](../using-it/). | not set | `yes` | `yes`
+`njord.releaseUrl` | The url identifying the local Njord store/staging repository for release artifacts. Must always start with `njord:`. For details on the URI format refer to [What is it](../what-is-it/). | Determined from `project.distributionManagement.repository.url` | `yes` | `yes`
+`njord.snapshotUrl` | The url identifying the local Njord store/staging repository for SNAPSHOT artifacts. Must always start with `njord:`. For details on the URI format refer to [What is it](../what-is-it/). | Determined from `project.distributionManagement.snapshotRepository.url` | `yes` (only if Njord should be used with Snapshots, one can continue to use `maven-deploy-plugin` for SNAPSHOTs) | `yes`
+`njord.authRedirect` | Id of the server from which to retrieve the credentials from [Maven's `settings.xml`](https://maven.apache.org/settings.html) instead of the one determined by `project.distributionManagement.repository.id` / `project.distributionManagement.snapshotRepository.id`. Only used if `njord.serviceRedirect` is not set. | - | `no` | `exclusively`
+`njord.serviceRedirect` | Id of the server from which to retrieve Njord properties from [Maven's `settings.xml`](https://maven.apache.org/settings.html) instead of the one determined by `project.distributionManagement.repository.id` / `project.distributionManagement.snapshotRepository.id`. | - | `no` | `exclusively`
 
 ### Publisher specific properties
 
@@ -63,6 +87,7 @@ Name | Alias | Description | Default Value
 --- | --- | --- | ---
 `njord.publisher.sonatype-cp.publishingType` | `njord.publishingType` | Either `automatic` or `user_managed`. See <https://central.sonatype.org/publish/publish-portal-api/#uploading-a-deployment-bundle> for details. | `user_managed`
 `njord.publisher.sonatype-cp.waitForStates` | `njord.waitForStates` | Boolean flag determining whether publishing should block until deployment reached the final state. Makes the publishing fail in case the final state is an error state. | `false` | `no`
+
 
 ## Project
 
