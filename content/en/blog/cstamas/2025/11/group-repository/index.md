@@ -149,7 +149,8 @@ to those URLs your environment provide (ie. Central proxy).
 
 ## When to use groups?
 
-Group repositories are still useful, but are not silver bullet. They are fine to be used to group repositories that are
+Group repositories are still useful, but are not silver bullet. And to remain with bullet analogy, they should be used sparingly. 
+They are fine to be used to group repositories that are
 logically bound together, like for example you can "stripe" your snapshots into `snapshots-2024`, `snapshots-2025` etc
 and you could group them into `snapshots` group repository. Some MRMs have this feature to allow deploy operations
 against group URLs, where the deployment ends up in first repository (presumably `snapshots-2025`). But cannot 
