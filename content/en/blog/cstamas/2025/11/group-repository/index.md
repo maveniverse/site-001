@@ -71,9 +71,9 @@ But it gets even worse: Maven build has "no idea" about remote, and remote has "
 goes round-robin on remote repositories" is false today: In trivial project [RRF Demo](https://github.com/cstamas/rrf-demo)
 just the use of RRF (and no other change) **improved the build duration from 2:01 minutes to 0:20 seconds**! Using groups 
 puts this "nobody has any idea" into cement, as no party can even improve things: Maven has no idea how to route smarter,
-while MRM has no idea what client really wants ("what is the build context"). In fact, what happens, is that the old
-mantra of "goes round-robin over remote repositories" is just shifted to "goes round-robin over group member
-repositories", it takes away any possibility to improve. There may be some optimizations in place in some MRMs, 
+while MRM has no idea what client really wants ("what is the build context"). In fact, what happens, is that the **old
+mantra of "Maven goes round-robin over remote repositories" is just shifted to "MRM goes round-robin over group member
+repositories"**, it takes away any possibility to improve. There may be some optimizations in place in some MRMs, 
 but MRM still has no clue about overall picture: all it can work off is just one HTTP request for given artifact.
 
 By forcing Maven to go over the group repository, clients also lose any extra information, like prefixes, indexes and
