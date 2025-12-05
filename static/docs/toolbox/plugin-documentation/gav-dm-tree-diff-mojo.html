@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>toolbox:gav-record – eu.maveniverse.maven.plugins:toolbox</title>
+    <title>toolbox:gav-dm-tree-diff – eu.maveniverse.maven.plugins:toolbox</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.0-M9.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -54,12 +54,12 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="toolbox.3Agav-record"></a>
-<h1>toolbox:gav-record</h1>
+<section><a id="toolbox.3Agav-dm-tree-diff"></a>
+<h1>toolbox:gav-dm-tree-diff</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:toolbox:0.14.7:gav-record</p>
+<p>eu.maveniverse.maven.plugins:toolbox:0.14.7:gav-dm-tree-diff</p>
 <p><strong>Description</strong>:</p>
-<p>Controls recording of resolved Maven Artifacts.</p>
+<p>Displays dependency management tree diff of Maven Artifact.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>The goal is thread-safe and supports parallel builds.</li></ul><section><a id="Required_Parameters"></a>
@@ -71,15 +71,20 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#start"><code>&lt;start&gt;</code></a></td>
-<td><code>boolean</code></td>
+<td><a href="#gav1"><code>&lt;gav1&gt;</code></a></td>
+<td><code>String</code></td>
 <td><code>-</code></td>
-<td>Stops recording if set, otherwise starts it.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>start</code></td></tr>
+<td>The GAV to show tree for.<br /><strong>User Property</strong>: <code>gav1</code></td></tr>
 <tr class="a">
-<td><a href="#stop"><code>&lt;stop&gt;</code></a></td>
+<td><a href="#gav2"><code>&lt;gav2&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>The GAV to show tree for.<br /><strong>User Property</strong>: <code>gav2</code></td></tr>
+<tr class="b">
+<td><a href="#verboseTree"><code>&lt;verboseTree&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
-<td>Stops recording if set, otherwise starts it.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>stop</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<td>Set it <code>true</code> for verbose tree.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>verboseTree</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -88,31 +93,42 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
+<td><a href="#boms"><code>&lt;boms&gt;</code></a></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Comma separated list of BOMs to apply.<br /><strong>User Property</strong>: <code>boms</code></td></tr>
+<tr class="a">
 <td><a href="#dryRun"><code>&lt;dryRun&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Option to run potentially destructive commands without performing any IO.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>dryRun</code></td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="#extraRepositories"><code>&lt;extraRepositories&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>Appends extra repositories to context.<br /><strong>User Property</strong>: <code>extraRepositories</code></td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="#failOnLogicalFailure"><code>&lt;failOnLogicalFailure&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Makes command fail on "logical" failure.<br /><strong>Default</strong>: <code>true</code><br /><strong>User Property</strong>: <code>failOnLogicalFailure</code></td></tr>
-<tr class="a">
+<tr class="b">
 <td><a href="#forceStdout"><code>&lt;forceStdout&gt;</code></a></td>
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>User Property</strong>: <code>forceStdout</code></td></tr>
-<tr class="b">
+<tr class="a">
 <td><a href="#verbosity"><code>&lt;verbosity&gt;</code></a></td>
 <td><code>Output$Verbosity</code></td>
 <td><code>-</code></td>
 <td>No description.<br /><strong>Default</strong>: <code>NORMAL</code><br /><strong>User Property</strong>: <code>verbosity</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
+<h2>Parameter Details</h2><a id="boms"></a><section><a id="a.3Cboms.3E"></a>
+<h3>&lt;boms&gt;</h3>
+<div>Comma separated list of BOMs to apply.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>boms</code></li></ul><hr /></section><a id="dryRun"></a><section><a id="a.3CdryRun.3E"></a>
 <h3>&lt;dryRun&gt;</h3>
 <div>Option to run potentially destructive commands without performing any IO.</div>
 <ul>
@@ -138,20 +154,25 @@
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="start"></a><section><a id="a.3Cstart.3E"></a>
-<h3>&lt;start&gt;</h3>
-<div>Stops recording if set, otherwise starts it.</div>
+<li><strong>User Property</strong>: <code>forceStdout</code></li></ul><hr /></section><a id="gav1"></a><section><a id="a.3Cgav1.3E"></a>
+<h3>&lt;gav1&gt;</h3>
+<div>The GAV to show tree for.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>gav1</code></li></ul><hr /></section><a id="gav2"></a><section><a id="a.3Cgav2.3E"></a>
+<h3>&lt;gav2&gt;</h3>
+<div>The GAV to show tree for.</div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>gav2</code></li></ul><hr /></section><a id="verboseTree"></a><section><a id="a.3CverboseTree.3E"></a>
+<h3>&lt;verboseTree&gt;</h3>
+<div>Set it <code>true</code> for verbose tree.</div>
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>start</code></li>
-<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="stop"></a><section><a id="a.3Cstop.3E"></a>
-<h3>&lt;stop&gt;</h3>
-<div>Stops recording if set, otherwise starts it.</div>
-<ul>
-<li><strong>Type</strong>: <code>boolean</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>stop</code></li>
+<li><strong>User Property</strong>: <code>verboseTree</code></li>
 <li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="verbosity"></a><section><a id="a.3Cverbosity.3E"></a>
 <h3>&lt;verbosity&gt;</h3>
 <div>No description.</div>
