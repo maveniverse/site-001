@@ -68,7 +68,7 @@ clearly deprecated since Maven 3 initial release, and you should just not use ev
 
 The problem with this claim, is that even if your project does not use version ranges, you may still end up using them, via
 some transitive dependency. And in that case, user only option is to either phone vendor and politely ask them to stop 
-using ranges, or just switch vendor. Problem here, is that aside of these two, user have no third option. The 
+using ranges, switch vendor or manage it. Problem here, is that aside of these, user have no third option. The 
 "do not use ranges" mantra (dogma?) goes so far, that there is even an enforcer rule banning "dynamic versions" 
 (called `badDynamicVersions`). It may help one to "manage" range version, but still, they may fall in out of the blue.
 And this represents more work for user, to manage things he should not manage.
