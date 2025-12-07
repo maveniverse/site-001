@@ -123,10 +123,10 @@ of the box), is **trusted checksums** feature.
 Trusted checksums, in contrary to provided ones, are not tied to transport, they are available in any scope. Moreover, 
 with adapters in place, every trusted checksum becomes immediately a provided checksums as well. 
 Trusted checksums are used as:
-* in transport, as "provided" kind (since they are adapted to provided kind of checksums)
-* in resolver post processor, they are used for verification of each resolved artifact
+* in transport, as "provided" kind (since they are automatically adapted to provided kind of checksums)
+* in resolver post processor, for verification of each resolved artifact
 
-And, the circle closes here. As can be seen, **Maven 3.9 allows one to provide even cryptographic checksums (not even 
+And, the circle closes here. As can be seen, **Maven 3.9 allows one to provide even cryptographic checksums (not  
 present in remote) ahead of time as trusted checksums, and those checksums will be used to verify artifacts always**,
 not only if transport is involved. Naturally, all this will have some overhead to your build, but its nuance diminishes 
 when you consider what you get with it. Also, one can do these verifiable builds on CI only, and not literally on 
@@ -152,18 +152,19 @@ For a trusted checksum demo, see here: https://github.com/cstamas/tc-demo
 ## But what about version ranges?
 
 Well, this is where I disagree with "usual response". Maven supports ranges, and while they were really problematic in
-3 era, in Maven 4+ they some huge improvements. 
+Maven 2 and 3 era, in Maven 4+ they got several huge improvements. 
 To me, current situation is like buying a car, that has a trunk, but the dealer advises you "It's better to not use trunk
 to avoid any problems. In fact, if trunk is used, the car warranty is breached, you are on your own". Wat?
 
 Have to note, that the improvements present right now in Maven 4 still do not solve lack of lockfile (collection reproducibility), 
-but that goal is planned too.
+but that goal is planned too, along with many others.
 
-Right now, with Maven 3.9+ what one can do is to enforce (see `aether.artifactResolver.postProcessor.trustedChecksums.failIfMissing` 
-[configuration property](https://maven.apache.org/resolver-archives/resolver-1.9.24/configuration.html)) that you provide 
-all required checksums for the build. As if anything changes, for example Maven "wanders off" over some range, as new
+Right now, with Maven 3.9+ what one can do is to enforce that you provide
+all required checksums for the build (see `aether.artifactResolver.postProcessor.trustedChecksums.failIfMissing` 
+[configuration property](https://maven.apache.org/resolver-archives/resolver-1.9.24/configuration.html)). As if anything changes, 
+for example Maven "wanders off" over some range, as new
 version pops up, build will fail and
 will force you to look into the reasons of failure. And if this happens, two outcomes are possible: your inspection
 deems new version (that is picked into range) as "okay", and you update the trusted checksums index, and life goes on. Or,
 you can just manage it back to "proper" version. Trust is re-established, but reproducibility is lost. For reproducibility,
-the only solution today with Maven 3.9 is managing the dependency.
+the only solution today with Maven 3.9 is always managing the dependency that uses range, which is an unwanted extra work for you.
