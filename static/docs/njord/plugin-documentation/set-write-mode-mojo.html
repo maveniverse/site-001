@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>njord:redeploy – Njord Maven Plugin</title>
+    <title>njord:set-write-mode – Njord Maven Plugin</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.1.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -30,7 +30,7 @@
       <li><a href="../..">Docs</a><span class="divider">/</span></li>
       <li><a href="..">Njord (Njörðr)</a><span class="divider">/</span></li>
       <li><a href="index.html">njord-maven-plugin</a><span class="divider">/</span></li>
-    <li class="active">njord:redeploy</li>
+    <li class="active">njord:set-write-mode</li>
         <li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 2025-12-29</li>
           <li id="projectVersion" class="pull-right">Version: 0.9.1-SNAPSHOT</li>
           </ul>
@@ -49,7 +49,7 @@
     <li><a href="drop-mojo.html">njord:drop</a></li>
     <li><a href="drop-all-mojo.html">njord:drop-all</a></li>
     <li><a href="compare-mojo.html">njord:compare</a></li>
-    <li class="active"><a>njord:redeploy</a></li>
+    <li><a href="redeploy-mojo.html">njord:redeploy</a></li>
     <li><a><span class="icon-chevron-down"></span>Advanced</a>
      <ul class="nav nav-list">
       <li><a href="check-artifacts-availability-mojo.html">njord:check-artifacts-availability</a></li>
@@ -80,12 +80,12 @@
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="njord.3Aredeploy"></a>
-<h1>njord:redeploy</h1>
+<section><a id="njord.3Aset-write-mode"></a>
+<h1>njord:set-write-mode</h1>
 <p><strong>Full name</strong>:</p>
-<p>eu.maveniverse.maven.plugins:njord:0.9.1-SNAPSHOT:redeploy</p>
+<p>eu.maveniverse.maven.plugins:njord:0.9.1-SNAPSHOT:set-write-mode</p>
 <p><strong>Description</strong>:</p>
-<p>Redeploys <code>from</code> store onto <code>to</code> store, eventually dropping <code>from</code> store.</p>
+<p>Sets store write mode (by default to read-only).</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li>Executes as an aggregator goal.</li>
@@ -98,20 +98,20 @@
 <th>Since</th>
 <th>Description</th></tr>
 <tr class="b">
-<td><a href="#drop"><code>&lt;drop&gt;</code></a></td>
-<td><code>boolean</code></td>
+<td><a href="#store"><code>&lt;store&gt;</code></a></td>
+<td><code>String</code></td>
 <td><code>-</code></td>
-<td>Whether source store should be dropped after successful operation.<br /><strong>Default</strong>: <code>false</code><br /><strong>User Property</strong>: <code>njord.drop</code></td></tr>
+<td>The name of the store to set read-only.<br /><strong>User Property</strong>: <code>njord.store</code></td></tr>
 <tr class="a">
-<td><a href="#from"><code>&lt;from&gt;</code></a></td>
+<td><a href="#writeMode"><code>&lt;writeMode&gt;</code></a></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
-<td>The name of the source store.<br /><strong>User Property</strong>: <code>njord.from</code></td></tr>
-<tr class="b">
-<td><a href="#to"><code>&lt;to&gt;</code></a></td>
-<td><code>String</code></td>
-<td><code>-</code></td>
-<td>The name of the target store.<br /><strong>User Property</strong>: <code>njord.to</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
+<td>The write mode of the store to apply. Accepted values are: 
+<ul>
+ <li><code>r</code>, <code>ro</code>, <code>readonly</code>, <code>read-only</code>, <code>read_only</code> (case-insensitive for <code>eu.maveniverse.maven.njord.shared.store.WriteMode.READ_ONLY</code><!-- no javadoc sites associated -->)</li>
+ <li><code>w1</code>, <code>wo</code>, <code>writeonce</code>, <code>write-once</code>, <code>write_once</code> (case-insensitive for <code>eu.maveniverse.maven.njord.shared.store.WriteMode.WRITE_ONCE</code><!-- no javadoc sites associated -->)</li>
+ <li><code>w</code>, <code>wm</code>, <code>writemany</code>, <code>write-many</code>, <code>write_many</code> (case-insensitive for <code>eu.maveniverse.maven.njord.shared.store.WriteMode.WRITE_MANY</code><!-- no javadoc sites associated -->)</li>
+</ul><br /><strong>See also:</strong> eu.maveniverse.maven.njord.shared.store.WriteMode<!-- no javadoc sites associated --><br /><strong>Default</strong>: <code>r</code><br /><strong>User Property</strong>: <code>njord.writeMode</code></td></tr></table></section><section><a id="Optional_Parameters"></a>
 <h2>Optional Parameters</h2>
 <table class="table table-striped">
 <tr class="a">
@@ -124,32 +124,31 @@
 <td><code>boolean</code></td>
 <td><code>-</code></td>
 <td>Plugin configuration to skip the Mojo. The Mojo can also be skipped by user property <code>$mojoName.skip</code> or <code>$prefix.$mojoName.skip</code> as well (check specific Mojo).<br /><strong>Default</strong>: <code>false</code></td></tr></table></section><section><a id="Parameter_Details"></a>
-<h2>Parameter Details</h2><a id="drop"></a><section><a id="a.3Cdrop.3E"></a>
-<h3>&lt;drop&gt;</h3>
-<div>Whether source store should be dropped after successful operation.</div>
-<ul>
-<li><strong>Type</strong>: <code>boolean</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>njord.drop</code></li>
-<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="from"></a><section><a id="a.3Cfrom.3E"></a>
-<h3>&lt;from&gt;</h3>
-<div>The name of the source store.</div>
-<ul>
-<li><strong>Type</strong>: <code>java.lang.String</code></li>
-<li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>njord.from</code></li></ul><hr /></section><a id="skip"></a><section><a id="a.3Cskip.3E"></a>
+<h2>Parameter Details</h2><a id="skip"></a><section><a id="a.3Cskip.3E"></a>
 <h3>&lt;skip&gt;</h3>
 <div>Plugin configuration to skip the Mojo. The Mojo can also be skipped by user property <code>$mojoName.skip</code> or <code>$prefix.$mojoName.skip</code> as well (check specific Mojo).</div>
 <ul>
 <li><strong>Type</strong>: <code>boolean</code></li>
 <li><strong>Required</strong>: <code>No</code></li>
-<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="to"></a><section><a id="a.3Cto.3E"></a>
-<h3>&lt;to&gt;</h3>
-<div>The name of the target store.</div>
+<li><strong>Default</strong>: <code>false</code></li></ul><hr /></section><a id="store"></a><section><a id="a.3Cstore.3E"></a>
+<h3>&lt;store&gt;</h3>
+<div>The name of the store to set read-only.</div>
 <ul>
 <li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
-<li><strong>User Property</strong>: <code>njord.to</code></li></ul></section></section></section>        </main>
+<li><strong>User Property</strong>: <code>njord.store</code></li></ul><hr /></section><a id="writeMode"></a><section><a id="a.3CwriteMode.3E"></a>
+<h3>&lt;writeMode&gt;</h3>
+<div>The write mode of the store to apply. Accepted values are: 
+<ul>
+ <li><code>r</code>, <code>ro</code>, <code>readonly</code>, <code>read-only</code>, <code>read_only</code> (case-insensitive for <code>eu.maveniverse.maven.njord.shared.store.WriteMode.READ_ONLY</code><!-- no javadoc sites associated -->)</li>
+ <li><code>w1</code>, <code>wo</code>, <code>writeonce</code>, <code>write-once</code>, <code>write_once</code> (case-insensitive for <code>eu.maveniverse.maven.njord.shared.store.WriteMode.WRITE_ONCE</code><!-- no javadoc sites associated -->)</li>
+ <li><code>w</code>, <code>wm</code>, <code>writemany</code>, <code>write-many</code>, <code>write_many</code> (case-insensitive for <code>eu.maveniverse.maven.njord.shared.store.WriteMode.WRITE_MANY</code><!-- no javadoc sites associated -->)</li>
+</ul><br /><strong>See also:</strong> eu.maveniverse.maven.njord.shared.store.WriteMode<!-- no javadoc sites associated --></div>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>Yes</code></li>
+<li><strong>User Property</strong>: <code>njord.writeMode</code></li>
+<li><strong>Default</strong>: <code>r</code></li></ul></section></section></section>        </main>
       </div>
     </div>
     <hr/>
