@@ -29,3 +29,5 @@ silently skipped. Your friend is `-Dsisu.debug` that will tell you about all the
 Latest Sisu version 0.9.0.M4 followed Guice and ASM is not shaded anymore, is "demoted" to a plain dependency of Sisu.
 
 Sadly, older versions like Maven 3.8.x are stuck on max Java 13 or so.
+
+One reason more, why follow patch releases of Maven: they have not only bugfixes, but also ASM updates...
