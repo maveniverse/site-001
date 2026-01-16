@@ -57,7 +57,7 @@ HttpClient the response was 404 Not Found. On "bad" outcome, on Java 17.0.17, th
 
 And what this resulted in? Nothing big, right? HTTP 404 or HTTP 500, does it matter?
 
-Well, check out Resolver [`ResolutionErrorPolicy`](maven-resolver-api/src/main/java/org/eclipse/aether/resolution/ResolutionErrorPolicy.java) class.
+Well, check out Resolver [`ResolutionErrorPolicy`](https://github.com/apache/maven-resolver/blob/2340c676f3aaf920ea7bbb5120b0ade4829a737c/maven-resolver-api/src/main/java/org/eclipse/aether/resolution/ResolutionErrorPolicy.java) class.
 It is obvious that Resolver _caches errors_ but also distinguish (sparingly) two types of them: "not found" types and "other".
 Also, there is a Maven 4 CLI command:
 ```
