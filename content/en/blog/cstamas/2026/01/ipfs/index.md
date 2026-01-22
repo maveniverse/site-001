@@ -134,4 +134,14 @@ As mentioned above, in repositories published with Maven @ IPFS, the _leaves wil
 CID remains unchanged. Next level would be _IPFS global caching_, for example with Mimir (that already offers similar
 service on LAN using JGroups). Here, some translation needs to be done, that begins with GAV and ends with CID.
 
-Once something in place, will report back! Cheers and have fun!
+## Final thoughts
+
+I am not planning to pull back Maven publishing back to "stone age" (the 2000s, with many little repositories coming and 
+going), but IPFS definitely has merit in several use cases. Some of them, just without any ordering are:
+* publishing snapshots across (probably totally disconnected) CI jobs
+* any ad-hoc kind of publishing without infrastructure
+* small scale forges
+
+But I personally think that (global) caching w/ Mimir may be very interesting.
+
+Once something more in place, will report back! Cheers and have fun!
