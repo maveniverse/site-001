@@ -23,6 +23,8 @@ to free-ride on some (centralized) infrastructure that may be a public good, or 
 This entry explains the simplest use case: "small scale publishing". Other use cases are "global caching" and will
 work them out later.
 
+Related previous [blog article is here](/blog/2026/01/22/maven-@-ipfs-i/).
+
 {{% /pageinfo %}}
 
 ## Let's dream together!
