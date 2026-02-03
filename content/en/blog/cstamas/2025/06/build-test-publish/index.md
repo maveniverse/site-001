@@ -8,7 +8,7 @@ categories:
   - Blog
 tags:
   - CI
-  - publishing
+  - publish
 projects:
   - Maven
 ---
