@@ -1,5 +1,5 @@
 ---
-title: "Maven Local Repository"
+title: "Maven Local Repository (II)"
 date: 2025-11-09T12:34:23+01:00
 draft: false
 authors: cstamas
@@ -7,7 +7,7 @@ author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:
-  - maven
+  - LRM
 projects:
   - Maven
 ---

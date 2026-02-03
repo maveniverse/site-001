@@ -7,7 +7,7 @@ author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:
-  - maven
+  - LRM
 projects:
   - Maven
 ---

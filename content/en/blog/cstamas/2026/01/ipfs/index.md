@@ -7,8 +7,9 @@ author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
 categories:
   - Blog
 tags:
-  - maven
   - ipfs
+  - cache
+  - publish
 projects:
   - Maven
 ---

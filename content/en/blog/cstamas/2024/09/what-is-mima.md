@@ -8,6 +8,7 @@ categories:
   - Blog
 tags:
   - resolver
+  - mima
 projects:
   - MIMA
 ---
