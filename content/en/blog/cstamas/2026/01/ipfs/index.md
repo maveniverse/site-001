@@ -1,5 +1,5 @@
 ---
-title: "Maven @ IPFS"
+title: "Maven @ IPFS (I)"
 date: 2026-01-22T10:55:53+01:00
 draft: false
 authors: cstamas

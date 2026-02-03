@@ -1,6 +1,6 @@
 ---
-title: "Maven @ IPFS"
-date: 2026-01-22T10:55:53+01:00
+title: "Maven @ IPFS (II)"
+date: 2026-02-03T11:55:53+01:00
 draft: false
 authors: cstamas
 author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))
