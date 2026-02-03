@@ -165,7 +165,26 @@ at session beginning. This is what happens behind the curtain:
 * the CID is being (lazy) copied to local node MFS (optionally pinned)
 * IPFS transport in Maven consumes from MFS as usual
 
-## Conclusion
+## Important notes
+
+There is an interesting feature of IPFS, given it is content addressable but also supports IPLD Merkle Tree connected
+structures: one file (artifact) is reachable via various means. Below are various paths that lead to **same POM**:
+* [/ipns/ipfs.maveniverse.eu/releases/eu/maveniverse/maven/ipfs/core/0.2.3/core-0.2.3.pom](http://ipfs.io/ipns/ipfs.maveniverse.eu/releases/eu/maveniverse/maven/ipfs/core/0.2.3/core-0.2.3.pom)
+* [/ipfs/QmbaoenBMNAJfUx6aR7otYEp4SGxU8CCFXUFxQUfPLHzoF/releases/eu/maveniverse/maven/ipfs/core/0.2.3/core-0.2.3.pom](https://ipfs.io/ipfs/QmbaoenBMNAJfUx6aR7otYEp4SGxU8CCFXUFxQUfPLHzoF/releases/eu/maveniverse/maven/ipfs/core/0.2.3/core-0.2.3.pom)
+* [/ipfs/bafkreifwirm224pokvzl5nngltyfimt5vudhbc4hozpngyiue2esat62ku](https://ipfs.io/ipfs/bafkreifwirm224pokvzl5nngltyfimt5vudhbc4hozpngyiue2esat62ku)
+
+First is fully "symbolic" and user-friendly: contains the namespace and trailing path (fx as Central behaves with HTTP).
+Second is similar, but there the CID root is used appended with same trailing path. And third is CID of the POM itself.
+All these paths can be fed into IPFS node or, as in examples above, to public HTTP Gateways to get the content.
+
+The consequence of this above: IPFS hosted repositories may be consumed via plain HTTP protocol as well! All you need
+an IPFS Gateway (every IPFS node provide it, while public Gateways are also available). In this case, the HTTP repository
+root is `http://ipfs.io/ipns/ipfs.maveniverse.eu/releases`. 
+
+**Important note: Do NOT abuse public gateways, is much better to have your own as it is really trivial to get one:
+just install IPFS node locally**.
+
+## About Maveniverse@IPFS suite
 
 The extension introduces three set of components:
 * IPFS core components (that talk to IPFS node)
@@ -193,6 +212,8 @@ k51xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx self
 k51qzi5uqu5dji6oq9whgjw8c8mkmv45a2ros93ncnluae37i2ayef5cscdoqu ipfs.maveniverse.eu 
 $ 
 ```
+
+## Conclusion
 
 This, as already said, is the simplest use case, usable for small scale publishing, as MFS is being involved in the process.
 But, have to emphasize, that artifact CIDs produced in this way, will become usable in other use cases, like 
