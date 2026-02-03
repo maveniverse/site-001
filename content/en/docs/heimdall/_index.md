@@ -1,8 +1,9 @@
 ---
 title: Heimdall (Heimdallr)
 description: Filtering at next level!
-categories: [Heimdall, Documentation]
-tags: [heimdall, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Heimdall ]
 weight: 90
 ---
 

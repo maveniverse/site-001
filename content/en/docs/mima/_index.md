@@ -1,8 +1,9 @@
 ---
 title: MIMA
 description: Use Resolver everywhere!
-categories: [MIMA, Documentation]
-tags: [mima, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ MIMA ]
 weight: 10
 ---
 

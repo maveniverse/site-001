@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: Embrace ZIPs
-categories: [Zippy, Documentation]
-tags: [zippy, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Zippy ]
 weight: 10
 ---
 

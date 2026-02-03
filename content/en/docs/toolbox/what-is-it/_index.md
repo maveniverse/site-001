@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: A showcase of MIMA + Mojo + Picocli that grew
-categories: [Toolbox, Documentation]
-tags: [toolbox, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Toolbox ]
 weight: 10
 ---
 

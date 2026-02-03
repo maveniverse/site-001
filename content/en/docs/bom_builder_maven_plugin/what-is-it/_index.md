@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: A tool for building BOMs
-categories: [BomBuilder, Documentation]
-tags: [bom-builder, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ BomBuilder ]
 weight: 10
 ---
 

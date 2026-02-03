@@ -1,8 +1,9 @@
 ---
 title: BOM Builder Maven Plugin
 description: A tool for generating BOMs
-categories: [BomBuilder, Documentation]
-tags: [bom-builder, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ BomBuilder ]
 weight: 40
 ---
 

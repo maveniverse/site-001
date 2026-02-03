@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: Where it all started
-categories: [MIMA, Documentation]
-tags: [mima, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ MIMA ]
 weight: 10
 ---
 

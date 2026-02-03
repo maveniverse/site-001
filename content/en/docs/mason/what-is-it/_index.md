@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: If you dislike XML
-categories: [Mason, Documentation]
-tags: [mason, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Mason ]
 weight: 10
 ---
 

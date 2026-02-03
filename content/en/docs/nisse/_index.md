@@ -1,8 +1,9 @@
 ---
 title: Nisse
 description: Inject properties to your build
-categories: [Nisse, Documentation]
-tags: [nisse, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Nisse ]
 weight: 30
 ---
 

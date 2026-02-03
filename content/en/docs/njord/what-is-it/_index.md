@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: Publish where you want (and more)!
-categories: [Njord, Documentation]
-tags: [njord, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Njord ]
 weight: 10
 ---
 

@@ -1,8 +1,9 @@
 ---
 title: Why would I use it?
 description: The Maven workstation and LAN cache
-categories: [Mimir, Documentation]
-tags: [mimir, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Mimir ]
 weight: 20
 ---
 

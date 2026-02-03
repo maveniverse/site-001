@@ -1,8 +1,9 @@
 ---
 title: Zippy
 description: Small extension for ZIP files
-categories: [Zippy, Documentation]
-tags: [zippy, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Zippy ]
 weight: 80
 ---
 

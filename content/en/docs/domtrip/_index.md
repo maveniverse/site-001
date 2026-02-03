@@ -1,8 +1,9 @@
 ---
 title: DOMTrip
 description: The lossless XML editing library for Java
-categories: [DOMTrip, Documentation]
-tags: [domtrip, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ DOMTrip ]
 weight: 100
 ---
 

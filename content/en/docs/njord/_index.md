@@ -1,8 +1,9 @@
 ---
 title: Njord (Njörðr)
 description: Local staging, Artifact publishing and more!
-categories: [Njord, Documentation]
-tags: [njord, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Njord ]
 weight: 70
 ---
 

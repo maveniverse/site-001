@@ -1,8 +1,9 @@
 ---
 title: Migrating projects
 description: Using Njord!
-categories: [Njord, Documentation]
-tags: [njord, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Njord ]
 weight: 40
 ---
 

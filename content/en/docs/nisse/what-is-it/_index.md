@@ -1,8 +1,9 @@
 ---
 title: What is it?
 description: A small helper for big tasks
-categories: [Nisse, Documentation]
-tags: [nisse, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Nisse ]
 weight: 10
 ---
 

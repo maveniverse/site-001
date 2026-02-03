@@ -1,8 +1,9 @@
 ---
 title: Toolbox
 description: Swiss knife in your pocket
-categories: [Toolbox, Documentation]
-tags: [toolbox, docs]
+categories: [Documentation]
+tags: [docs]
+projects: [ Toolbox ]
 weight: 20
 ---
 
