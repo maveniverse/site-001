@@ -172,7 +172,7 @@ The extension introduces three set of components:
 * Maven Lifecycle Participant, that triggers publishing, if needed
 * IPFS transport for Resolver
 
-The transport uses URI of format `ipfs:/$namespace[/suffix]`. It is expected that `namespace` is resolvable with IPFS
+The transport uses URI of format `ipfs:/namespace[/suffix]`. It is expected that `namespace` is resolvable with IPFS
 node, so it can be:
 * DNSLinked domain (similar trust model as in Central)
 * IPNS hash, like `k51qzi5uqu5dji6oq9whgjw8c8mkmv45a2ros93ncnluae37i2ayef5cscdoqu` (in this case user would want to make sure that IPNS record comes from one he thinks should come)
@@ -180,6 +180,19 @@ node, so it can be:
 
 The `suffix` is optional, and is really like a path, that may point inside the Merkle Tree, like in example of Maveniverse
 IPFS where root contains multiple repositories.
+
+For publishers, simplest is to create named private key **have same name as namespace**, as that makes administration
+simplest. In case of having multiple publishers for one namespace (like we do in Maveniverse), it is enough to share
+private key via same sane (and secure) means, and whoever has private key can publish to namespace. If private key
+is compromised (or just as part of maintenance), old private key can be tossed and new generated. This step requires
+DNS Link update (as IPNS record changed due new private key). And that's it.
+
+```
+$ ipfs key list -l
+k51xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx self
+k51qzi5uqu5dji6oq9whgjw8c8mkmv45a2ros93ncnluae37i2ayef5cscdoqu ipfs.maveniverse.eu 
+$ 
+```
 
 This, as already said, is the simplest use case, usable for small scale publishing, as MFS is being involved in the process.
 But, have to emphasize, that artifact CIDs produced in this way, will become usable in other use cases, like 
