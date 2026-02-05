@@ -56,10 +56,10 @@ In fact, it was DecentXML, that was closest to our expectations, but that projec
 DOMTrip is a Java 17 library that:
 * has no dependencies
 * does full and lossless round-trip editing
-* supports general XML, with extra support for Maven files like POM, Settings, Toolchains and Extensions XML files
+* supports general (laxed) XML, with extra support for Maven files like POM, Settings, Toolchains and Extensions XML files
 * offers "low level" and "high level" operations
 
-DOMTrip is being used you run `mvn toolbox:versions -Dapply` (to apply version upgrades to POM) for example. It will
+For example, DOMTrip is being used when you run `mvn toolbox:versions -Dapply` (to apply version upgrades to POM) for example. It will
 "edit" your POM, but you still need to review and eventually commit the changes.
 
 Just to give some perspective about "high level" operations, let me give you an example: assume you know that POM
