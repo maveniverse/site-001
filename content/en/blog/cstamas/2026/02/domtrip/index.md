@@ -46,7 +46,7 @@ Some of these are:
 But none of these suited to us. Our goals were:
 * do not depend on any Maven internal nor legacy stuff (like Model or Xpp3Dom)
 * ideally, to not have any dependency, or just minimal ones
-* to 100% support lossless round-tripping and editing
+* to 100% support lossless round-tripping and editing (think not only formatting, but comments and CDATA sections too)
 * to support most of Maven related files (hence, XML, with some "extras" for Maven specific stuff)
 
 In fact, it was DecentXML, that was closest to our expectations, but that project was abandoned. Hence, we came up with DOMTrip:
