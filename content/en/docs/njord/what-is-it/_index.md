@@ -98,3 +98,20 @@ Differences are:
 Notes:
 * Resolver 2.x `file` transport supports `bundle:" protocol, see [here](https://github.com/apache/maven-resolver/tree/master/maven-resolver-transport-file).
 * Mimir supports "overlay" functionality, where it is able to overlay ZIP content over contents of remote repository caches, see this [Mimir IT](https://github.com/maveniverse/mimir/tree/main/it/extension-its/src/it/overlay).
+
+## The `njord` attachments
+
+Njord is able to add "attachments" to bundles. Those are opaque file-like contents added to stores.
+Store attachments are handled with following Mojos:
+
+* `attachment-from-tile` adds store attachment from file user points at
+* `attachment-to-file` writes out store attachment to the file user points at
+* `attachment-delete` deletes a store attachment
+* `attachment-list` lists all store attachments
+
+Attachments are meant to carry some "orthogonal" information to store (artifacts), like some metadata collected
+during the build and similar. Attachments may be handled by publisher, if it wants to. Currently no publisher
+handles attachments.
+
+Hence, attachments are simply lost, for example when using `sonatype-cp` publisher, or when exporting
+store as "bundle". It is only the "transportable bundle" that carries over attachments.
