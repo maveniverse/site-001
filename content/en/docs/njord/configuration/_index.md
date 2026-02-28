@@ -10,8 +10,8 @@ weight: 30
 Njord uses existing Maven infrastructure to get the configuration, still a bit more explanation is needed for some bits.
 
 For start, user interacts with Njord via `njord:` URI using vanilla Maven plugins like `maven-deploy-plugin` is, and
-also using `njord-maven-plugin` goals. All the mojos **do not require projects** to be run (and are also aggregator
-Mojos). Still, IF goals are invoked with Maven Project present (ie in a checkout where POM is present, and Maven loads
+also using [`njord-maven-plugin` goals](../plugin-documentation/index.html). All the goals **do not require projects** to be run (and are also aggregator
+goals). Still, IF goals are invoked with Maven Project present (ie in a checkout where `pom.xml` is present, and Maven loads
 it) the Project will be used as "extra contextual source" for some operations.
 
 ## Njord basedir
@@ -31,7 +31,7 @@ Njord merges properties from the following sources to calculate effective (confi
 
 This implies, that if you want to define for example `njord.dryRun` property, you can achieve it in multiple ways: it is
 possible even to have it in (effective) Project properties set by some profile. But be warned: in this example case, the 
-property will be defined ONLY if you invoke Njord Mojos in this very same project using very same active profiles!
+property will be defined ONLY if you invoke Njord goals in this very same project using very same active profiles!
 Basic Maven stuff.
 
 Of course, the recommended way to set this very property from example is Maven user property like `mvn -Dnjord.dryRun ...`.

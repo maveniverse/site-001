@@ -20,7 +20,7 @@ hardlinks in Maven local repository pointing to Mímir cache entries.  This impl
 
 * you have separated **pure cache**, unlike existing local repository, that is a mixed bag on your disk.
 * because of hardlinks, ideally **you have only one copy of any cached artifact** on your disk (as opposed to as many, as many local repositories you use).
-* is **more compatible** than "split local repository" as it is in reality "invisible" for Maven and Maven Mojos.
+* is **more compatible** than "split local repository" as it is in reality "invisible" for Maven and Maven goals.
 
 Also some consequences are:
 

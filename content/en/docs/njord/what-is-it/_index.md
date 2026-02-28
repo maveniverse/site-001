@@ -57,8 +57,8 @@ using URL `njord:snapshot` you are ready to use Njord. But, Njord is not intrusi
 **doing nothing** in your project and just deploying with `-DaltDeploymentRepository=id::njord:` as well.
 
 Hints:
-* use `mvn njord:list` to list existing stores, see [list Mojo](../plugin-documentation/list-mojo.html)
-* use `mvn njord:list-templates` to list existing templates, see  [list-templates Mojo](../plugin-documentation/list-templates-mojo.html)
+* use `mvn njord:list` to list existing stores, see [list goal](../plugin-documentation/list-mojo.html)
+* use `mvn njord:list-templates` to list existing templates, see  [list-templates goal](../plugin-documentation/list-templates-mojo.html)
 
 ## The `njord` base directory
 
@@ -68,19 +68,19 @@ configuration and also staged contents are.
 This directory is not bound to any project, hence, you are free to go to one project, stage it locally, then
 go over another project, and stage that one as well, and so on.
 
-Moreover, many Njord plugin mojos does not require project, hence you can operate on staged contents outside
+Moreover, many Njord plugin goals does not require project, hence you can operate on staged contents outside
 of any project. Projects merely serve as "configuration source", but you can always publish a staged store
-from outside it, by properly configuring `publish` mojo.
+from outside it, by properly configuring `publish` goal.
 
 ## The `njord` bundles
 
 Njord by default produces two kinds of "bundles". They are very similar, as essentially both are ZIP files
 with contents being artifacts laid down on Maven layout. But, there are subtle differences between the two:
 
-The Mojo `write-bundle` will write out **"bundle"** file, that is a ZIP file and it will contain only the artifacts
+The [goal `write-bundle`](../plugin-documentation/write-bundle-mojo.html) will write out **"bundle"** file, that is a ZIP file and it will contain only the artifacts
 laid down on Maven layout. This is the same file format used for publishing for example on Maven Central.
 
-The Mojo `export` will write out **"transportable bundle"** (NTB, "Njord Transportable Bundle"), that is very similar 
+The [goal `export`](../plugin-documentation/export-mojo.html) will write out **"transportable bundle"** (NTB, "Njord Transportable Bundle"), that is very similar 
 to "bundle", but contains also Njord metadata, and can be imported by Njord too. This means you can carry staged content from
 one workstation to another workstation, like it was locally staged on another workstation. Export and Import combined
 with "install" publisher (that installs into local repository) can be also used in use cases like preparing some 
@@ -102,7 +102,7 @@ Notes:
 ## The `njord` attachments
 
 Njord is able to add "attachments" to bundles. Those are opaque file-like contents added to stores.
-Store attachments are handled with following Mojos:
+Store attachments are handled with following goals:
 
 * `attachment-from-tile` adds store attachment from file user points at
 * `attachment-to-file` writes out store attachment to the file user points at
