@@ -90,6 +90,8 @@ on your namespace, and you wish directly to deploy to it, not locally stage them
   </servers>
 ```
 
+## Njord publishers
+
 Supported publishers are:
 
 | Publisher (publisher ID)                                    | server.id               | What is needed                                                                                                                                                                                                                                                |
