@@ -59,3 +59,42 @@ using URL `njord:snapshot` you are ready to use Njord. But, Njord is not intrusi
 Hints:
 * use `mvn njord:list` to list existing stores, see [list Mojo](../plugin-documentation/list-mojo.html)
 * use `mvn njord:list-templates` to list existing templates, see  [list-templates Mojo](../plugin-documentation/list-templates-mojo.html)
+
+## The `njord` base directory
+
+By default, Njord uses user-wide base directory (`~/.njord/njord.properties`). This is where Njord global
+configuration and also staged contents are.
+
+This directory is not bound to any project, hence, you are free to go to one project, stage it locally, then
+go over another project, and stage that one as well, and so on.
+
+Moreover, many Njord plugin mojos does not require project, hence you can operate on staged contents outside
+of any project. Projects merely serve as "configuration source", but you can always publish a staged store
+from outside it, by properly configuring `publish` mojo.
+
+## The `njord` bundles
+
+Njord by default produces two kinds of "bundles". They are very similar, as essentially both are ZIP files
+with contents being artifacts laid down on Maven layout. But, there are subtle differences between the two:
+
+The Mojo `write-bundle` will write out **"bundle"** file, that is a ZIP file and it will contain only the artifacts
+laid down on Maven layout. This is the same file format used for publishing for example on Maven Central.
+
+The Mojo `export` will write out **"transportable bundle"** (NTB, "Njord Transportable Bundle"), that is very similar 
+to "bundle", but contains also Njord metadata, and can be imported by Njord too. This means you can carry staged content from
+one workstation to another workstation, like it was locally staged on another workstation. Export and Import combined
+with "install" publisher (that installs into local repository) can be also used in use cases like preparing some 
+testing.
+
+Differences are:
+
+| Use case                                              | **bundle** ZIP | **transportable bundle** ZIP                            |
+|-------------------------------------------------------|----------------|---------------------------------------------------------|
+| Can be published to Maven Central Portal              | Yes            | No (probably, unsure whar will Portal do with metadata) |
+| Can be imported on another workstation                | No             | Yes                                                     |
+| Can be "mounted" as Remote Repository by Resolver 2.x | Yes            | Yes                                                     |
+| Can be "overlaid" by Mimir                            | Yes            | Yes                                                     |
+
+Notes:
+* Resolver 2.x `file` transport supports `bundle:" protocol, see [here](https://github.com/apache/maven-resolver/tree/master/maven-resolver-transport-file).
+* Mimir supports "overlay" functionality, where it is able to overlay ZIP content over contents of remote repository caches, see this [Mimir IT](https://github.com/maveniverse/mimir/tree/main/it/extension-its/src/it/overlay).
