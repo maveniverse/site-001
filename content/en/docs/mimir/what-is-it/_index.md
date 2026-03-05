@@ -57,7 +57,21 @@ classDiagram
 ```
 
 Where node name represents the content "locality": local node is "local" to the user workstation, and hence, has access
-to OS filesystem. Remote node on the other hand, need to "retrieve" the content from somewhere else (remote).
+to OS filesystem. Remote node on the other hand, needs to retrieve the content from somewhere else (remote).
+
+In other words: every node is able to "locate", but local node is able to "store" local filesystem backed content, and 
+system node is able to "store" `Entry` instances, usually originating from other `Node` instances.
+
+Most important Node implementations are (note: there are more, but they are usually aggregating nodes):
+
+| Node name | LocalNode | SystemNode | RemoteNode | Description                                                     |
+|-----------|-----------|------------|------------|-----------------------------------------------------------------|
+| `file`    | yes       | yes        | no         | Uses OS filesystem                                              |
+| `minio`   | yes       | yes        | no         | Uses S3 storage                                                 |
+| `bundle`  | yes       | no         | no         | Read-only local node, backed by "bundle" ZIP files              |
+| `daemon`  | yes       | no         | no         | Communicates via UDS to Mimir Daemon process                    |
+| `jgroups` | no        | no         | yes        | Uses JGroups messaging w/ publishers to LAN share cache content |
+| `ipfs`    | no        | no         | yes        | Uses IPFS to WAN share cache content (not implemented yet)      |
 
 ## Mimir Session
 
@@ -67,29 +81,23 @@ hence backing file set).
 
 Using `MimirSession`, the `MimirConnector`, that wraps original `RepositoryConnector` resolver would use, implements 
 caching: it asks `MimirSession` to locate the required artifact. If local node has the artifact, the request is 
-"short-circuited and artifact with content is returned to resolver. If not, the `MimirConnector` falls back to original 
-connector, and if the artifact is successfully retrieved, it is stored/cached for future use and then returned to caller.
+"short-circuited" and artifact with content is returned to resolver. If not, the `MimirConnector` falls back to original 
+connector, and if the artifact is successfully retrieved, it is stored/cached for future use and then returned to resolver.
 
-There are multiple `LocalNode` implementations, like `BundleNode`, `OverlayingLocalNode` and `DaemonNode`, but see later for
-`SystemNode` implementations, as they **extend** `LocalNode`, hence are usable as local nodes as well!
-
-Out of these, the interesting one is `DaemonNode`: this node in reality starts (unless not already running) a Mímir Daemon
+Out of local nodes, the interesting one is `DaemonNode`: this node in reality starts (unless not already running) a Mímir Daemon
 process, and uses Unix Domain Sockets to communicate with it. On workstation, there is only one Mímir Daemon running, and 
-it is shared by all builds (`DaemonNodes` in each separate Maven sessions).
+it is shared by all Maven processes (`DaemonNodes` in each separate Maven sessions).
 
-## Mimir Daemon
+## Mimir Daemon process
 
-Mímir Daemon requires one `SystemNode` and zero or more `RemoteNode`s. IT implements "round-robin" strategy to locate
+Mímir Daemon requires one `SystemNode` and zero or more `RemoteNode`s. It implements "round-robin" strategy to locate
 the requested artifact: it first tries to locate it in `SystemNode` (which is local to the workstation), and if not found,
 it tries to locate it in `RemoteNode`s (which are remote, hence on LAN or WAN). If artifact is found in `RemoteNode`, 
 it is retrieved and cached in `SystemNode` for future use.
 
-Mimir Daemon by default uses hard linking, as it runs on same workstation it is used on, and executes commands as
-"client" (the `DaemonNode` in Maven process) instructs it.
-
-## Mimir without daemon
+## Mimir without daemon process
 
 In case of CI usage, daemon is usually unwanted overhead, as usually there is **only one Maven process**, hence one "client" of
-Mimir cache. In such cases, Mimir can be configured to use other node than `DaemonNode` is. In this case, a `~/.mimir/session.properties`
-with content of `mimir.session.localNode=<node name>` can be used, for example `file`.
+Mimir cache. In such cases, Mimir session can be configured to use other local node than `DaemonNode` is. In this case, a `~/.mimir/session.properties`
+with content of `mimir.session.localNode=<node name>` can be used, for example `file` (remember, `SystemNode` extends `LocalNode`).
 
