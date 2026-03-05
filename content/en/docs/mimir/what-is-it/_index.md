@@ -62,6 +62,9 @@ to OS filesystem. Remote node on the other hand, needs to retrieve the content f
 In other words: every node is able to "locate", but local node is able to "store" local filesystem backed content, and 
 system node is able to "store" `Entry` instances, usually originating from other `Node` instances.
 
+One peculiarity of system nodes is that they can be "published" as well. Mimir supports two LAN publishers out of the 
+box: `http` that uses Java built in HTTP server and `socket` that uses plain `ServerSocket`.
+
 Most important Node implementations are (note: there are more, but they are usually aggregating nodes):
 
 | Node name | LocalNode | SystemNode | RemoteNode | Description                                                     |
@@ -101,3 +104,16 @@ In case of CI usage, daemon is usually unwanted overhead, as usually there is **
 Mimir cache. In such cases, Mimir session can be configured to use other local node than `DaemonNode` is. In this case, a `~/.mimir/session.properties`
 with content of `mimir.session.localNode=<node name>` can be used, for example `file` (remember, `SystemNode` extends `LocalNode`).
 
+## Mimir LAN cache sharing
+
+It is currently implemented using JGroups cluster messaging. In short, when JGroups backed `RemoteNode` is asked for
+`URI`, a message is broadcasted in cluster. Receiving cluster nodes will respond do they have the wanted content or not.
+If one or more node has it, it will create once-usable "token", and access URI and send back as response. Finally, the
+originator will fetch the wanted content identified by "token" from the received URI from randomly chosen node that
+responded positively.
+
+## Mimir WAN cache sharing
+
+**Not implemented yet**
+
+Most probably will use IPFS.
