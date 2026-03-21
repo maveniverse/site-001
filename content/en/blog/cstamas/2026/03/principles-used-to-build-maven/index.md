@@ -83,7 +83,12 @@ With new Java capabilities, things greatly improved: we today can use annotation
 and so on. But one of the biggest thing that changed with Sisu, was ability to create **real immutable components
 without any compromise, that are easily testable as well**: by use of constructor injection.
 
-Hence, many components were migrated from Plexus to Sisu/JSR330. And all this happened without any client code needing change! Unless...
+It was modern Java and Sisu, that really "clicked in" for Maven 2 model envisioned in early 2000s!
+
+Since then, many components were migrated from Plexus to Sisu/JSR330, and more importantly, all these change happened 
+without any client code required change! 
+
+Unless...
 
 ## Where problems may come from
 
@@ -106,9 +111,12 @@ due this (wrong) client code expectation.
 
 If your code is expected to run in Maven, and you use Maven (and related, like Resolver) classes, you MUST obey this
 expectation, otherwise you are doomed to fail. This is the sole reason why MIMA provides different runtimes as
-well ("embedded", "static" and "sisu").
+well ("embedded", "static" and "sisu") and expects you to get everything you need from `Context`: as it hides this
+from you, whether the component was DI constructed ("sisu runtime"), manually ("static runtime") or in fact, was given
+by Maven itself ("embedded runtime"), the client side of `Context` is always the same, and hence, your code does not 
+need any change.
 
-Similarly, extending a managed component is bad practice, just like extending a Mojo. Tampering with implementation
+Extending a managed component is bad practice, just like extending a Mojo. Tampering with implementation
 constructors and methods, same!
 
 In any case, if you think you cannot get something you need by injecting a managed component, better create an issue,
