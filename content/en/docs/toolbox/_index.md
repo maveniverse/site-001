@@ -18,9 +18,9 @@ A tool that gives you Swiss Knife for every situation. Toolbox is a Maven Plugin
 
 If you consider the Maven Plugin documentation below, you will notice there are two types of goals: those with `gav-`
 prefix and those without it. The differences are:
-* The `gav-` prefixed goals does **not require project** and same code is exposed via CLI as well. For example
-  `mvn toolbox:gav-search` and `jbang toolbox@maveniverse search` runs essentially same code.
-* The `gav-` prefix-less goals **do require Maven project** and are not exposed via CLI.
+* The `gav-` prefixed goals do **not require project** and same code is exposed via CLI as well. For example
+  `mvn toolbox:gav-search` and `jbang toolbox@maveniverse search` runs essentially the same code.
+* The `gav-` prefix-less goals **do require Maven project** and hence are not exposed via CLI.
 
 {{% /pageinfo %}}
 
