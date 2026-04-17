@@ -16,13 +16,13 @@ projects:
 
 Maven ranges are very controversial topic. If you ask anyone, the response most often is "do not use them". 
 And while there are good reasons for that, there are also some use cases where they can be useful. 
-So let's how can Maven 3.10.x help with them.
+So lets see how can Maven 3.10.x help with them.
 
 ## Problems
 
 Biggest issue with ranges, is that when they are collected by resolver, following steps are applied:
 * current POM processed dependency contains a version range, for example `[1.0,2.0)`
-* resolver collects all versions of the dependency, for example `1.0`, `1.1`, `1.2`, `2.0` etc.
+* resolver collects all versions of the dependency, for example `1.0`, `1.1`, `1.2` etc up to `2.0` (including alphas, snapshots... if such artifacts are in scope, for example snapshot repository is used for resolution)
 * dirty graph gets nodes created for each version and builds subtree for each (given dependencies may differ across versions)
 * finally, conflict resolver "choose" the winner node (version) and eliminates the rest.
 
@@ -83,7 +83,7 @@ Example filter expression: `h(5);s;e(1)@org.foo:bar` results in following behavi
 * snapshots are banned if root project is not a snapshot
 * if range for `org.foo:bar` is being processed, version "1" is omitted
 
-## Rules
+## Filter kinds
 
 Rules helps you to more expressively define your range filters, instead of "keep tuning" you range, as new and 
 new version appears, you can say "consider latest 5" (based on version comparison).
@@ -116,9 +116,9 @@ For example
 * the `e(1.1)` would narrow the discovered versions to (`1.0`, `1.2`, `1.3`, `1.4`), while `i([1,1.2),[1.3,2))` basically
   modifies original range to always leave out `1.2`.
 
-## Rule scopes
+## Filter scopes
 
-Each rule can be appended by scope, in form of `@G[:A]`. Presence of scope **narrows** the application of filter to given 
+Each filter can be appended by scope, in form of `@G[:A]`. Presence of scope **narrows** the application of filter to given 
 `G` or `G:A`. If scope is not present, filter is applied globally.
 
 Rule scoping allows you to target given range more narrowly, useful for `e` and `i` rules mostly, but they can
