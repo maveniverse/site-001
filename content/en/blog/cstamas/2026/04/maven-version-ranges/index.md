@@ -126,10 +126,11 @@ come handy for other rules as well.
 
 ## Example use case No1: Reproducible builds
 
-So far, builds with ranges were deemed non-reproducible, as in the moment a new version popped up in some range 
+So far, builds with ranges were deemed non-reproducible, as at the moment a new version popped up in some range 
 was deployed, the build could resolve to different version, and thus, be different.
 
-One example is this kind of build is **Cucumber 38.0.0** as can be [seen here; is marked as non reproducible](https://github.com/jvm-repo-rebuild/reproducible-central/blob/master/content/io/cucumber/gherkin/README.md).
+One example is this kind of build is **`io.cucumber:gherkin` 38.0.0** release. 
+Here is RB report, and as can be [seen here; is marked as non-reproducible](https://github.com/jvm-repo-rebuild/reproducible-central/blob/master/content/io/cucumber/gherkin/README.md).
 
 Problem is [use of range](https://github.com/cucumber/gherkin/blob/v38.0.0/java/pom.xml#L57-L61) in the project POM for 
 dependency `io.cucumber:messages`, and what happened was that when RB check was triggered, there was already a new 
