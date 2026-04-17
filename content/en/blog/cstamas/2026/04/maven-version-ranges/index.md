@@ -605,7 +605,6 @@ Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-si
 [INFO] Total time:  0.968 s
 [INFO] Finished at: 2026-04-16T19:06:20+02:00
 [INFO] ------------------------------------------------------------------------
-[cstamas@angeleyes mtm]$ 
 ```
 
 This basically **limited the range** to `1.7.36`.
@@ -614,11 +613,10 @@ Oh, and the version in `i` and `e` filters is dependency version constraint, so 
 (whatever real dependency in POM can).
 
 What if for some weird reason we want to force different versions to `slf4j-api` and `slf4j-simple`? No problem! 
-List the rules from "most specific" to "least specific":
 
 ```
 [cstamas@angeleyes mtm]$ rm -R local/org/slf4j/
-[cstamas@angeleyes mtm]$ mvn verify -e -Dmaven.repo.local=local -Dmaven.session.versionFilter="i(1.7.31)@org.slf4j:slf4j-simple;i(1.7.31)@org.slf4j"
+[cstamas@angeleyes mtm]$ $  mvn verify -e -Dmaven.repo.local=local -Dmaven.session.versionFilter="i(1.7.31)@org.slf4j:slf4j-simple;i(1.7.36)@org.slf4j:slf4j-api"
 [INFO] Error stacktraces are turned on.
 [INFO] Scanning for projects...
 [INFO] 
@@ -629,27 +627,25 @@ List the rules from "most specific" to "least specific":
 [INFO] Loaded 22552 auto-discovered prefixes for remote repository central (prefixes-central.txt)
 Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/maven-metadata.xml
 Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/maven-metadata.xml
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/maven-metadata.xml (4.1 kB at 24 kB/s)
 Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/maven-metadata.xml (3.8 kB at 22 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.31/slf4j-api-1.7.31.pom
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/maven-metadata.xml (4.1 kB at 22 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom
 Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.31/slf4j-simple-1.7.31.pom
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.31/slf4j-api-1.7.31.pom (3.8 kB at 104 kB/s)
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.31/slf4j-simple-1.7.31.pom (1.0 kB at 30 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom (2.7 kB at 83 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.31/slf4j-simple-1.7.31.pom (1.0 kB at 27 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom
 Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.31/slf4j-parent-1.7.31.pom
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.31/slf4j-parent-1.7.31.pom (14 kB at 406 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.31/slf4j-api-1.7.31.jar
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.31/slf4j-api-1.7.31.jar (41 kB at 943 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom (14 kB at 361 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.31/slf4j-parent-1.7.31.pom (14 kB at 345 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.31/slf4j-api-1.7.31.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.31/slf4j-api-1.7.31.pom (3.8 kB at 107 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar (41 kB at 979 kB/s)
 Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.31/slf4j-simple-1.7.31.jar
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.31/slf4j-simple-1.7.31.jar (15 kB at 401 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.31/slf4j-simple-1.7.31.jar (15 kB at 391 kB/s)
 [INFO] 
 [INFO] --- resources:3.4.0:resources (default-resources) @ mtm-test ---
 [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
-Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom (2.7 kB at 81 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom (14 kB at 391 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar
-Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar (41 kB at 894 kB/s)
 [INFO] skip non existing resourceDirectory /home/cstamas/tmp/mtm/src/main/resources
 [INFO] 
 [INFO] --- compiler:3.14.1:compile (default-compile) @ mtm-test ---
@@ -669,10 +665,9 @@ Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-ap
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.061 s
-[INFO] Finished at: 2026-04-16T21:10:31+02:00
+[INFO] Total time:  0.885 s
+[INFO] Finished at: 2026-04-17T14:22:29+02:00
 [INFO] ------------------------------------------------------------------------
-[cstamas@angeleyes mtm]$ 
 ```
 
 This made our POM above to resolve dependency `slf4j-api` to `1.7.36` and `slf4j-simple` to `1.7.31`.
