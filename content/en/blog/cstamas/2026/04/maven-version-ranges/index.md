@@ -1,5 +1,5 @@
 ---
-title: "Maven Version Ranges"
+title: "Taming Maven Version Ranges"
 date: 2026-04-17T10:07:53+01:00
 draft: false
 authors: cstamas
