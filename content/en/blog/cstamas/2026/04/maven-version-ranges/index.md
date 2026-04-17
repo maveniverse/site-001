@@ -16,28 +16,28 @@ projects:
 
 Maven ranges are very controversial topic. If you ask anyone, the response most often is "do not use them". 
 And while there are good reasons for that, there are also some use cases where they can be useful. 
-So let's see what they are, and how they work.
+So let's how can Maven 3.10.x help with them.
 
 ## Problems
 
 Biggest issue with ranges, is that when they are collected by resolver, following steps are applied:
-* current POM dependency node contains a version range, for example `[1.0,2.0)`
+* current POM processed dependency contains a version range, for example `[1.0,2.0)`
 * resolver collects all versions of the dependency, for example `1.0`, `1.1`, `1.2`, `2.0` etc.
-* dirty graph gets nodes created for each version (and sub-tree), given dependencies may differ across ranges
+* dirty graph gets nodes created for each version and builds subtree for each (given dependencies may differ across versions)
 * finally, conflict resolver "choose" the winner node (version) and eliminates the rest.
 
 From these, one can immediately notice several problems:
 * potentially many downloads, this is the **"ranges slow down the build"** argument. This clearly happens, when the range
-  contains many versions (as it is huge range, or project emits many versions).
+  resolves to many versions (as it is huge range, or project emits many versions or an old project with many range included releases).
 * build reproducibility, as the range may resolve to different versions at different times, and thus, build may be 
-  different at different times. This is the **"build with ranges is not reproducible"** argument.
+  different at different times. This is the **"builds with ranges are not reproducible"** argument.
 
 ## Maven 3.10.x enters the dojo
 
-With Maven 3.10.x, that brings in Resolver 2.x things change. One of the new Resolver 2 features are version range filters.
+With Maven 3.10.x, that brings in Resolver 2.x, things change. One of the new Resolver 2 features are version range filters.
 In Maven 3.10.x, they will be exposed somewhat along these lines:
 * user property, so they can be specified via CLI, or in `.mvn/maven.config` even
-* filters can be defined as "expressions"
+* filters can be defined as "list of expressions"
 
 The expressions (this is still a PR so consider it WIP) are along these lines:
 
@@ -113,26 +113,29 @@ excluded or included if they match the constraint.
 For example
 * given the range `[1,2)`
 * and discovered versions (`1.0`, `1.1`, `1.2`, `1.3`, `1.4`) (this part is changing as time passes, new and new releases are done)
-* the `e(1.2)` would narrow the discovered versions to (`1.0`, `1.1`, `1.3`, `1.4`), while `i([1,1.2),[1.3,))` would
-  just leave out `1.2`.
+* the `e(1.1)` would narrow the discovered versions to (`1.0`, `1.2`, `1.3`, `1.4`), while `i([1,1.2),[1.3,2))` basically
+  modifies original range to always leave out `1.2`.
 
 ## Rule scopes
 
-Each rule can be appended by scope, in form of `@G[:A]`. Presence of scope narrows the application of filter to given 
-G or G:A. Scope limits the filter application to dependencies with given G or G:A only. If scope is not present, 
-filter is applied globally.
+Each rule can be appended by scope, in form of `@G[:A]`. Presence of scope **narrows** the application of filter to given 
+`G` or `G:A`. If scope is not present, filter is applied globally.
+
+Rule scoping allows you to target given range more narrowly, useful for `e` and `i` rules mostly, but they can
+come handy for other rules as well.
 
 ## Example use case No1: Reproducible builds
 
 So far, builds with ranges were deemed non-reproducible, as in the moment a new version popped up in some range 
 was deployed, the build could resolve to different version, and thus, be different.
 
-One example is this kind of build is Cucumber 38.0.0 as can be [seen here](https://github.com/jvm-repo-rebuild/reproducible-central/blob/master/content/io/cucumber/gherkin/README.md).
+One example is this kind of build is **Cucumber 38.0.0** as can be [seen here; is marked as non reproducible](https://github.com/jvm-repo-rebuild/reproducible-central/blob/master/content/io/cucumber/gherkin/README.md).
 
-Problem is [use of range](https://github.com/cucumber/gherkin/blob/v38.0.0/java/pom.xml#L57-L61) in the project POM, as
-when RB triggered, there was already new version of `io.cucumber:messages` deployed to Central.
+Problem is [use of range](https://github.com/cucumber/gherkin/blob/v38.0.0/java/pom.xml#L57-L61) in the project POM for 
+dependency `io.cucumber:messages`, and what happened was that when RB check was triggered, there was already a new 
+version of `io.cucumber:messages` deployed to Central, and hence, the RB build picked it up.
 
-By using Maven 3.10.x and doing "just a vanilla" build, we get the same result ([full log](https://gist.github.com/cstamas/23f44fc82ed8e58bc1ab1bf92b9046a0b)):
+By using Maven 3.10.x and doing "just a vanilla" build, we get the same result ([full log](https://gist.github.com/cstamas/23f44fc82ed8e58bc1ab1bf92b9046a0b)): failure
 
 ```
 $ mvn -V -Dmaven.repo.local=../local package artifact:compare
@@ -171,7 +174,7 @@ OS name: "linux", version: "6.19.12-200.fc43.x86_64", arch: "amd64", family: "un
 [INFO] Finished at: 2026-04-17T11:16:07+02:00
 [INFO] ------------------------------------------------------------------------
 ```
-As obviously, we are tripped on same "new" version as RB did. But, given **we know** what the issue is, we can easily fix
+As obviously, we also are tripped on same "new" version as RB did. But, given **we know** what the issue is, we can easily fix
 it by applying filter to the range `i(32.0.0)@io.cucumber:messages`:
 
 ```
@@ -209,7 +212,7 @@ OS name: "linux", version: "6.19.12-200.fc43.x86_64", arch: "amd64", family: "un
 [INFO] ------------------------------------------------------------------------
 ```
 
-And we get the same build as deployed on Central. Hence, the build is now reproducible.
+And we get the same build as deployed on Central. Hence, the **build is in fact reproducible**.
 
 ## Example use case No2: Speeding things up
 
@@ -253,7 +256,12 @@ Consider following trivial POM just for demo purposes:
 In essence, we depend on range of `[1.7.30,2)` for both, `slf4j-api` and `slf4j-simple`. Given there are many 
 versions of `slf4j` in that range, the resolver will have to work hard.
 
+{{% pageinfo %}}
+
 Note: between each execution we nuke the `org.slf4j` from local repository, to make obvious what Maven is tinkering to resolve.
+
+{{% /pageinfo %}}
+
 
 First, a "vanilla" build:
 
@@ -451,7 +459,7 @@ Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-ap
 
 A lot! Also, there are some alpha and beta versions of SLF4J I am not interested in. So lets get rid of them!
 
-The `alpha`, `beta` and `milestone` versions are called "preview" versions. And, Maven 3.10.x has the "no preview" filter.
+The `alpha`, `beta` and `milestone` versions are called "preview" versions. And, Maven 3.10.x has the `np` "no preview" filter.
 (We have `s` and `ns` filter as well, so bye-bye snapshots in ranges!)
 
 So lets remove all these unwanted versions with "no preview" filter in `org.slf4j` group!
@@ -544,8 +552,8 @@ Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-si
 [INFO] ------------------------------------------------------------------------
 ```
 
-Much better, is it? But let's assume we want exactly `1.7.36` version to be selected (again, we are NOT modifying POM, just the command line).
-We can use `i` (include) filter for that:
+Much better, is it? But let's assume we want exactly `1.7.36` version to be selected, but in this demo we are NOT allowed
+or we cannot modify the POM, just the command line. We can use `i` (include) filter for that:
 
 ```
 [cstamas@angeleyes mtm]$ rm -R local/org/slf4j/
@@ -605,7 +613,7 @@ This basically **limited the range** to `1.7.36`.
 Oh, and the version in `i` and `e` filters is dependency version constraint, so it can contain comma separated ranges 
 (whatever real dependency in POM can).
 
-What if for some reason we want to force different artifacts of same group to different versions? No problem! 
+What if for some weird reason we want to force different versions to `slf4j-api` and `slf4j-simple`? No problem! 
 List the rules from "most specific" to "least specific":
 
 ```
@@ -667,7 +675,7 @@ Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-ap
 [cstamas@angeleyes mtm]$ 
 ```
 
-This made our POM above to resolve dependency slf4j-api to `1.7.36` and slf4j-simple to `1.7.31`.
+This made our POM above to resolve dependency `slf4j-api` to `1.7.36` and `slf4j-simple` to `1.7.31`.
 
 {{% pageinfo %}}
 
