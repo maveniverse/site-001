@@ -47,7 +47,7 @@ imaging:
 # Language configuration
 languages:
   en:
-    languageName: English
+    label: English
     title: Maveniverse
     params:
       description: The missing bits from Apache Maven universe
