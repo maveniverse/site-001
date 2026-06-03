@@ -28,6 +28,10 @@ All these ideas are envisioned as SPI extension points, and by default (or witho
 alter anything of Resolver behavior. Moreover, in this post I am intentionally talking **about Resolver only**,
 and did not draw any parallel with Maven, as again, details would be implemented in specific SPI implementation.
 
+Moreover, some of these features may not be feasible for Maven use cases at all, but as I said, this is about Resolver
+features only, and Maven is not the only Resolver integration out there, so users of library like MIMA can still
+benefit from these extra features, if they want to.
+
 Note: these are just ideas and are locally implemented as "proof of concept" (PoC). Also, in many examples will use
 Maveniverse Toolbox, but only as tool, as same output would be produced by `maven-dependency-plugin:tree` as well.
 
