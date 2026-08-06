@@ -192,11 +192,11 @@ params:
         desc: Discuss development issues around the project
 
 module:
-  # Uncomment the next line to build and serve using local docsy clone declared in the named Hugo workspace:
-  # workspace: docsy.work
+  proxy: direct
   hugoVersion:
     extended: true
-    min: 0.110.0
+    min: 0.160.1
   imports:
-    - path: github.com/google/docsy
+    - path: github.com/google/docsy/theme
       disable: false
+
