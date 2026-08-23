@@ -62,8 +62,9 @@ much more capable than "only" Resolver 1.x could do with for example split local
 MWM performs these steps:
 * takes over Repository System Session creation from vanilla Maven
 * collects git information of the checkout where Maven was invoked
-* detects things like "current branch", "upstream URL" and even "is this a git-workspace checkout".
+* detects things (relies on Nisse) like "current branch", "upstream URL" and even worktree checkout.
 * using these collected information creates "workspace", that, simplified tells two things: where should Maven cache, and where should Maven install.
+* workspace "links" are in fact ["local repository tail"](https://cwiki.apache.org/confluence/spaces/MAVEN/pages/235837219/Chained+Local+Repository+Manager+CLRM) auto-managed (this is why MWM bails out if their use by user is detected)
 
 MWM also introduces a new directory `.mvn-local/`, that should be git-ignored (placed in `.gitignore`) just like
 `target/` is git-ignored.
