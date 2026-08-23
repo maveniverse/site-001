@@ -15,7 +15,9 @@ projects:
 
 {{% pageinfo %}}
 
-
+Maveniverse MWM repository is at https://github.com/maveniverse/mwm and supports currently following goals:
+`detect`, `link` and `unlink`. Workspaces can be linked in a tree-like form, if someone is really playful
+(but recommendation is rather to keep things simple).
 
 {{% /pageinfo %}}
 
