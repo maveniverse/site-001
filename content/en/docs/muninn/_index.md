@@ -4,7 +4,7 @@ description: Maven core extension producing compact JSON reports, for coding age
 categories: [Documentation]
 tags: [docs]
 projects: [ muninn ]
-weight: 100
+weight: 190
 ---
 
 {{% pageinfo %}}

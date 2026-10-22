@@ -4,7 +4,7 @@ description: A tool for generating BOMs
 categories: [Documentation]
 tags: [docs]
 projects: [ BomBuilder ]
-weight: 40
+weight: 50
 ---
 
 {{% pageinfo %}}

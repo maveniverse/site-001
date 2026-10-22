@@ -4,7 +4,7 @@ description: Project-aware MCP server for Maven, for coding agents
 categories: [Documentation]
 tags: [docs]
 projects: [ huginn ]
-weight: 100
+weight: 200
 ---
 
 {{% pageinfo %}}

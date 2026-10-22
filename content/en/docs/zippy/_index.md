@@ -4,7 +4,7 @@ description: Small extension for ZIP files
 categories: [Documentation]
 tags: [docs]
 projects: [ Zippy ]
-weight: 80
+weight: 90
 ---
 
 {{% pageinfo %}}

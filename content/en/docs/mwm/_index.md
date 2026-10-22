@@ -4,7 +4,7 @@ description: Maven Workspace Manager
 categories: [Documentation]
 tags: [docs]
 projects: [ mwm ]
-weight: 100
+weight: 180
 ---
 
 {{% pageinfo %}}

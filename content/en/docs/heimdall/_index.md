@@ -4,7 +4,7 @@ description: Filtering at next level!
 categories: [Documentation]
 tags: [docs]
 projects: [ Heimdall ]
-weight: 90
+weight: 110
 ---
 
 {{% pageinfo %}}

@@ -4,7 +4,7 @@ description: Checksums powers to Maven!
 categories: [Documentation]
 tags: [docs]
 projects: [ checksum ]
-weight: 100
+weight: 170
 ---
 
 {{% pageinfo %}}

@@ -4,7 +4,7 @@ description: The TUI for Maven
 categories: [Documentation]
 tags: [docs]
 projects: [ pilot ]
-weight: 100
+weight: 150
 ---
 
 {{% pageinfo %}}

@@ -4,7 +4,7 @@ description: Generating the missing BOMs
 categories: [Documentation]
 tags: [docs]
 projects: [ maven-boms ]
-weight: 100
+weight: 120
 ---
 
 {{% pageinfo %}}

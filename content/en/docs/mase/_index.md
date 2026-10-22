@@ -4,7 +4,7 @@ description: Maven Search
 categories: [Documentation]
 tags: [docs]
 projects: [ mase ]
-weight: 100
+weight: 20
 ---
 
 {{% pageinfo %}}

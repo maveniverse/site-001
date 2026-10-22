@@ -4,7 +4,7 @@ description: Surgical tool to speed up builds
 categories: [Documentation]
 tags: [docs]
 projects: [ scalpel ]
-weight: 100
+weight: 140
 ---
 
 {{% pageinfo %}}

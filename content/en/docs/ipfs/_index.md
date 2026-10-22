@@ -4,7 +4,7 @@ description: Maven suite to use IPFS
 categories: [Documentation]
 tags: [docs]
 projects: [ ipfs ]
-weight: 100
+weight: 130
 ---
 
 {{% pageinfo %}}
