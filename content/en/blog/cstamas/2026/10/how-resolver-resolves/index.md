@@ -1,6 +1,6 @@
 ---
 title: "How Resolver resolves artifacts"
-date: 2026-10-22T19:10:00+01:00
+date: 2026-10-22T19:10:00+02:00
 draft: false
 authors: cstamas
 author: cstamas ([@cstamas](https://bsky.app/profile/cstamas.bsky.social))

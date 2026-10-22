@@ -3,7 +3,7 @@ title: Pilot
 description: The TUI for Maven
 categories: [Documentation]
 tags: [docs]
-projects: [ pilot ]
+projects: [ Pilot ]
 weight: 150
 ---
 

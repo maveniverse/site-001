@@ -3,7 +3,7 @@ title: Checksum Suite
 description: Checksums powers to Maven!
 categories: [Documentation]
 tags: [docs]
-projects: [ checksum ]
+projects: [ Checksum ]
 weight: 170
 ---
 

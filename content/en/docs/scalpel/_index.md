@@ -3,7 +3,7 @@ title: Scalpel
 description: Surgical tool to speed up builds
 categories: [Documentation]
 tags: [docs]
-projects: [ scalpel ]
+projects: [ Scalpel ]
 weight: 140
 ---
 

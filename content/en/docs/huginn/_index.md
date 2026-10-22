@@ -3,7 +3,7 @@ title: Huginn
 description: Project-aware MCP server for Maven, for coding agents
 categories: [Documentation]
 tags: [docs]
-projects: [ huginn ]
+projects: [ Huginn ]
 weight: 200
 ---
 

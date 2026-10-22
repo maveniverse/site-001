@@ -3,7 +3,7 @@ title: MASE
 description: Maven Search
 categories: [Documentation]
 tags: [docs]
-projects: [ mase ]
+projects: [ MASE ]
 weight: 20
 ---
 

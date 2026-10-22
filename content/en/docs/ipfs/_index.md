@@ -3,7 +3,7 @@ title: Maven@IPFS
 description: Maven suite to use IPFS
 categories: [Documentation]
 tags: [docs]
-projects: [ ipfs ]
+projects: [ IPFS ]
 weight: 130
 ---
 

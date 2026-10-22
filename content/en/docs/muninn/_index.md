@@ -3,7 +3,7 @@ title: Muninn
 description: Maven core extension producing compact JSON reports, for coding agents
 categories: [Documentation]
 tags: [docs]
-projects: [ muninn ]
+projects: [ Muninn ]
 weight: 190
 ---
 

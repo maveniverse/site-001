@@ -3,7 +3,7 @@ title: MWM
 description: Maven Workspace Manager
 categories: [Documentation]
 tags: [docs]
-projects: [ mwm ]
+projects: [ MWM ]
 weight: 180
 ---
 
