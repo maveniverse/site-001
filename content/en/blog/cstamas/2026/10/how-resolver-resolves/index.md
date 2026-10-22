@@ -127,13 +127,21 @@ Finally, the LRM is told about the new file and "registers" it (availability tra
 
 ## Putting it together
 
-```
-collect                                   resolve
--------                                   -------
-root -> descriptor reader -> POM(s)       workspace? -> local repo? -> remote repos
-     -> select/manage/traverse            (update policy, filters, checksums, offline)
-     -> transform (conflicts)                      |
-     -> final graph  -------------------->   File for each artifact
+```mermaid
+flowchart LR
+  subgraph collect
+    direction TB
+    R[root] --> D[descriptor reader: POMs]
+    D --> S[select / manage / traverse]
+    S --> T[transform: conflicts]
+    T --> G[final graph]
+  end
+  subgraph resolve
+    direction TB
+    W[workspace?] --> L[local repo?] --> M["remote repos<br/>(update policy, filters, checksums, offline)"]
+    M --> F[File for each artifact]
+  end
+  G --> W
 ```
 
 Also worth remembering: the whole thing is *configuration-driven* (`RepositorySystemSession` plus
