@@ -21,7 +21,7 @@ The history of this goal predates many Maven version, and it appeared around Mav
 to "go offline" (fx while traveling, those were the 2000s!) and pre-populate their local repository with required
 artifacts cached.
 
-But, as I tried to explain my several previous articles (see [Local repository](/blog/2025/11/09/maven-local-repository/)),
+But, as I tried to explain my several previous articles (see [Local repository](/blog/2025/11/09/maven-local-repository-ii/)),
 in Maven 2 and before, local repository was really just a "bunch of files". This is not true since Maven 3.0 released in
 2010!
 

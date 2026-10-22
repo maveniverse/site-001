@@ -58,7 +58,7 @@ closed source project there are many pitfalls.
 The consequence is that **project configuration** is maybe just blurred, but sometimes fully delegated from Maven to MRM: Maven is not anymore in control,
 but neither is MRM. Building becomes impossible at the moment Maven cannot reach MRM, or, and this is the more usual
 case, MRM **changes** intentionally or unintentionally. It may be migrated, upgraded or even just reconfigured. The sole
-group repository change may render builds inoperable. Also, it is very easy to create "overlap" (see [Local Repositories](/blog/2025/11/09/maven-local-repository/)),
+group repository change may render builds inoperable. Also, it is very easy to create "overlap" (see [Local Repositories](/blog/2025/11/09/maven-local-repository-ii/)),
 especially with "supergroups". In this very moment, with or without the awareness of this overlap (by MRM maintainers
 and MRM clients) your MRM, and thus, client builds became dependent on repository ordering of the group repository. Later,
 one build may fail and other may work if you make your `GR` as `(R1, R2, R3)` while the opposite happens only if you

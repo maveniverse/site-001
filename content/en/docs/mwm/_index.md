@@ -11,6 +11,6 @@ weight: 180
 Maven Workspace Manager
 {{% /pageinfo %}}
 
-Maveniverse MWM maven Maven `git worktree` aware. See the [introduction blog post](/blog/cstamas/2026/08/mwm-01/).
+Maveniverse MWM makes Maven `git worktree` aware. See the [introduction blog post](/blog/2026/08/22/meet-mwm/).
 
 Sources: https://github.com/maveniverse/mwm

@@ -147,7 +147,7 @@ flowchart LR
 Also worth remembering: the whole thing is *configuration-driven* (`RepositorySystemSession` plus
 configuration properties). Resolver itself implements no "Maven behavior": what Maven 3 and Maven 4
 do differently is mostly a matter of how the session is **configured**, and which components are
-plugged in. That is also the reason why tools like [MIMA](/blog/cstamas/2024/09/what-is-mima/) can use the same
+plugged in. That is also the reason why tools like [MIMA](/blog/2024/09/07/what-is-mima-and-what-is-not/) can use the same
 machinery outside of Maven.
 
 ## Important changes in Resolver 2
