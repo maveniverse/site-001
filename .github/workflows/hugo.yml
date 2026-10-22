@@ -46,6 +46,13 @@ jobs:
         uses: actions/configure-pages@v6
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Install Dart Sass
+        env:
+          DART_SASS_VERSION: 1.106.1
+        run: |
+          wget -O ${{ runner.temp }}/sass.tar.gz https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz \
+          && tar -xzf ${{ runner.temp }}/sass.tar.gz -C ${{ runner.temp }} \
+          && echo "${{ runner.temp }}/dart-sass" >> $GITHUB_PATH
       - name: Install PostCSS
         run: npm i -D postcss postcss-cli autoprefixer
       - name: Build with Hugo
