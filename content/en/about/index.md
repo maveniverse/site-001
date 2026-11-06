@@ -16,8 +16,7 @@ We are expanding the Maveniverse!
 
 Maveniverse is a team providing awesome extensions, plugins, documentation and advice around Apache Maven.
 
-We are long-time Maven users and contributors, many of us committers and PMC members of the
-Apache Maven project. Maveniverse is where we build what does not (yet) fit into Maven proper:
+We are long-time contributors and maintainers of the Apache Maven project. Maveniverse is where we build what does not (yet) fit into Maven proper:
 extensions, plugins and tools that solve real-world build problems today.
 
 {{% /blocks/lead %}}
