@@ -5,6 +5,7 @@ menu: {main: {weight: 10}}
 ---
 
 {{% blocks/cover title="About Maveniverse" image_anchor="bottom" height="auto" %}}
+<span class="mvn-planet" aria-hidden="true"></span>
 
 We are expanding the Maveniverse!
 {.mt-5}
@@ -17,7 +18,7 @@ Maveniverse is a team providing awesome extensions, plugins, documentation and a
 
 {{% /blocks/lead %}}
 
-{{% blocks/section %}}
+{{% blocks/section color="dark" %}}
 
 # Get the best Maven stuff directly from people who love Apache Maven
 {.text-center}
