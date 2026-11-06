@@ -18,25 +18,34 @@ title: Maveniverse
 
 
 {{% blocks/lead color="primary" %}}
-Maveniverse is a team providing awesome extensions, plugins, documentation and advices around Apache Maven.
+Maveniverse is a team providing awesome extensions, plugins, documentation and advice around Apache Maven.
+
+From local caching and staging to surgical build speedups, lossless POM editing and tooling for coding agents:
+we build the things we wished Maven had, and share them with everyone.
 {{% /blocks/lead %}}
 
 
 {{% blocks/section color="dark" type="row" %}}
 {{% blocks/feature icon="fa-lightbulb" title="Get insight and learn about latest improvements!" %}}
 Peek around this site and get the latest improvements and ideas "cooking".
+Many of our projects are proving grounds for features that may later land in
+Maven itself, so you get to see (and shape) them early.
 
-Follow this space for updates!
+Follow this space and our [blog](/blog/) for updates!
 {{% /blocks/feature %}}
 
 
 {{% blocks/feature icon="fa-wrench" title="Adopt latest changes and improvements!" %}}
 Experiment and apply latest improvements in your builds.
+Most of our tools are drop-in core or build extensions: add a few lines to
+`.mvn/extensions.xml` and you are good to go, no project rewrite needed.
 {{% /blocks/feature %}}
 
 
 {{% blocks/feature icon="fa-industry" title="Make your Maven builds run smooth!" %}}
 Join the rest of Mavens by having your builds running smooth.
+Faster downloads, shared caches, reproducible publishing and smarter
+incremental builds: less waiting, more shipping.
 {{% /blocks/feature %}}
 
 
@@ -57,12 +66,14 @@ Just joking, Maven will download things for you!
 
 {{% blocks/feature icon="fab fa-github" title="Contributions welcome!"
     url="https://github.com/maveniverse" %}}
-We develop on Github and contributions and new users are always welcome!
+We develop on GitHub, all in the open. Contributions, bug reports and new
+users are always welcome, no matter how small!
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa fa-comments" title="Discuss your Maven issues with us!"
     url="https://github.com/orgs/maveniverse/discussions" %}}
 Feel free to chime in with ideas, questions or just to have some fun time!
+No question is too basic, and no idea is too wild.
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
