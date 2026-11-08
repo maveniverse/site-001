@@ -33,3 +33,6 @@ prefix and those without it. The differences are:
 Sources: https://github.com/maveniverse/toolbox
 
 [Maven generated plugin documentation](plugin-documentation/plugin-info.html)
+
+Many goals accept `*Spec` parameters (matchers, selectors, sources, sinks...); their syntax is described in
+[Spec languages](specs/).
